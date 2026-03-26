@@ -1,0 +1,18 @@
+# Eclipse 관련 폴더 및 파일 무시
+.classpath
+.project
+.settings/
+eclipse/
+portfolio/
+
+# 빌드 결과물 무시
+/bin/
+/build/
+
+# IDE 관련
+.idea/
+*.iml
+
+# OS별 임시파일
+*.DS_Store
+Thumbs.db
