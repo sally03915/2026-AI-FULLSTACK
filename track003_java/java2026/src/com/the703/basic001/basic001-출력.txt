@@ -1,0 +1,40 @@
+> Q) 패키지명 :com.the703.basic001_ex
+>    클래스명 : A000_ex.java
+>    "한 번 작성하면 어디서든 실행된다."  출력
+
+> Q) package : com.the703.basic001_ex
+>    클래스명 : A001_ex
+>   출력내용  : 내 이름은 홍길동
+
+> Q) package : com.the703.basic001_ex
+>    클래스명 : A002_ex
+> 출력내용  : 
+	X
+	XY
+	XYZ
+
+> Q) package : com.the703.basic001_ex
+>    클래스명 : A003_ex
+문제 :  다음을 한 줄 출력
+        System.out.println("X");
+        System.out.println("XY");
+        System.out.println("XYZ");
+
+> Q) package : com.the703.basic001_ex
+>    클래스명 : A004_ex
+문제 :   포맷형식이용해서 출력	
+출력내용  : 
+	도시 : 인천  ,  인구:1000000
+
+> Q) package : com.the703.basic001_ex
+>    클래스명 : A005_ex
+println, print, printf 3가지 버젼으로 출력
+
+아리랑 아리랑 아라리요      ←  println   
+아리랑 고개를 넘어간다      ←  print
+나를 버리고 가시는 님은     ←  print  
+십리(4km)도 못 가서 발병난다  ←  printf   숫자 출력서식
+
+
+
+
