@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>002. tag</title>
+</head>
+<body>
+    <!-- 1. 영역(div)잡고 제목(h) 내용(p)    -->
+    <div>
+        <h3>제목태그 : h1~h6</h3>
+        <pre>
+            h1: 로고 상호명
+            h2: 주메뉴
+            h3~h6: 각 단락 중요 제목
+        </pre>
+    </div> <!-- end div -->
+   
+    <!-- 2. 문단 (p/pre)  -->
+     <div>
+        <h3>문단 : p, pre</h3>
+        <p>
+           p : 일반문단
+           공백, 줄바꿈 인식 안됨.
+        </p>
+        <pre>
+           pre : 코드, 미리보기 문단
+            공백, 줄바꿈 인식 됨.
+        </pre>
+     </div>
+
+    <!-- 3. 이미지  -->
+    <div>
+        <h3>img</h3>
+        <p> src="경로"  alt="이미지의 설명" </p>
+        <p><img src="./img/one.png"  alt="one 회원"/></p>
+
+        <!-- Q1. two.png 이미지 넣기  --> 
+        <p><img src="./img/two.png"  alt="two 회원"/></p>
+
+        <!-- Q2. friends 폴더안의 jack.png 화면에 나오게 만들기  -->
+        <p><img src="./img/friends/jack.png"  alt="특별회원 jack"/></p>
+    </div>
+
+    <!-- 4. 링크  -->
+    <div>
+        <h3>링크</h3>
+        <p> href="경로"  title="링크경로설명"  target="_blank" (새창열기) </p>
+        <p> <a href="https://www.naver.com" 
+               target="_blank"  title="네이버 링크">네이버</a>  </p>
+        
+        <!-- Q4. 내 포트폴리오를 클릭하면 내 깃허브페이지로 링크  -->
+        <p><a href="https://github.com/sally03915/2026-AI-FULLSTACK"  
+            title="내 깃허브" target="_blank">내 포트폴리오</a></p>
+    </div>
+
+    <!-- 5. 마크업검사  -->
+    <div>
+        <h3>마크업검사</h3>
+        <pre> 
+            1. https://validator.w3.org/ 
+            2. Validate by Direct Input (탭 3번째)
+               - 코드 붙여넣기
+        </pre>
+
+    </div> 
+</body>
+</html>
