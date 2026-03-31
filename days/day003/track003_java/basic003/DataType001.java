@@ -17,9 +17,8 @@ public class DataType001 {
 		
 		//2-3 실수형 : (float(f)-double★ /3.14 / 4-8)
 		float fl=3.14f;       double dou=3.14;
-		
 
-		fl = lo;  //실수 > 정수 4byte = 8byte 
+		fl = lo;  //실수 > 정수 4byte = 8byte
 		
 		float fp1 = 1.0000001f;  // 0 6개 + 1 = 7개  → 정확하게 표현
 		float fp2 = 1.00000001f; // 0 7개 + 1 = 8개  → 정밀도 초과 반올림
@@ -40,7 +39,6 @@ public class DataType001 {
 		System.out.println(abc2);  // apple
 		
 		System.out.println( abc ==  abc2 ); //false
-		 
 	}
 }
 

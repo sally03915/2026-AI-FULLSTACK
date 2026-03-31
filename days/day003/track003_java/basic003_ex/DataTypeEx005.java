@@ -16,7 +16,7 @@ public class DataTypeEx005 {
 		// 처리  A=B
 		total = kor + eng + math;
 		//avg   = total/3f;       // 정수/정수  10/3
-		avg   = total/3.0;      //정수/실수    
+		avg   = total/3.0;       
 		// 출력
 		System.out.println("총점 :"+total+" \n평균 :"+avg);
 		System.out.print  ("총점 :"+total+" \n평균 :"+avg + "\n");
