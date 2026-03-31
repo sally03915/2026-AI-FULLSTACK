@@ -1,4 +1,4 @@
-package com.thejoa703.basic004_ex;
+package com.the703.basic004_ex;
 
 import java.util.Scanner;
 
