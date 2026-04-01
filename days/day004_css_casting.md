@@ -83,7 +83,9 @@
     2-2 정수형 :  
     2-3 실수형 :  
     2-4 문자형 :
-  3. 자동형변환은 (    )  빼고  (    ) 기본형
+  3. 자동형변환은 (  boolean )  빼고  ( 
+      byte <  short  / char < int < long < float < double 
+   ) 기본형
 
 
 - 3. java [실습]

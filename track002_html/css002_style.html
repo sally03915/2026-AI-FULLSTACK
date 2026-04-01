@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 내부적용</title>
+    <style>
+        /*    선택자 {  속성  : 값    }     */
+        div{   
+                width:300px;  
+                margin:50px auto;  
+                border-radius: 20px;    
+                box-shadow: 0 0 10px rgba(238, 251, 182, 0.5);
+                padding:20px;
+                background-color:hsl(69, 100%, 93%);
+        }
+        div:hover{
+            background-color: aliceblue;
+            transition: all 2s;
+        }
+        /*  Q1. h3  : 글자색상 : #123456 , border-left:3px solid #123456  */
+        h3 {   color:#123456;  border-left:5px solid #123456;  padding-left:10px; }
+        
+        /*  Q2. p   : 글자사이즈 14px ,  정렬 - center  */
+        p  {    font-size:14px;  text-align: center;     }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>인라인</h3>
+        <p>태그 안에 직접 적용</p>
+        <p style="color:red">color:red</p>
+    </div>
+
+    <div>
+        <h3>내부스타일</h3>
+        <p> head 안에 style 태그 사용 작성</p>
+        <pre>
+            p    {  color: red;  }
+           선택자 {  속성  : 값    } 
+        </pre>
+    </div>
+
+    <div>
+        <h3>외부스타일</h3>
+        <p>별도의 .css파일을 만들어서 link태그로 연결</p>
+    </div>
+
+</body>
+</html>

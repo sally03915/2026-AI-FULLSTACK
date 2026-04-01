@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>태그연습 - 여행 티켓 카드</title>
+</head>
+<body  style="
+  margin:0;
+  padding:30px;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg , #fdfbfb , #a8defa);
+">
+  <div>
+    <h1  style="
+        text-align: center;
+        color:#2c3e50;
+        margin-bottom: 40px;
+      ">여행 티켓</h1>
+    <div style="background-color: #fff;
+      width:250px;
+      margin:0 auto;   
+      margin-bottom:20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1)  ;
+      padding:20px;
+    ">
+      <h2 style="
+        margin:10px 0 5px 0;
+        font: size 18px;
+        color:#333;
+        text-align: center;
+      ">ICN ✈️ SFO</h2> 
+      <p style="font-size: 14px; color:#666; margin-bottom: 10px;">
+        <span style="font-weight: bold;">출발:</span> 인천 | 2026-04-15 10:30
+      </p>
+      <p style="font-size: 14px; color:#666; margin-bottom: 10px;">
+         <span style="font-weight: bold;">도착:</span> 샌프란시스코 | 2026-04-15 18:00
+      </p>
+      <p style="font-size: 14px; color:#666; margin-bottom: 10px;">
+         <span style="font-weight: bold;">탑승객:</span> Sally An
+      </p>
+      <p style="font-size: 14px; color:#666; margin-bottom: 10px;">
+         <span style="font-weight: bold;">좌석:</span> 12A | Economy
+      </p>
+      <p style="
+        font-size: 14px; color:#666;  margin-bottom: 10px;
+        border-top: 2px dashed #ccc;  
+        margin:15px 0; 
+        text-align: right;
+        padding-top:5px;
+      ">
+            <a href="https://www.koreanair.com" 
+            target="_blank"
+            title="항공사 사이트 열기"
+            style="
+              font-size:13px;
+              color:#2c3e50;
+              text-decoration: none; 
+            "
+            >항공사 사이트 보기</a>
+      </p> 
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+## STEP1) markup / validator 검사
+여행 티켓 
+
+ICN ✈️ SFO  
+출발: 인천 | 2026-04-15 10:30  
+도착: 샌프란시스코 | 2026-04-15 18:00  
+탑승객: Sally An  
+좌석: 12A | Economy  
+항공사 사이트 보기  
+
+ 
+## STEP2) CSS 작성 규칙
+✅ `<body>` 태그  
+1) 바깥쪽 여백 없음 → 0  
+2) 안쪽 여백 30px  
+3) 글꼴 → "Segoe UI", sans-serif  
+4) 배경 → 135도 방향 그라디언트 (#fdfbfb → #ebedee)  
+
+✅ `<div>` 카드  
+1) 배경색 흰색 → #fff  
+2) 너비 250px  
+3) 가운데 정렬 → 0 auto  (0 위아래/ auto 좌우)
+4) 아래 여백 20px  
+5) 모서리 둥글게 → 20px  
+6) 그림자 효과 → 0 4px 12px rgba(0,0,0,0.1)  
+7) 텍스트 가운데 정렬 → center  
+8) 안쪽 여백 20px  
+
+✅ `<h1>` 태그  
+9) 텍스트 가운데 정렬  
+10) 글자 색상 → #2c3e50  
+11) 아래 여백 40px  
+
+✅ `<h2>` 태그  
+12) 위쪽 여백 10px, 아래 여백 5px    
+      margin-top:10px;
+      margin-bottom:5px;
+      margin:10px 0 5px 0;  top right bottom left
+13) 글자 크기 18px  
+14) 글자 색상 → #333  
+15) 텍스트 가운데 정렬 
+
+✅ `<p>` 태그 (설명 텍스트)  
+16) 글자 크기 14px  
+17) 글자 색상 → #666  
+18) 아래 여백 10px  
+
+✅ `<p>` 태그 (절취선)  
+19) border-top: 2px dashed #ccc  
+20) 위아래 여백 → margin: 15px 0  (15px위아래 0좌우)
+
+✅ `<a>` 태그 (항공사 링크)  
+21) 위쪽 여백 5px  
+22) 글자 크기 13px  
+23) 글자 색상 → #2c3e50  
+24) 밑줄 제거  
+25) 텍스트 오른쪽 정렬 
+ 
+-->
