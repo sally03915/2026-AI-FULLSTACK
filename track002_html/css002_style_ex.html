@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내부적용 css -users</title>
+    <style> 
+      *   {  margin:0;  padding:0;   }
+      /* Q1. body  글꼴 : Segoe UI, 배경 : 그라디언트 #fdfbfb → #ebedee */
+      body{  
+          font-family: Segoe UI;   
+          background: linear-gradient(135deg, #fdfbfb , #9cdeff);  
+      }
+      /* Q2. h1 중앙정렬, 글자색상 : #e1306c, 아래쪽여백 : 40px */
+      h1  {  text-align: center;   color:#e1306c;  margin-bottom: 40px; }
+
+      /* Q3. .card 너비 : 250px, 여백 : 아래쪽 30px 중앙정렬, 테두리 둥글게 : 20px, 그림자효과, 중앙정렬, 안쪽여백 : 20px,   트랜지션 : 0.3초 부드럽게 */
+      .card {
+        width:250px;
+        margin:auto;
+        margin-bottom:30px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0, 0.3);
+        text-align: center;
+        padding:20px;
+        transition: all 0.3s;
+      }
+      /* Q4. .card:hover    위로 이동 : 5px,                  그림자 강조 */
+      .card:hover{          transform: translateY(-5px);     box-shadow: 0 0 10px rgba(0,0,0, 0.5);  }
+      /* Q5. .jack 배경 : 그라디언트 #dbeafe → #f0f9ff */
+      .jack{ background:linear-gradient(135deg , #dbeafe , #f0f9ff); }  
+      /* Q6. .june 배경 : 그라디언트 #ffe0f0 → #fff0f5 */
+      .june{ background:linear-gradient(135deg , #ffe0f0 , #fff0f5); }  
+      /* Q7. .mina 배경 : 그라디언트 #ede9fe → #f5f3ff */
+      .mina{ background:linear-gradient(135deg , #ede9fe , #f5f3ff); }  
+
+      /* Q8. .card img 너비/높이 : 90px, 원형처리, 이미지 비율 유지, 테두리 : 3px 실선 #e1306c   - object-fit: contain; */
+      .card  img{ width: 90px;  height: 90px;   border-radius: 50%; 
+                  border:3px solid #e1306c;   object-fit: contain;}
+
+      /* Q9. .card h2 여백 : 위10px 아래5px, 글자크기 : 18px, 글자색상 : #333 */
+      .card  h2{ margin-top: 10px;  margin-bottom: 5px; font-size: 18px;  color:#333;  }
+
+      /* Q10. .card p 글자크기 : 14px, 글자색상 : #444, 아래쪽여백 : 10px */
+      .card   p{  font-size: 14px;  color:#444;  margin-bottom: 10px;  }
+
+      /* Q11. .card a 글자크기 : 13px, 글자색상 : #e1306c, 밑줄 제거 */
+       .card    a{  font-size: 13px;  color:#e1306c;  text-decoration: none;}
+
+      /* Q12. .card h3 위쪽여백 : 20px, 글자크기 : 16px, 글자색상 : #333 */
+      .card h3{ margin-top: 20px;  font-size:  16px;   color: #333; }
+
+      /* Q13. .card ul, ol, dl 왼쪽정렬, 왼쪽 안쪽여백 : 20px, 글자색상 : #333, 여백제거 */
+      .card ul , 
+      .card ol ,  
+      .card dl {   text-align: left;    padding-left:20px; color:#333; margin:0;  }
+
+      /* Q14. .card dt 글자굵기 : 굵게 */
+      .card dt { font-weight: bold; }
+
+      /* Q15. .card dd 여백 : 아래쪽 10px */
+      .card dd { margin-bottom: 10px; }
+
+    </style>
+</head>
+<body>
+   <div>
+       <h1>사용자 프로필 카드</h1> 
+       <div class="card  jack">
+          <p><img src="./img/one.png" alt="Jack 프로필사진"/></p>  
+          <h2>Jack</h2>
+          <p>백엔드 개발자 | Node.js & DB전문가</p>
+          <p>팔로워 : 3200명</p>
+          <p><a href="" title="">깃허브 보기</a></p>
+          <h3>Jack이 좋아하는 기술</h3> 
+          <ul>
+            <li>Node js</li>    
+            <li>MongoDB</li>    
+            <li>Docker</li> 
+          </ul>     
+       </div><!--end div1 -->
+
+       <div class="card  june">
+          <p><img src="./img/two.png" alt="June 프로필사진"/></p>  
+          <h2>June</h2>
+          <p>프론트엔드 디자이너 | React & UI/UX</p>
+          <p>팔로워 : 2,100명</p>
+          <p><a href="#" title="">깃허브 보기</a></p>
+          <h3>프론트엔드 학습 추천 순서</h3> 
+          <ol>
+              <li>HTML & CSS</li>
+              <li>JavaScript</li>
+              <li>React</li>
+          </ol>
+       </div><!--end div2 -->
+
+       <div class="card  mina">
+          <p><img src="./img/three.png" alt="Mina 프로필사진"/></p>  
+          <h2>Mina</h2>
+          <p>AI 연구원 + Python & 머신러닝</p>
+          <p>팔로워 : 1,500명</p>
+          <p><a href="#" title="깃허브 보기 바로가기링크">깃허브 보기</a></p>
+          <h3>Mina의 역할</h3> 
+          <dl>
+            <dt>직무</dt>    <dd>AI 연구원</dd>
+            <dt>주요기술</dt> <dd>Python, 머신러닝</dd>
+            <dt>관심분야</dt> <dd>자연어 처리, 딥러닝</dd>
+          </dl>
+       </div><!--end div3 -->
+   </div><!-- end div -->
+</body>
+</html> 
+ 
+
+
+
+
+<!--
+STEP1) MARKUP + VALIDATOR
+
+사용자 프로필 카드
+
+Jack 프로필사진
+Jack
+백엔드 개발자 | Node.js & DB전문가
+팔로워 : 3200명
+깃허브 보기
+Jack이 좋아하는 기술
+Node js
+MongoDB
+Docker
+
+June 프로필사진
+June
+프론트엔드 디자이너 | React & UI/UX
+팔로워 : 2,100명
+깃허브 보기
+프론트엔드 학습 추천 순서
+HTML & CSS
+JavaScript
+React
+
+
+Mina 프로필사진
+Mina
+AI 연구원 + Python & 머신러닝
+팔로워 : 1,500명
+깃허브 보기
+Mina의 역할
+직무
+AI 연구원
+주요기술
+Python, 머신러닝
+관심분야
+자연어 처리, 딥러닝
+
+
+STEP2) CSS  내부적용
+/* Q1. body  글꼴 : Segoe UI, 배경 : 그라디언트 #fdfbfb → #ebedee */
+/* Q2. h1 중앙정렬, 글자색상 : #e1306c, 아래쪽여백 : 40px */
+/* Q3. .card 너비 : 250px, 여백 : 아래쪽 30px 중앙정렬, 테두리 둥글게 : 20px, 그림자효과, 중앙정렬, 안쪽여백 : 20px, 트랜지션 : 0.3초 부드럽게 */
+/* Q4. .card:hover 위로 이동 : 5px, 그림자 강조 */
+/* Q5. .jack 배경 : 그라디언트 #dbeafe → #f0f9ff */
+/* Q6. .june 배경 : 그라디언트 #ffe0f0 → #fff0f5 */
+/* Q7. .mina 배경 : 그라디언트 #ede9fe → #f5f3ff */
+/* Q8. .card img 너비/높이 : 90px, 원형처리, 이미지 비율 유지, 테두리 : 3px 실선 #e1306c */
+/* Q9. .card h2 여백 : 위10px 아래5px, 글자크기 : 18px, 글자색상 : #333 */
+/* Q10. .card p 글자크기 : 14px, 글자색상 : #444, 아래쪽여백 : 10px */
+/* Q11. .card a 글자크기 : 13px, 글자색상 : #e1306c, 밑줄 제거 */
+/* Q12. .card h3 위쪽여백 : 20px, 글자크기 : 16px, 글자색상 : #333 */
+/* Q13. .card ul, ol, dl 왼쪽정렬, 왼쪽 안쪽여백 : 20px, 글자색상 : #333, 여백제거 */
+/* Q14. .card dt 글자굵기 : 굵게 */
+/* Q15. .card dd 여백 : 아래쪽 10px */
+-->

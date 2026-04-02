@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS ID/CLASS</title>
+    <style>
+        /* 전체여백빼기 */
+        * {   margin:0;  padding:0; }
+
+        /* body 좋아하는 글꼴 */
+        body{
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background: linear-gradient(135deg, #eee , rgb(255, 201, 235));
+        } 
+        /* Q1. h3 중앙정렬, 글자색상 : #e1306c,  아래쪽여백 : 10px  */
+        h3{   text-align: center;  color:#e1306c;  margin-bottom: 10px;  }
+
+        /* Q2. p 중앙정렬, 글자크기 : 14px, 글자색상 : #666, 아래쪽여백 : 20px */
+        p { text-align: center;  font-size: 14px; color:#666;  margin-bottom: 20px;}
+
+        /* Q3. div 배경색상 : #fff, 너비 : 300px, 여백 : 위아래 30px 좌우 중앙정렬, 
+                    안쪽여백 : 20px, 테두리 둥글게 : 15px, 
+                    그림자효과, text-shadow: 0 0 5px red   , 10px 0 5px blue;
+                    왼쪽정렬 */
+        div{ background-color:#fff;  width:300px;  margin:30px auto; 
+             padding:20px;   border-radius: 15px;  
+             box-shadow: 0 0 10px rgba(255 , 0, 0 , 0.3);
+             text-align: left;
+        }
+        /* Q4. dt 글자굵기 : 굵게, 아래쪽여백 : 10px, 글자색상 : #333 */
+        dt { font-weight: bold;    margin-bottom: 10px;  color:#333;    }
+        /* Q5. dd 글자크기 : 14px, 글자색상 : #666, 아래쪽여백 : 8px, 왼쪽 안쪽여백 : 10px */
+        dd{  font-size: 14px;     color:#666;   
+            margin-bottom: 8px;  padding-left: 10px; }
+        
+        /* Q6. id1, id2 글자색상 :      각각 색상다르게 글자굵기 : 굵게
+          id="id1" 
+          id="id2" 
+        */
+        dd#id1 {  color:rgb(186, 80, 80); }
+          #id2 {  color:#e1306c           }
+        
+       /* Q7. .mycss 배경색상 : #f9f1f7, 
+        왼쪽 테두리 : 4px 실선 #e1306c, 
+        안쪽여백 : 5px 10px, 
+        테두리 둥글게 : 5px 
+        class="myclass two"
+        */
+        .myclass{  
+            background-color:#f9f1f7; 
+            border-left:4px solid #e1306c;
+            padding:5px 10px;
+            border-radius: 5px;
+        }    
+        .two{border-color:aquamarine}
+    </style>
+</head>
+<body>
+    <div>
+        <h3>id</h3>
+        <p> css 안에서 선택자 - 유일한 값  </p>
+        <dl>
+            <dt>id 특징</dt>
+            <dd>html 문서에서 한번만 사용 가능</dd>
+            <dd  id="id1"> 중복 불가 - Error: Duplicate ID id1. </dd>
+            <dd  id="id2"> css 에서는 #id명 </dd>
+            <dd> 우선순위 id와 class 모두있을때 id가 더 높음 </dd>
+        </dl>
+    </div><!-- end div  -->
+    
+    <div>
+        <h3>class</h3>
+        <p> css 안에서 선택자 - 여러개 선택시</p>
+        <dl>
+            <dt>class의 특징</dt>
+            <dd  class="myclass">재사용 가능 : 여러요소에 class 지정</dd>
+            <dd  class="myclass two">
+                하나의 요소에 여러개의 
+                class 사용 가능</dd>
+            <dd>css 에서는  .class 명</dd>
+            <dd>반복되는 스타일에 적합</dd>
+        </dl>
+    </div>
+
+</body>
+</html>
+
+<!--  css003_id_class.html   -->
