@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1wk check</title>
+    <style>
+        * { margin:0;  padding:0 }
+        /* Q1. body 여백제거, 안쪽여백 : 30px, 글꼴 : 'Segoe UI', 
+              배경 : 그라디언트 #fff1eb → #ace0f9 */
+        body{               padding:30px;  font-family: 'Segoe UI';
+            background-image: linear-gradient(135deg ,#fff1eb , #ace0f9 );
+        }
+              
+        /* Q2. h1 중앙정렬, 글자색상 : #34495e, 아래쪽여백 : 40px */
+        h1{ text-align: center; color: #34495e ;    margin-bottom : 40px }
+ 
+        /* Q3. .portfolio 너비 : 250px, 여백 : 아래쪽 30px 중앙정렬, 
+                테두리 둥글게 : 20px, 그림자효과, 안쪽여백 : 20px, 트랜지션 : 0.3초 
+        class="portfolio*/
+        .portfolio {
+            width:250px;  margin:0  auto 30px auto;  /* top right bottom auto*/  
+            border-radius: 20px;    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding:20px;  transition: all 0.3s;
+        }
+
+        /* Q4. .portfolio:hover 확대 + 회전 + 밝기 + 그림자 강조 */
+        .portfolio:hover{
+            transform: scale(1.05)  rotate(-3deg);
+            filter: brightness(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        /* Q5. .project1 배경 : 그라디언트 #fceabb → #f8b500 */
+        .project1{ background-image: linear-gradient(90deg, #fceabb , #f8b500); }
+        /* Q6. .project2 배경 : 그라디언트 #d5fefd → #a1c4fd */
+        .project2{ background-image: linear-gradient(90deg, #d5fefd , #a1c4fd); }
+        /* Q7. .project3 배경 : 그라디언트 #fbc2eb → #a6c1ee */
+        .project3{ background-image: linear-gradient(90deg, #fbc2eb , #a6c1ee); }
+
+        /* Q8. .portfolio img 너비/높이 : 90px, 원형처리, 이미지 비율 유지, 
+                테두리 : 3px 실선 #34495e */
+        .portfolio  img{
+            width:150px; height: 90px;  border-radius: 20px;
+            object-fit: cover; border:3px solid #34495e;
+            /* text-align: center;  동작안함 - inline 컨텐츠 */
+        }
+        /* Q9. .portfolio h2 여백 : 위10px 아래5px, 글자크기 : 18px, 글자색상 : #2c3e50 */
+        .portfolio h2{  margin:  10px 0 5px 0;  font-size: 18px; color:#2c3e50;  }
+        /* Q10. .portfolio p 글자크기 : 14px, 글자색상 : #555, 아래쪽여백 : 10px */
+        .portfolio p{  font-size: 14px;  color:#555;   margin-bottom: 10px;  }
+        /* Q11. .portfolio a 글자크기 : 13px, 글자색상 : #34495e, 밑줄 제거 */
+        .portfolio a{  font-size:13px; color:#34495e;  text-decoration:none; }
+        /* Q12. .portfolio h3 위쪽여백 : 20px, 글자크기 : 16px, 글자색상 : #2c3e50 */
+        .portfolio h3{  margin-top:20px;  font-size:16px; color:#2c3e50; }
+        /* Q13. .portfolio ul 왼쪽정렬, 왼쪽 안쪽여백 : 20px, 글자색상 : #2c3e50  */ 
+        .portfolio ul{  text-align: left;  padding-left:20px;  color:#2c3e50; }
+
+        /*   가상선택자    
+            :hover                 마우스를 올렸을때 
+            :first-child           부모안에서 첫번째 자식요소
+            :last-child            부모안에서 마지막 자식요소
+
+            Q .portfolio ul태그의 첫번째 li를 선택해서 좋아하는 배경색으로 넣기
+        */
+        .portfolio :first-child{ text-align: center; }
+        .portfolio :last-child { font-weight: bold;  font-size:90%}
+        .portfolio ul :first-child{background-color:rgb(172, 243, 220);}
+
+    </style>
+</head>
+<body>
+     <div>
+        <h1>프로젝트 설명 카드</h1>
+        <div class="portfolio project1">
+            <p><img src="./img/portfolio1.jpg" alt="도서 추천 웹앱 포트폴리오"></p>
+            <h2>도서 추천 웹앱</h2>
+            <p>기획자: 사장님</p>
+            <p>사용자 취향 기반으로 도서를 추천하는 웹 서비스</p>
+            <p><a href="#" title=""  target="_blank">GitHub 저장소 보기</a></p>
+            <h3> 핵심 기능</h3>
+            <ul>
+                <li>사용자 입력 기반 추천 알고리즘</li>
+                <li>카드 UI를 활용한 도서 정보 시각화</li>
+                <li>팀원 역할 분담 및 협업 관리</li>
+            </ul>
+        </div>
+        <div class="portfolio project2">
+            <p><img src="./img/portfolio2.jpg" alt="반응형 포트폴리오 사이트"></p>
+            <h2>반응형 포트폴리오 사이트</h2>
+            <p>프론트엔드: June</p>
+            <p>디자이너와 협업하여 제작한 개인 포트폴리오 웹사이트</p>
+            <p><a href="#" title=""  target="_blank">배포된 페이지 보기</a></p>
+            <h3> 주요 기술</h3>
+            <ul>
+                <li>HTML5 / CSS3 / JavaScript</li>
+                <li>미디어쿼리를 활용한 반응형 디자인</li>
+                <li>Figma 기반 UI 설계</li>
+            </ul>
+        </div>
+        <div class="portfolio project3">
+            <p><img src="./img/portfolio3.jpg" alt="AI 기반 독서 취향 분석기"></p>
+            <h2>AI 기반 독서 취향 분석기</h2>
+            <p>AI 분석: Mina</p>
+            <p>독서 이력 데이터를 기반으로 취향을 분석하고 도서를 추천</p>
+            <p><a href="#" title=""  target="_blank">프로젝트 상세 보기</a></p>
+            <h3> 기술 스택</h3>
+            <ul>
+                <li>Python / Pandas / Scikit-learn</li>
+                <li>자연어 처리 기반 키워드 분석</li>
+                <li>데이터 시각화 및 사용자 피드백 반영</li>
+            </ul>
+        </div> 
+    </div>
+
+</body>
+</html>
+
+<!--
+1. 다음을 참고하여 마크업하고 validator를 하시오.
+📁 프로젝트 설명 카드
+
+도서 추천 웹앱
+기획자: 사장님
+
+사용자 취향 기반으로 도서를 추천하는 웹 서비스
+
+GitHub 저장소 보기
+
+핵심 기능
+사용자 입력 기반 추천 알고리즘
+카드 UI를 활용한 도서 정보 시각화
+팀원 역할 분담 및 협업 관리
+프로젝트 썸네일 이미지
+
+
+반응형 포트폴리오 사이트
+프론트엔드: June
+
+디자이너와 협업하여 제작한 개인 포트폴리오 웹사이트
+
+배포된 페이지 보기
+
+주요 기술
+HTML5 / CSS3 / JavaScript
+미디어쿼리를 활용한 반응형 디자인
+Figma 기반 UI 설계
+프로젝트 썸네일 이미지
+
+
+AI 기반 독서 취향 분석기
+AI 분석: Mina
+
+독서 이력 데이터를 기반으로 취향을 분석하고 도서를 추천
+
+프로젝트 상세 보기
+
+기술 스택
+Python / Pandas / Scikit-learn
+자연어 처리 기반 키워드 분석
+데이터 시각화 및 사용자 피드백 반영
+
+
+2.  다음을 참고하여 내부적용으로 css를 적용하시오.
+
+  /* Q1. body 여백제거, 안쪽여백 : 30px, 글꼴 : 'Segoe UI', 배경 : 그라디언트 #fff1eb → #ace0f9 */
+  /* Q2. h1 중앙정렬, 글자색상 : #34495e, 아래쪽여백 : 40px */
+  /* Q3. .portfolio 너비 : 250px, 여백 : 아래쪽 30px 중앙정렬, 테두리 둥글게 : 20px, 그림자효과, 안쪽여백 : 20px, 트랜지션 : 0.3초 */
+  /* Q4. .portfolio:hover 확대 + 회전 + 밝기 + 그림자 강조 */
+  /* Q5. .project1 배경 : 그라디언트 #fceabb → #f8b500 */
+  /* Q6. .project2 배경 : 그라디언트 #d5fefd → #a1c4fd */
+  /* Q7. .project3 배경 : 그라디언트 #fbc2eb → #a6c1ee */
+  /* Q8. .portfolio img 너비/높이 : 90px, 원형처리, 이미지 비율 유지, 테두리 : 3px 실선 #34495e */
+  /* Q9. .portfolio h2 여백 : 위10px 아래5px, 글자크기 : 18px, 글자색상 : #2c3e50 */
+  /* Q10. .portfolio p 글자크기 : 14px, 글자색상 : #555, 아래쪽여백 : 10px */
+  /* Q11. .portfolio a 글자크기 : 13px, 글자색상 : #34495e, 밑줄 제거 */
+  /* Q12. .portfolio h3 위쪽여백 : 20px, 글자크기 : 16px, 글자색상 : #2c3e50 */
+  /* Q13. .portfolio ul 왼쪽정렬, 왼쪽 안쪽여백 : 20px, 글자색상 : #2c3e50  */ 
+
+-->
