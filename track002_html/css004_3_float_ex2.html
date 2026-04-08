@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>float 예제 확장버전</title>
+    <style>
+    *{ margin:0; padding:0; }    
+/* Q1. body 글꼴 : Arial, sans-serif / 배경색 : #f0f9ff 
+        1) background: red url('./img/five.png') center ;    
+        2) background-color: aqua;  */
+    body{  font-family: Arial, sans-serif; 
+        background-color:  #f0f9ff ;
+    }
+/* Q2. h3 태그 : 위아래 여백 20px, 왼쪽 테두리 8px 실선 #333, 안쪽여백 왼쪽 10px 
+       1) margin-top:20px; margin-bottom:20px; 
+       2) margin:  20px 0   20px 0; 
+       3) margin:  20px 0  
+*/
+    h3{  
+        margin:20px 0; 
+        border-left:8px solid #333;  
+        padding-left:10px;
+    }    
+
+/* Q3. .container : 너비 70%, 중앙정렬, 배경 흰색, 안쪽여백 20px, 
+            모서리둥글게 10px, 그림자 효과 */
+    .container{ width: 70%;  margin:5% auto;   background-color: #fff; 
+        padding:20px;   border-radius: 10px;   box-shadow: 0 0 10px pink;
+    }
+
+/* Q4. .box : 너비/높이 100px, 배경 #ff6600, 글자색 흰색, 중앙정렬(line-height 활용), 
+        margin 5px, 부드러운 전환효과 0.6초 */
+    .box{ width:100px; height:100px; background-color: #ff6600; color:white;
+        text-align: center;  line-height: 100px;  margin:5px;
+        transition: all 0.6s;
+    }
+
+/*
+    .left           .right
+*/
+/* Q5. .left : 왼쪽으로 붙이기 / .right : 오른쪽으로 붙이기 */
+.left{ float:left; }
+.right{ float:right; }
+/* Q6. .clear : float 해제 */
+.clear{  clear:both; }
+
+
+/* Q7. .trans .box 첫 번째 hover 시 : Y축 -200px 이동, 배경 #00ccff  (translateY)  
+.trans  .box:first-child:hover{ 
+    transform: translateY(-200px);  background-color: #00ccff;
+} */
+.trans  .box:nth-child(1):hover{ 
+    transform: translateY(-200px);  background-color: #00ccff;
+} 
+
+/* Q8. .trans .box 두 번째 hover 시 : Z축 15도 회전, 배경 #33cc33  (rotateZ) */
+.trans  .box:nth-child(2):hover{ 
+    transform: rotateZ(15deg);  background-color: #33cc33;
+} 
+
+/* Q9. .trans .box 세 번째 hover 시 : X축 180도 회전, 배경 #ff33aa  (rotateX) */
+.trans  .box:nth-child(3):hover{ 
+    transform: rotateX(180deg);  background-color: #ff33aa;
+} 
+/* Q10. .trans .box 네 번째 hover 시 : Y축 180도 회전, 배경 #ffaa00  (rotateY) */
+.trans  .box:nth-child(4):hover{ 
+    transform: rotateY(180deg);  background-color: #ffaa00;
+} 
+/* Q11. .trans .box 다섯 번째 hover 시 : 1.3배 확대, 배경 #6600ff  (scale) */
+.trans  .box:nth-child(5):hover{ 
+    transform: scale(1.3);  background-color: #6600ff;
+} 
+
+/* Q12. .gallery ul : 기본 점 제거(list-style), 안쪽여백/바깥여백 0 background-color: #00ccff; */
+.gallery {
+    list-style: none;  margin:0; padding:0;
+    padding:10px; overflow: hidden;
+}
+
+/* Q13. .gallery li : 왼쪽으로 줄 세우기, margin 10px */
+.gallery li{ float:left; margin:10px }
+
+/* Q14. .gallery img : 모서리 둥글게 10px, 테두리 2px 실선 #ff6600, 부드러운 전환효과 0.6초 */
+.gallery img{
+    border-radius: 10px;  
+    border:2px solid #ff6600;
+    transition: all 0.6s;
+}
+
+/* Q15. .gallery 첫 번째 이미지 hover 시 : 1.2배 확대, 테두리색 #00ccff */
+.gallery li:nth-child(1):hover  img {
+    transform: scale(1.2);  border-color: #00ccff;
+}
+/* Q16. .gallery 두 번째 이미지 hover 시 : Z축 15도 회전, 테두리색 #33cc33 */
+.gallery li:nth-child(2):hover  img {
+    transform: rotateZ(15deg);  border-color: #33cc33;
+}
+/* Q17. .gallery 세 번째 이미지 hover 시 : Y축 180도 회전, 테두리색 #ff33aa */
+.gallery li:nth-child(3):hover  img {
+    transform: rotateY(180deg);  border-color: #ff33aa;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>예제 1: float left</h3>
+        <div class="box left">A</div><div class="box left">B</div><div class="box left">C</div>
+        <div class="clear"></div><p>박스들이 왼쪽으로 줄줄이 붙어요.</p>
+    </div>
+
+    <div class="container">
+        <h3>예제 2: float right</h3>
+        <div class="box right">A</div><div class="box right">B</div><div class="box right">C</div>
+        <div class="clear"></div><p>박스들이 오른쪽으로 줄줄이 붙어요.</p>
+    </div>
+
+    <div class="container">
+        <h3>예제 3: 왼쪽과 오른쪽</h3>
+        <div class="box left">LEFT</div><div class="box right">RIGHT</div>
+        <div class="clear"></div><p>왼쪽과 오른쪽에 각각 붙일 수 있어요.</p>
+    </div>
+
+    <div class="container">
+        <h3>예제 4: 이미지 옆에 글</h3>
+        <p class="left"><img src="https://picsum.photos/100" alt="이미지"></p>
+        <p>이미지가 왼쪽에 붙고 글이 오른쪽에 따라와요.</p>
+        <div class="clear"></div>
+    </div>
+
+    <div class="container">
+        <h3>예제 5: 메뉴 줄 세우기</h3>
+        <div class="box left">HOME</div><div class="box left">ABOUT</div><div class="box left">CONTACT</div>
+        <div class="clear"></div><p>메뉴 버튼들이 왼쪽부터 나란히 줄 서요.</p>
+    </div>
+
+    <div class="container">
+        <h3>예제 6: hover 효과 (nth-child)</h3>
+        <div class="trans">
+            <div class="box left">1</div><div class="box left">2</div><div class="box left">3</div>
+            <div class="box left">4</div><div class="box left">5</div>
+        </div>
+        <div class="clear"></div><p>마우스를 올리면 각 박스마다 다른 동작을 해요.</p>
+    </div>
+
+    <div class="container">
+        <h3>예제 7: float + 글자 꾸미기</h3>
+        <div class="box left">A</div><p>왼쪽 박스 옆에 글이 자연스럽게 흘러갑니다.</p>
+        <div class="clear"></div>
+    </div>
+
+    <div class="container">
+        <h3>예제 8: float으로 사진 갤러리 (ul/li)</h3>
+        <ul class="gallery">
+            <li><img src="https://picsum.photos/100?random=1" alt="사진1"></li>
+            <li><img src="https://picsum.photos/100?random=2" alt="사진2"></li>
+            <li><img src="https://picsum.photos/100?random=3" alt="사진3"></li>
+        </ul>
+        <div class="clear"></div>
+        <p>사진들이 리스트 항목으로 나란히 갤러리처럼 배치돼요.</p>
+    </div>
+
+
+</body>
+</html>

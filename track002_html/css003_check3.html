@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>캐릭터 카드</title>
+  <style>
+    * { margin:0; padding:0; }
+    body {
+      font-family: 'Segoe UI';
+      background: linear-gradient(135deg, #fff1eb, #ace0f9);
+    }
+    h1 {
+      text-align:center;
+      color:#34495e;
+      margin-bottom:40px;
+    }
+    .cardbox { overflow:auto; }
+    .card {
+      float:left;
+      width:250px;
+      margin:20px;
+      border-radius:20px;
+      box-shadow:0 0 10px rgba(0,0,0,0.3);
+      text-align:center;
+      padding:20px;
+      transition:all 0.3s;
+    }
+    .card:hover {
+      transform:translateY(-5px) scale(1.05);
+      box-shadow:0 0 15px rgba(0,0,0,0.5);
+    }
+    .wizard { background:linear-gradient(135deg,#dbeafe,#f0f9ff); }
+    .warrior { background:linear-gradient(135deg,#ffe0f0,#fff0f5); }
+    .archer { background:linear-gradient(135deg,#ede9fe,#f5f3ff); }
+    .card img {
+      width:90px; height:90px;
+      border-radius:50%;
+      border:3px solid #34495e;
+      object-fit:cover;
+    }
+    .card h2 { margin:10px 0 5px; font-size:18px; color:#333; }
+    .card p { font-size:14px; color:#555; margin-bottom:10px; }
+    .card a { font-size:13px; color:#34495e; text-decoration:none; }
+    .card h3 { margin-top:20px; font-size:16px; color:#333; text-align:left; }
+    .card ul { text-align:left; padding-left:20px; color:#333; }
+  </style>
+</head>
+<body>
+  <div class="cardbox">
+    <h1>게임 캐릭터 카드</h1>
+    <div class="card wizard">
+      <img src="./img/wizard.png" alt="마법사">
+      <h2>마법사</h2>
+      <p>강력한 마법으로 적을 제압</p>
+      <p><a href="#">캐릭터 정보</a></p>
+      <h3>스킬</h3>
+      <ul>
+        <li>파이어볼</li>
+        <li>아이스 스톰</li>
+        <li>텔레포트</li>
+      </ul>
+    </div>
+    <div class="card warrior">
+      <img src="./img/warrior.png" alt="전사">
+      <h2>전사</h2>
+      <p>강한 체력과 근접 공격</p>
+      <p><a href="#">캐릭터 정보</a></p>
+      <h3>스킬</h3>
+      <ul>
+        <li>강타</li>
+        <li>방패 막기</li>
+        <li>돌진</li>
+      </ul>
+    </div>
+    <div class="card archer">
+      <img src="./img/archer.png" alt="궁수">
+      <h2>궁수</h2>
+      <p>빠른 속도와 원거리 공격</p>
+      <p><a href="#">캐릭터 정보</a></p>
+      <h3>스킬</h3>
+      <ul>
+        <li>멀티샷</li>
+        <li>독화살</li>
+        <li>은신</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
+ 
+<!-- 
+## 📝 문제 세트 (게임 캐릭터 카드)
+
+### **STEP 1: 부분 설계**
+- 카드 너비는 반드시 250px 유지.  
+- 배경은 그라디언트 필수, 색상은 자유 선택.  
+- hover 효과는 반드시 포함하되, 이동/확대/회전 중 하나를 자유롭게 선택.  
+- 각 카드에 이미지 + 이름 + 설명 + 링크 포함.  
+- 리스트(ul)로 캐릭터 스킬 3개 이상 작성.  
+
+---
+
+### **STEP 2: 자유 설계**
+- “내가 좋아하는 캐릭터 카드 페이지”를 자유롭게 만들어라.  
+- 최소 카드 2개 이상, 이미지 포함.  
+- hover 효과 자유롭게 선택.  
+- 배경과 글꼴은 자유롭게 선택.  
+
+---
+
+### **STEP 3: 개념 정리**
+- 선택자 우선순위: `id > class > 태그 > 전체(*)`  
+- 박스 모델: margin / border / padding / content  
+- 레이아웃: float vs flex vs grid  
+- 시각 효과: transition, transform, box-shadow, gradient  
+  -->

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>실무 position 예제 확장 (문제 버전)</title>
+    <style>
+        /* Q1. body 글꼴 : Arial, sans-serif / 배경색 : #f0f9ff */
+
+        /* Q2. h3 태그 : 위아래 여백 20px, 왼쪽 테두리 8px 실선 #333, 안쪽여백 왼쪽 10px */
+
+        /* Q3. .container : 너비 80%, 중앙정렬, 배경 흰색, 안쪽여백 20px, 모서리둥글게 10px, 그림자 효과 */
+
+        /* Q4. .box : 너비/높이 100px, 배경 #ff6600, 글자색 흰색, 중앙정렬(line-height 활용), margin 5px */
+
+        /* Q5. .tooltip : position relative */
+
+        /* Q6. .tooltip .tooltip-text : position absolute, 아래쪽 120% 위치, 왼쪽 0%, 너비 200px, 배경 #333, 글자색 흰색, 안쪽여백 5px, 모서리둥글게 5px, 기본은 숨김 처리 */
+
+        /* Q7. .tooltip:hover .tooltip-text : 보이도록 처리 (visibility:visible) */
+
+        /* Q8. .badge-box : position relative */
+
+        /* Q9. .badge : position absolute, 위쪽 -10px, 오른쪽 -10px, 배경 빨강, 글자색 흰색, 원형 모양(border-radius:50%), 안쪽여백 5px 8px, 글자크기 12px */
+
+        /* Q10. .dropdown : position relative, display:inline-block */
+
+        /* Q11. .dropdown-content : position absolute, 위쪽 100%, 왼쪽 0, 배경 흰색, 테두리 1px 실선 #ccc, 최소너비 150px, 기본은 숨김 처리(display:none) */
+
+        /* Q12. .dropdown-content a : block 요소, 안쪽여백 10px, 밑줄 제거, 글자색 #333 */
+
+        /* Q13. .dropdown:hover .dropdown-content : 보이도록 처리(display:block) */
+
+
+        *{margin:0; padding:0; box-sizing:border-box;}
+        body{font-family:Arial, sans-serif; background:#f0f9ff;}
+        h3{margin:20px 0; border-left:8px solid #333; padding-left:10px;}
+        .container{width:80%; margin:20px auto; background:#fff; padding:20px; 
+                   border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2);}
+
+        .box{width:100px; height:100px; background:#ff6600; color:#fff; 
+             text-align:center; line-height:100px; margin:5px;}
+
+        /* 7. 툴팁 */
+        .tooltip { position:relative;  }
+        .tooltip .tooltip-text { position:absolute;  bottom:120%; left:0%;  width:200px; 
+                                 background:#333; color:#fff; padding:5px; border-radius:5px; visibility:hidden; }
+        .tooltip:hover .tooltip-text { visibility:visible; }
+
+        /* 8. 배지 */
+        .badge-box { position:relative; display:inline-block; }
+        .badge { position:absolute; top:-10px; right:-10px; background:red; color:#fff; 
+                 border-radius:50%; padding:5px 8px; font-size:12px; }
+
+        /* 9. 드롭다운 메뉴 */
+        .dropdown { position:relative; display:inline-block; }
+        .dropdown-content { position:absolute; top:100%; left:0; background:#fff; border:1px solid #ccc; 
+                            min-width:150px; display:none; }
+        .dropdown-content a { display:block; padding:10px; text-decoration:none; color:#333; }
+        .dropdown:hover .dropdown-content { display:block; }
+
+    
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h3>예제 6: 툴팁 (relative + absolute)</h3>
+        <div class="tooltip">
+            버튼
+            <span class="tooltip-text">툴팁 설명</span>
+        </div>
+        <p>hover 시 툴팁이 나타납니다.</p>
+    </div>
+
+    <div class="container">
+        <h3>예제 7: 배지 (absolute)</h3>
+        <div class="badge-box">
+            <img src="https://picsum.photos/100" alt="아이콘">
+            <span class="badge">3</span>
+        </div>
+        <p>알림 개수를 표시하는 배지를 absolute로 구현합니다.</p>
+    </div>
+
+    <div class="container">
+        <h3>예제 8: 드롭다운 메뉴 (relative + absolute)</h3>
+        <div class="dropdown">
+            <button>메뉴</button>
+            <div class="dropdown-content">
+                <a href="#">항목1</a>
+                <a href="#">항목2</a>
+                <a href="#">항목3</a>
+            </div>
+        </div>
+        <p>hover 시 드롭다운 메뉴가 나타납니다.</p>
+    </div>
+
+</body>
+</html>

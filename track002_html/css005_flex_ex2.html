@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>홈페이지 레이아웃 예제 (문제 버전)</title>
+  <style>
+    /* Q1. body 글꼴 : Arial, sans-serif / 배경색 : #f0f9ff */
+
+    /* Q2. header : flex 컨테이너, justify-content space-between, align-items center, 배경 #333, 글자색 흰색, 안쪽여백 15px 30px */
+
+    /* Q3. header .logo : 글자크기 20px, 글자굵게 */
+
+    /* Q4. header nav ul : flex 컨테이너, gap 20px, 기본 점 제거, 여백/패딩 0 */
+
+    /* Q5. header nav a : 글자색 흰색, 밑줄 제거, 글자굵게 */
+
+    /* Q6. header nav a:hover : 글자색 #ff6600 */
+
+    /* Q7. .banner : flex 컨테이너, 중앙정렬, 높이 300px, 배경 #ff6600, 글자색 흰색, 글자크기 30px */
+
+    /* Q8. .cards : flex 컨테이너, flex-wrap wrap, gap 20px, 너비 80%, 중앙정렬(margin auto), 위아래 여백 40px */
+
+    /* Q9. .card : flex 1 1 calc(33% - 20px), 배경 흰색, 모서리둥글게 8px, 그림자 효과, 안쪽여백 20px, 중앙정렬(text-align center) */
+
+    /* Q10. .layout : flex 컨테이너, 너비 80%, 중앙정렬(margin auto), gap 20px, 위아래 여백 40px */
+
+    /* Q11. .sidebar : flex 1, 배경 #eee, 안쪽여백 20px */
+
+    /* Q12. .content : flex 3, 배경 흰색, 안쪽여백 20px, 그림자 효과 */
+
+    /* Q13. footer : flex 컨테이너, 중앙정렬, 배경 #333, 글자색 흰색, 안쪽여백 20px */
+
+
+    *{margin:0; padding:0; box-sizing:border-box;}
+    body{font-family:Arial, sans-serif; background:#f0f9ff;}
+
+    /* 헤더 */
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      background:#333; color:#fff; padding:15px 30px;
+    }
+    header .logo { font-size:20px; font-weight:bold; }
+    header nav ul { display:flex; gap:20px; list-style:none; margin:0; padding:0; }
+    header nav a { color:#fff; text-decoration:none; font-weight:bold; }
+    header nav a:hover { color:#ff6600; }
+
+    /* 메인 배너 */
+    .banner {
+      display:flex; justify-content:center; align-items:center;
+      height:300px; background:#ff6600; color:#fff; font-size:30px;
+    }
+
+    /* 카드 섹션 */
+    .cards {
+      display:flex; flex-wrap:wrap; gap:20px;
+      width:80%; margin:40px auto;
+    }
+    .card {
+      flex:1 1 calc(33% - 20px);
+      background:#fff; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1);
+      padding:20px; text-align:center;
+    }
+
+    /* 사이드바 + 콘텐츠 */
+    .layout {
+      display:flex; width:80%; margin:40px auto; gap:20px;
+    }
+    .sidebar {
+      flex:1; background:#eee; padding:20px;
+    }
+    .content {
+      flex:3; background:#fff; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* 푸터 */
+    footer {
+      display:flex; justify-content:center; align-items:center;
+      background:#333; color:#fff; padding:20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <div class="logo">MyWebsite</div>
+    <nav>
+      <ul>
+        <li><a href="#">HOME</a></li>
+        <li><a href="#">ABOUT</a></li>
+        <li><a href="#">SERVICES</a></li>
+        <li><a href="#">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 메인 배너 -->
+  <div class="banner">
+    메인 배너 영역
+  </div>
+
+  <!-- 카드 섹션 -->
+  <section class="cards">
+    <div class="card">카드 1</div>
+    <div class="card">카드 2</div>
+    <div class="card">카드 3</div>
+    <div class="card">카드 4</div>
+    <div class="card">카드 5</div>
+    <div class="card">카드 6</div>
+  </section>
+
+  <!-- 사이드바 + 콘텐츠 -->
+  <section class="layout">
+    <aside class="sidebar">사이드바 메뉴</aside>
+    <article class="content">본문 콘텐츠 영역</article>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    © 2026 MyWebsite. All rights reserved.
+  </footer>
+
+</body>
+</html>

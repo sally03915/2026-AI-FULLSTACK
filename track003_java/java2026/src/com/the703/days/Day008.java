@@ -2,6 +2,7 @@ package com.the703.days;
 
 public class Day008 {
 	public static void main(String[] args) {
+		
 //		4.  eclipse 열어서 작성해주세요! [20분]
 //				   패키지명 : com.the703.days
 //				   클래스명 :  Day008

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>flex 예제 모음 (문제 버전)</title>
+    <style>
+        /* Q1. body 글꼴 : Arial, sans-serif / 배경색 : #f0f9ff */
+
+        /* Q2. h3 태그 : 위아래 여백 20px, 왼쪽 테두리 8px 실선 #333, 안쪽여백 왼쪽 10px */
+
+        /* Q3. .container : 너비 70%, 중앙정렬, 배경 흰색, 안쪽여백 20px, 모서리둥글게 10px, 그림자 효과 */
+
+        /* Q4. .box : 너비/높이 100px, 배경 #ff6600, 글자색 흰색, 중앙정렬(line-height 활용), margin 5px */
+
+        /* Q5. .flex : flex 컨테이너로 설정 (display:flex) */
+
+        /* Q6. .row : flex-direction row */
+
+        /* Q7. .column : flex-direction column */
+
+        /* Q8. .space-between : justify-content space-between */
+
+        /* Q9. .center : justify-content center, align-items center, 높이 200px */
+
+        /* Q10. .wrap : flex-wrap wrap, gap 10px */
+
+        /* Q11. .align-start : align-items flex-start */
+
+        /* Q12. .align-end : align-items flex-end */
+
+        /* Q13. .grow .box:nth-child(2) : flex-grow 1, 배경 #33cc33 */
+
+        /* Q14. .shrink .box : flex-shrink 1 */
+
+
+        *{margin:0; padding:0; box-sizing:border-box;}
+        body{font-family:Arial, sans-serif; background:#f0f9ff;}
+        h3{margin:20px 0; border-left:8px solid #333; padding-left:10px;}
+        .container{width:70%; margin:20px auto; background:#fff; padding:20px; 
+                   border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2);}
+        .box{width:100px; height:100px; background:#ff6600; color:#fff; 
+             text-align:center; line-height:100px; margin:5px;}
+
+        /* flex 기본 */
+        .flex { display:flex; }
+
+        /* 예제별 flex 설정 */
+        .row { flex-direction: row; }
+        .column { flex-direction: column; }
+        .space-between { justify-content: space-between; }
+        .center { justify-content: center; align-items: center; height:200px; }
+        .wrap { flex-wrap: wrap; gap:10px; }
+        .align-start { align-items: flex-start; }
+        .align-end { align-items: flex-end; }
+        .grow .box:nth-child(2) { flex-grow: 1; background:#33cc33; }
+        .shrink .box { flex-shrink: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="container flex row">
+        <h3>예제 1: 기본 row 배치</h3>
+        <div class="box">A</div><div class="box">B</div><div class="box">C</div>
+        <p>flex 기본값은 가로(row) 방향으로 나란히 배치됩니다.</p>
+    </div>
+
+    <div class="container flex column">
+        <h3>예제 2: column 배치</h3>
+        <div class="box">A</div><div class="box">B</div><div class="box">C</div>
+        <p>세로(column) 방향으로 박스들이 줄줄이 배치됩니다.</p>
+    </div>
+
+    <div class="container flex space-between">
+        <h3>예제 3: space-between</h3>
+        <div class="box">A</div><div class="box">B</div><div class="box">C</div>
+        <p>양 끝에 붙고, 나머지는 균등하게 떨어져 배치됩니다.</p>
+    </div>
+
+    <div class="container flex center">
+        <h3>예제 4: 중앙 정렬</h3>
+        <div class="box">A</div><div class="box">B</div><div class="box">C</div>
+        <p>가로·세로 모두 중앙에 배치됩니다.</p>
+    </div>
+
+    <div class="container flex wrap">
+        <h3>예제 5: flex-wrap</h3>
+        <div class="box">1</div><div class="box">2</div><div class="box">3</div>
+        <div class="box">4</div><div class="box">5</div><div class="box">6</div>
+        <div class="box">7</div><div class="box">8</div><div class="box">9</div>
+        <p>공간이 부족하면 자동으로 줄바꿈되어 여러 줄에 배치됩니다.</p>
+    </div>
+
+    <div class="container flex align-start" style="height:500px;">
+        <h3>예제 6: align-items flex-start</h3>
+        <div class="box">A</div><div class="box" style="height:150px;">B</div><div class="box">C</div>
+        <p>세로 방향 위쪽(flex-start)에 맞춰 정렬됩니다.</p>
+    </div>
+
+    <div class="container flex align-end" style="height:500px;">
+        <h3>예제 7: align-items flex-end</h3>
+        <div class="box">A</div><div class="box" style="height:150px;">B</div><div class="box">C</div>
+        <p>세로 방향 아래쪽(flex-end)에 맞춰 정렬됩니다.</p>
+    </div>
+
+    <div class="container flex grow">
+        <h3>예제 8: flex-grow</h3>
+        <div class="box">A</div><div class="box">B</div><div class="box">C</div>
+        <p>두 번째 박스가 남은 공간을 모두 차지합니다.</p>
+    </div>
+
+</body>
+</html>

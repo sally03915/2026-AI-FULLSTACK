@@ -2,34 +2,50 @@ package com.the703.basic006_ex;
 
 import java.util.Scanner;
 
-public class ForIn001_2 {
+public class ForIn001_4 {
 	public static void main(String[] args) {
 		//변수
 		// 자료형 : 기본형/참조형 (String)
 		// 기본형 - 정수: byte(1)<short/char(2)<int★(4)<long(8) / 실수 : float(4)<double★(8) / boolean 빼고 타입형변환가능
 		String stdid="" , pass="불합격" , level="가" , jang="";
-		int kor = -1, eng = -1, mat = -1, total = -1;
+		int kor = -1, eng = -1, mat = -1, total = -1;  /* ■1) 0~100사이의 아닌값    */
 		double avg = -1;
-		Scanner scanner = new Scanner(System.in); 
-		
+		Scanner scanner = new Scanner(System.in);  
 		//입력   0. 국어,영어, 수학(0~100만입력받기)  무한반복 
 		//      문자열: next() / 정수형(10) : nextInt() / 실수형(1.23) : nextDouble() / 문자: next().charAt(0)
+		
 		System.out.print("학번 입력 >");  stdid=scanner.next();
-		for(;  !(kor>=0 && kor<=100)   ;){  // 조건: 0~100 사이의 범위가 아니면
-			System.out.print("국어점수 입력 >");     kor = scanner.nextInt();
+		for(;;){  //5) 여기와서 
+			//if(  !(kor>=0 && kor<=100) ){  //■2) kor = -1
+			if(  kor<0 || kor>100 ){ 	// 해당범위가 아니야?
+				System.out.print("국어점수 입력 >");     kor = scanner.nextInt();   //입력받아
+			
+			}else if(       mat<0 || mat>100   ){  //해당범위 아니야?
+				System.out.print("수학점수 입력 >");     mat = scanner.nextInt(); //입력받아
+			
+			}else if(  !(eng>=0 && eng<=100) ){ // 해당범위아니야
+				System.out.print("영어점수 입력 >");     eng = scanner.nextInt();  //입력받아 
+			}else {	break; }   //나가
 		}
-		for(;  !(mat>=0 && mat<=100)   ;){
-			System.out.print("수학점수 입력 >");     mat = scanner.nextInt(); 
-		}
-		for(;     eng<0 || eng>100     ;){
-			System.out.print("영어점수 입력 >");     eng = scanner.nextInt();  
-		}
-		 
-		/*		for(;;){
-		 * 			국어점수 입력 > 100  
-		 * 			if(잘썼으면,,,, 국어점수의 범위라면){ 나와! break;}
+		
+		/*	 
+		 * 	for(;;){  //무한반복
+		 * 		    if(국어점수의 범위가 아니라면){  //-1     (0~100 사이가 아니므로)
+		 * 				1. 국어점수 입력 > 100    입력받기
+		 * 				2. 건너뛰기  (continue)
+		 * 			}
+		 * 		    if(영어점수의 범위가 아니라면){
+		 * 				1. 영어점수 입력 > 100    입력받기
+		 * 				2. 건너뛰기(continue)
+		 * 			}
+		 * 
+		 * 		    if(수학점수의 범위가 아니라면){
+		 * 				1. 수학점수 입력 > 100    입력받기
+		 * 				2. 건너뛰기(continue)
+		 * 			}
+		 * 			// break; 나오기  -  이위치까지 왔다면 잘입력한것!
 		 		} 
-		 */ 
+		 */
 		//처리  - 연산자 먼저()  값(++,--,산술)  비교(<,>)  조건(&& || 삼항) 대입(=)
 		//     - 제어문 (#if/ #switch)  반복(#for/while/do while)
 		total = kor + eng + mat ;   //		1. 총점 구하기

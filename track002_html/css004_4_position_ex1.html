@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>position 예제 모음</title>
+    <style>
+        * {  margin:0;  padding:0;   }
+        /* Q1. body 글꼴 : Arial, sans-serif / 배경색 : #f0f9ff */
+        body{   font-family: Arial, sans-serif;  background-color: #f0f9ff; }
+        /* Q2. h3 태그 : 위아래 여백 20px, 왼쪽 테두리 8px 실선 #333, 안쪽여백 왼쪽 10px */
+        h3{ margin:20px 0;  border-left: 8px solid #333;  padding-left: 10px;}
+        /* Q3. .container : 너비 70%, 중앙정렬, 배경 흰색, 
+                안쪽여백 20px, 모서리둥글게 10px, 그림자 효과 */
+        .container{ width:70%;  margin:5% auto;  background-color: #fff;
+                padding:20px;  border-radius: 10px;  box-shadow: 0 0 10px pink;
+        }
+        /* Q4. .box : 너비/높이 100px, 배경 #ff6600, 글자색 흰색, 
+                중앙정렬(line-height 활용), margin 5px */
+        .box{  width:100px; height:100px; background-color:#ff6600;
+            color:white; text-align: center;  line-height:100px;  margin:5px;
+        }
+
+        /* Q5. .static .box : position 기본값(static) */
+        /* Q6. .relative .box : position relative, 위쪽 20px, 왼쪽 20px */
+        /* Q7. .absolute : 부모 요소 position relative */
+        /* Q8. .absolute .box : position absolute, 위쪽 10px, 오른쪽 10px */
+        /* Q9. .fixed .box : position fixed, 아래쪽 20px, 오른쪽 20px */
+        /* Q10. .sticky .box : position sticky, 위쪽 0, 배경색 #33cc33 */  
+        .static     .box{   position: static;}       
+        .relative   .box{   position: relative;  top:30px; left:100px;}
+        
+        .absolute    { position: relative; }
+        .absolute   .box{   position: absolute;  left:0;  top:0;}
+
+        .fixed     .box{   position:fixed;  bottom:20px;  right:20px}
+
+        .sticky    .box{   position: sticky;  top:0; background-color: aquamarine;}
+
+        /* Q11. .badge-box : position 기준점 */
+        /* Q12. .badge : position 위쪽 -10px, 오른쪽 -10px, 
+            배경 빨강, 글자색 흰색, 원형 모양(border-radius:50%), 
+            안쪽여백 5px 8px, 글자크기 12px */
+        .badge-box{position: relative;}
+        .badge {  position: absolute; 
+                 background-color: red; color:white;border-radius:50%;
+                padding:5px 8px;  font-size: 12px;  top:-10px; left:90px;}
+    </style>
+</head>
+<body>
+
+    <div class="container static">
+        <h3>예제 1: position static</h3>
+        <div class="box">STATIC</div>
+        <p>기본값으로, 특별한 위치 지정 없이 문서 흐름에 따라 배치됩니다.</p>
+    </div>
+
+    <div class="container relative">
+        <h3>예제 2: position relative</h3>
+        <div class="box">RELATIVE</div>
+        <p>자기 자신을 기준으로 top/left/right/bottom 값을 적용합니다.</p>
+    </div>
+
+    <div class="container absolute">
+        <h3>예제 3: position absolute</h3>
+        <div class="box">ABSOLUTE</div>
+        <p>부모 요소(position: relative) 기준으로 위치가 결정됩니다.</p>
+    </div>
+
+    <div class="container fixed">
+        <h3>예제 4: position fixed</h3>
+        <div class="box">FIXED</div>
+        <p>브라우저 화면(viewport)을 기준으로 항상 같은 위치에 고정됩니다.</p>
+    </div>
+
+    <div class="container sticky">
+        <h3>예제 5: position sticky</h3>
+        <div class="box">STICKY</div>
+        <p>스크롤할 때 특정 지점에 도달하면 그 위치에 붙어서 따라옵니다.</p>
+        <p style="height:1000px;">스크롤 테스트용 긴 영역</p>
+    </div>
+
+    <div class="container">
+        <h3>배지 (absolute)</h3>
+        <div class="badge-box">
+            <img src="https://picsum.photos/100" alt="아이콘">
+            <span class="badge">3</span>
+        </div>
+        <p>알림 개수를 표시하는 배지를 absolute로 구현합니다.</p>
+    </div>
+
+</body>
+</html>
