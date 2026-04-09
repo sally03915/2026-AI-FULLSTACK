@@ -30,21 +30,59 @@ h3{  border-left:10px solid #00bfff; background-color: #1f2833;   margin-bottom:
 /*   float end  */
 
 
-/* Q8: 자식 absolute 요소 기준이 되는 공간을 만들고 배경색(#1abc9c), 
+/* Q8: 자식 absolute 요소 기준이 되는 공간을 만들고 
+      배경색(#1abc9c), 
       패딩(2em), 모서리 둥글게(10px) 하려면? */ 
-/* Q9: 부모 기준으로 위치 지정된 우주비행사 박스를 만들고 위치(top:10px, left:10px), 
-      배경색(#ecf0f1), 글자색(#2c3e50), 패딩(0.5em), 모서리 둥글게(5px) 하려면? */ 
-/* Q10: 화면 고정 위치에 붙어 있는 위성 박스를 만들고 위치(bottom:10px, right:10px), 
+.space{ background: #1abc9c;  
+       padding:2em;  border-radius: 10px;
+       position: relative;
+}      
+/* Q9: 부모 기준으로 위치 지정된 우주비행사 박스를 만들고 
+      위치(top:10px, left:10px), 
+      배경색(#ecf0f1), 글자색(#2c3e50), 패딩(0.5em), 
+      모서리 둥글게(5px) 하려면? */
+ .astronaut{
+    position: absolute;
+    top :10px; left:10px;
+    background-color: #ecf0f1;
+    color:#2c3e50;
+    padding:0.5em;
+    border-radius: 5px;
+ }
+/* Q10: 화면 고정 위치에 붙어 있는 
+     위성 박스를 만들고 위치(bottom:10px, right:10px), 
        배경색(#9b59b6), 패딩(0.5em), 모서리 둥글게(5px) 하려면? */ 
-/*   position end  */
+.satellite{
+  position: fixed;  bottom:10px;  right:10px;
+    background-color: #9b59b6; 
+    padding:0.5em;
+    border-radius: 5px;
+}
+       /*   position end  */
+
 
 /* Q11: 인라인으로 나열된 은하 항목을 만들고 오른쪽 여백(10px), 
       배경색(#95a5a6), 패딩(0.5em), 모서리 둥글게(5px) 하려면? */ 
-/* Q12: 너비(120px) 지정 가능한 인라인 블록 항목을 만들고 배경색(#e74c3c), 
+.galaxy  li{
+  display: inline;  
+  margin-right: 10px;   background-color: #95a5a6;
+  padding:0.5em;  border-radius: 5px;
+} 
+/* Q12: 너비(120px: 20% ) 지정 가능한 인라인 블록 항목을 만들고
+      배경색(#e74c3c), 
       바깥 여백(5px), 패딩(1em), 텍스트 가운데 정렬, 모서리 둥글게(10px) 하려면? */ 
-/* Q13: 여백(margin:30px)과 안쪽 공간(padding:20px)이 있는 
+.nebula  li{
+  display: inline-block;   width:120px;
+  background-color: #e74c3c;  margin:5px; padding:1em; 
+  text-align:center; border-radius: 10px; 
+} 
+      /* Q13: 여백(margin:30px)과 안쪽 공간(padding:20px)이 있는 
     탐사 미션 박스를 만들고 배경색(#2980b9), 모서리 둥글게(10px) 하려면? */ 
-/*   display end  */
+.mission{
+  margin:30px;  padding:20px;   
+  background-color: #2980b9;   border-radius: 10px; 
+}
+    /*   display end  */
 
   </style>
 </head>

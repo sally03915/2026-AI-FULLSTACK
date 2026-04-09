@@ -25,6 +25,18 @@
     .p{  position:relative; }
     .me{ position:absolute; bottom:0;  right:10px}
 
+    div.di   p.item { background-color:green; text-align: center;  }
+    div.di   p.item a {  color:white;  display: block;   background-color:red; }
+    /*  a(인라인)   display:block -  인라인을 블록 (box) */
+    div.di   p.item a:last-child{   display: none;  }
+    /*  display:none 화면상에 안보이게 숨기기 (h태그에서 주의) */
+
+    .d1{ background-color:blueviolet; text-align: center;  margin:10px 0;  padding:10px}
+    .d1 li{  background-color:#f4ffb8;  display: inline;  width:100px; }  
+    /* display:inline 블록을 인라인으로 - 한줄로 배치 */
+
+    .d2{ background-color:#ffb8f1; text-align: center; margin:10px 0;  padding:10px}
+    .d2 li{  background-color: #f4ffb8;  display: inline-block;  width:100px; }
     </style>
 </head>
 <body>
@@ -64,8 +76,20 @@
         <p>부모 :  relative(공간확보) / 자식 : (원하는 위치 배치) - 좌표</p>
     </div>
 
-
-
+    <div class="container di">
+        <h3>5. 배치(3) - display</h3>
+        <p>속성바꾸기 : display:block, inilne, inline-block, none </p>
+        <p>배치 - 박스들이 어떻게 놓일지 정하는 규칙(정리 도우미) display:flex </p>
+        <p class="item">
+           <a href="http://www.naver.com">NAVER</a>  <!-- display:block [box] -링크확대  -->
+           <a href="http://www.daum.com"> DAUM</a>  <!-- display:none [숨기기] -->
+        </p>
+        <!-- display:inline [콘텐츠] -->
+        <ul  class="d1"> <li>APPLE</li>  <li>BANANA</li>  <li>COCONUT</li>  </ul>
+        <!-- display:inline-block [콘텐츠-width O] -->
+        <ul  class="d2"> <li>APPLE</li>  <li>BANANA</li>  <li>COCONUT</li>  </ul>
+    </div>
+    
 
 
 </body>
