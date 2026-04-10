@@ -5,122 +5,58 @@ import java.util.Scanner;
 public class Bank_김보라 {
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int num = 0;
-		int id  = -1, pass = -1, balance=-1;
-		int tid = -1, tpass = -1; // 임시변수
-		char yn;
-
-		// menu  2~5번까지 코드가 반복되는 부분 줄이기~! 도전!
-		for (;;) {
-			System.out.println("WELCOME TO BANK SYSTEM");
-			System.out.println("======BANK======");
-			System.out.println("[1] ➕계좌추가");
-			System.out.println("[2] 🔍계좌조회");
-			System.out.println("[3] 💵계좌입금");
-			System.out.println("[4] 💸계좌출금");
-			System.out.println("[5] 🗑️계좌삭제");
-			System.out.println("[9] ⛔종료");
-			System.out.print("👉 번호를 선택하세요 : ");
-
-			num = sc.nextInt();
-			
-			if (num == 9) {
-				System.out.println("종료기능입니다.");
-				break;
-			} else if (num == 1) { 
-				System.out.print("ID 입력: ");
-				id = sc.nextInt();
-				System.out.print("PASS 입력: ");
-				pass = sc.nextInt();
-				System.out.print("금액 입력: ");
-				balance = sc.nextInt();
-			} else if (num == 2) {
-				// 임시공간에 아이디와 비번 입력
-				// tid == id && tpass == pass 면 정보출력 아니면 비밀번호를 확인해주세요
-				///////////////////////////////
-				System.out.print("ID 입력: ");
-				tid = sc.nextInt();
-				System.out.print("PASS 입력: ");
-				tpass = sc.nextInt();
-				
-				if(id == tid && pass == tpass) {
-				///////////////////////////////
-					System.out.println("ID : " + id);
-					System.out.println("PASS :" + pass);
-					System.out.println("금액 : " + balance);
-				}else {
-					System.out.println("비밀번호를 확인해주세요.");
-				}				
-				
-			} else if (num == 3) { 
-
-				///////////////////////////////
-				System.out.print("ID 입력: ");
-				tid = sc.nextInt();
-				System.out.print("PASS 입력: ");
-				tpass = sc.nextInt();
-				if(id == tid && pass == tpass) {
-					///////////////////////////////
-					System.out.println("입금잔액 : ");
+		//변수
+				int num1=-1;
+				int id = -1, pass = -1 , balance=-1 ,in=-1,out=-1;
+				Scanner sc = new Scanner(System.in);
+				//입력
+				for(;;) {		
+					System.out.println("👌WELCOME TO BANK SYSTEM👌");
+					System.out.println("[1] ➕계좌 추가");
+					System.out.println("[2] 🔎계좌 조회");
+					System.out.println("[3] 💶입금 하기");
+					System.out.println("[4] 💸출금 하기");
+					System.out.println("[5] ❌계좌 삭제");
+					System.out.println("[9] 🖐종료\n");
 					
-					balance += sc.nextInt();
+					System.out.print("👉번호를 입력해주세요.>"); num1 = sc.nextInt();
 					
-					System.out.println("=======");
-					System.out.println("입금완료 : " + balance);
-					System.out.println("=======");
-				}else {
-					System.out.println("비밀번호를 확인해주세요.");
-				}		
-				
-			} else if (num == 4) {
-				///////////////////////////////
-				System.out.print("ID 입력: ");
-				tid = sc.nextInt();
-				System.out.print("PASS 입력: ");
-				tpass = sc.nextInt();
-				if(id == tid && pass == tpass) {
-					///////////////////////////////
-					System.out.print("출금잔액 : ");
+					if     ( num1==1 ) {
+						System.out.println("1.추가 \n"); 
+						//입력    int id = -1, pass = -1 , balance=-1 ;
+						System.out.print("[1]ID   입력> "); id = sc.nextInt();
+						System.out.print("[2]PASS 입력> "); pass = sc.nextInt();
+						System.out.print("[3]금액  입력> "); balance = sc.nextInt();				
+						} // if( num1==1 ) end
 					
-					balance -= sc.nextInt();
-					
-					System.out.println("=======");
-					System.out.println("출금완료 : " + balance);
-					System.out.println("=======");
-				}else {
-					System.out.println("비밀번호를 확인해주세요.");
-				}				
-				
-			} else if (num == 5) {
-				///////////////////////////////
-				System.out.print("ID 입력: ");
-				tid = sc.nextInt();
-				System.out.print("PASS 입력: ");
-				tpass = sc.nextInt();
-				if(id == tid && pass == tpass) {
-					///////////////////////////////
-
-					System.out.println("계좌를 삭제하시겠습니까? (Y/N)");					
-					yn = sc.next().charAt(0);
-					
-					if(yn == 'Y' || yn == 'y') {
-						 id = -1;  
-						 pass = -1;
-						 balance=-1;
-						 tid = -1;
-						 tpass = -1;
-						System.out.println("삭제되었습니다.");
+					else if ( num1==2 || num1==3 || num1==4 || num1==5 ) {
+						
+	
+						int tid =-1,tpass =-1;
+						//입력
+						System.out.print("[1]ID   입력> "); tid = sc.nextInt();
+						System.out.print("[2]PASS 입력> "); tpass = sc.nextInt();
+						//처리+출력
+						
+						if(tid==id && tpass==pass) { 
+						
+							if      (num1==2) { System.out.println("잔액 : " + balance + "\n"); }
+							
+							else if (num1==3) { System.out.print("입금 : "); in = sc.nextInt();
+		                    					System.out.println("==입금완료");
+		                    					System.out.print("잔액 : " + (balance+in) ); }
+							
+							else if (num1==4)  { System.out.print("출금 : "); out = sc.nextInt();
+												 System.out.println("==출금완료");
+												 System.out.println("잔액 : " + (balance-out)); }
+							
+							else if (num1==5) { id = -1;   pass = -1; } } // end tid==id && tpass==pass 
+								
+						else                       { System.out.println("다시 확인해주세요."); }	
+						 					
 					}
 					
-				}else {
-					System.out.println("비밀번호를 확인해주세요.");
-				}	
-				
-			}
-
 		}
-
 	}
 
 }

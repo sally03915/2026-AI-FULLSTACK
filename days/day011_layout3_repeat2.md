@@ -147,24 +147,21 @@
 
 ■ 2. java
 ```
+
+
 1. if버젼에 해당하는 다음에 연결해서 문제를 작성하시오.
    정수를 하나 입력받아 다음 조건에 따라 성적을 출력하는 프로그램을 작성하시오.
+    90점 이상 → "A 학점"
+    80점 이상 → "B 학점"
+    70점 이상 → "C 학점"
+    그 외 → "F 학점"
 
-90점 이상 → "A 학점"
-
-80점 이상 → "B 학점"
-
-70점 이상 → "C 학점"
-
-그 외 → "F 학점"
 2. switch버젼에 해당하는 다음에 연결해서 문제를 작성하시오.
-    문자를 한개 입력받아 a이면 apple , b이면 banana, c이면 coconut
-
-    char ch='\u0000';
-    Scanner scanner =new Scanner(System.in);
-
-    System.out.println("a,b,c 중에 입력 > ");  
-    ch = scanner.next().charAt(0);
+   위의 문제를 switch 로
+  
+    int avg=0;
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("평균입력 > ");  avg = scanner.nextInt();
     
 3. for, while, do while 버젼으로  문제를 풀으시오!  
     1 2 3

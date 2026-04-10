@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>나의 포트폴리오</title>
+  <style>
+/* Q1: 페이지 전체에 배경 그라디언트를 적용하고 기본 글꼴과 안쪽 여백을 주려면?
+   - 배경: 135도 방향의 그라디언트 (#f0f9ff → #e0f7fa)
+   - 글꼴: Arial
+   - 안쪽 여백: 30px */
+   *{  margin:0;   padding:0;}
+   body{    
+      font-family:  Arial;
+      background-image: linear-gradient(135deg,#f0f9ff , #e0f7fa , #b8f7ff);
+      padding:30px;
+   }
+ 
+/* Q2: 제목(h1)을 가운데 정렬하고 색상과 아래 여백을 주려면?
+   - 정렬: 가운데
+   - 글자 색상: #00796b (청록색 계열)
+   - 아래 여백: 40px */ 
+   h1{  text-align: center;    color:#00796b;  margin-bottom: 40px;   width:100%;  }
+
+/* Q3: 콘텐츠 박스를 가운데 배치하고 너비를 50%로 설정하려면?
+   - 너비: 50%
+   - 좌우 자동 마진으로 가운데 정렬 */ 
+   .container {
+      width:80%;  margin: auto; border:1px solid red;
+      display: flex;   /*  자식들 가로방향으로 배치  */  
+      justify-content: center;    /* space-between 좌우 끝에 배치 */
+      flex-wrap: wrap;  
+      gap:20px;   /*  자식들 간격사이  */
+      /*  콘텐츠 보장 - 넘치는 콘텐츠가 있으면 줄바꿈 허용 (한줄에 다 안들어가면 다음줄로 )  */
+   }
+
+/* Q4: 카드 박스를 가로로 배치하고 시각적 스타일을 주려면?
+   - float: left (가로 정렬)
+   - 너비: 250px
+   - 바깥 여백: 20px
+   - 안쪽 여백: 20px
+   - 배경색: 흰색 (#ffffff)
+   - 모서리 둥글게: 15px
+   - 그림자: 흐림 효과 (10px)
+   - 위치 기준점: relative   
+   - 텍스트 가운데 정렬
+   - 애니메이션: 등장 시 아래에서 위로 이동 (translateY)
+   - 테두리: 투명 3px , 배경 클립 설정(배경이 패딩까지)■ */
+   .card{   
+      /* float:left; */   width:250px;  margin:20px;  padding:20px;
+      background-color:#fff;   border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;  
+      border:3px  solid transparent;  /* ■ */
+      transition: all 0.3s  ease; /* ■ */
+      position: relative;
+      background-clip: padding-box;
+   }
+/*                                                    */ 
+/*                                                    */ 
+/*                                                    */ 
+/* Q5: 두 번째 카드에 애니메이션 지연을 주려면?  - 지연 시간: 0.3초 
+      .card를 대상으로  nth-of-type
+       부모를 기준으로   nth-child
+*/
+
+ /*                                                    */ 
+/*                                                    */ 
+/*                                                    */ 
+
+/* Q6: 카드에 마우스를 올렸을 때 효과를 주려면?
+   - 위로 이동: 5px
+   - 그림자 강조: 15px
+   - 테두리 색상 변경: #00796b */
+.card:hover{
+   transform: translateY(-5px);
+   box-shadow: 0 0 15px  rgba(0,0,0,0.2);
+   border: 3px solid #00796b;
+} 
+
+/* Q7: 카드에 마우스를 올렸을 때 그라디언트 테두리를 나타내려면?
+   - 위치: 카드 바깥쪽 (-3px)  ■
+   - 배경: 45도 방향의 그라디언트 (#00c9ff → #92fe9d)
+   - 둥근 테두리: 18px
+   - 투명도: hover 시 1로 변경 
+
+   css에서는 border에 그라디언트색상을 줄수 없음!
+   1) ::before  가상요소 카드보다 살짝 크게 만들기
+*/
+.card::before{
+   content:"";
+   position: absolute;   top:-3px;  right:-3px; bottom:-3px;  left:-3px;
+   background-image: linear-gradient(  45deg, #00c9ff , #92fe9d );
+   border-radius: 15px;
+   z-index:-1;
+   opacity: 0;
+   transition: opacity 0.5s ease;
+}
+.card:hover::before{
+   opacity: 1;
+}
+
+/* Q8: 카드 이미지에 크기와 스타일을 주려면?
+   - 너비: 120px
+   - 높이: 80px
+   - 둥근 모서리: 10px
+   - 이미지 비율 유지: object-fit: cover
+   - 테두리 색상: #00796b */
+ .card  img{
+   width: 120px;   height:80px;  border-radius: 10px;
+   border:3px solid #00796b;
+   object-fit: cover;
+ }
+ 
+/* Q9: 카드 제목(h2)에 글자 크기와 여백, 색상을 주려면?
+   - 글자 크기: 18px
+   - 여백: 위 15px, 아래 10px    margin:15px(top) 0(왼,오) 10px(아래);
+   - 색상: #333 (진회색) */ 
+  .card h2{  font-size: 18px;  margin:15px 0 10px;   color:#333; }  
+
+/* Q10: 카드 설명(p)에 글자 크기와 색상, 아래 여백을 주려면?
+   - 글자 크기: 14px
+   - 색상: #555 (중간 회색)
+   - 아래 여백: 10px */ 
+  .card p{  font-size: 14px;  color:#555;  margin-bottom: 10px; } 
+ 
+/* Q11: 카드 오른쪽 상단에 고정된 버튼을 만들고 스타일을 주려면?
+   - 위치: absolute (top:10px, right:10px)
+   - 배경색: #00796b
+   - 글자색: 흰색
+   - 패딩: 8px 12px
+   - 둥근 모서리: 12px
+   - 글자 크기: 13px */
+  .more-btn{   
+      position: absolute; top:10px;  right:10px;
+      background-color: #00796b;  color:white;
+      padding:8px 12px;   border-radius: 12px;  font-size: 13px;
+      text-decoration: none;
+      transition: background  0.3s;
+  } 
+ 
+/* Q12: 버튼에 마우스를 올렸을 때 색상 변경과 흔들림 효과를 주려면? 
+    - 배경색 변경: #004d40    - 애니메이션: shake (0.3초) ####### */
+ .more-btn:hover{
+   background-color: #004d40;
+ }
+
+
+/* Q13: 흔들림(shake) 애니메이션을 정의하려면?   - 좌우/상하로 2px씩 이동 반복 */
+ 
+ 
+/* Q14: 카드가 아래에서 위로 부드럽게 등장하도록 애니메이션을 정의하려면?
+   - 시작: opacity 0, translateY(20px)
+   - 종료: opacity 1, translateY(0) */
+ 
+
+/* Q15: float를 끊고 아래 설명 박스를 만들려면?
+   - clear: both
+   - 위 여백: 50px
+   - 안쪽 여백: 15px
+   - 배경색: #e0f2f1
+   - 둥근 모서리: 10px
+   - 텍스트 가운데 정렬, 글자색: #333 */
+ .clear{ clear:both;}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>나의 포트폴리오</h1>   
+
+    <div class="card">
+      <img src="./img/portfolio1.jpg" alt="프로젝트1 썸네일">
+      <h2>쇼핑몰 웹앱</h2>
+      <p>React + Firebase 기반의 쇼핑몰 웹 애플리케이션</p>
+      <p>사용 기술: React, Firebase, Styled-components</p>
+      <a href="https://github.com/myshop" class="more-btn" target="_blank">더보기</a>
+    </div>
+
+    <div class="card">
+      <img src="./img/portfolio2.jpg" alt="프로젝트2 썸네일">
+      <h2>AI 챗봇 서비스</h2>
+      <p>Python 기반의 자연어 처리 챗봇 시스템</p>
+      <p>사용 기술: Flask, TensorFlow, NLP</p>
+      <a href="https://github.com/mychatbot" class="more-btn" target="_blank">더보기</a>
+    </div>
+
+    <div class="card">
+      <img src="./img/portfolio3.jpg" alt="프로젝트3 썸네일">
+      <h2>자연어 챗봇 서비스</h2>
+      <p>Python 기반의 자연어 처리 챗봇 시스템</p>
+      <p>사용 기술: Flask, TensorFlow, NLP</p>
+      <a href="https://github.com/mychatbot" class="more-btn" target="_blank">더보기</a>
+    </div>
+
+    <div class="clear">
+      이 포트폴리오는 실제 프로젝트를 기반으로 구성되었으며, 각 프로젝트는 GitHub에서 확인할 수 있습니다.
+    </div>
+  </div>
+</body>
+</html>

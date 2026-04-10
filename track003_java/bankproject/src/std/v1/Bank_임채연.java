@@ -6,136 +6,81 @@ public class Bank_임채연 {
 
 	public static void main(String[] args) {
 
-		// 변수
+		//변수
 		Scanner sc = new Scanner(System.in);
-		int num = -1, id = -1, pw = -1, balance = -1, money = -1;
-		String answer;
-		
-		// 입력
-		System.out.println("🌟💰 WELCOME TO BANK SYSTEM 💰🌟");
-		
+		int num = -1, age = -1, balance = -1, price=-1;
+		char user_id = '\u0000', user_pw = '\u0000', 
+			 ch_id = '\u0000', ch_pw = '\u0000';
+				
+		System.out.println("WELCOME! 💰 ㈜CODEBANK");
+				
 		for(;;) {
-			System.out.println("\n======BANK======");
-			System.out.println("[1] ➕ 계좌 추가");
-			System.out.println("[2] 🔍 계좌 조회");
-			System.out.println("[3] 💵 입금하기");
-			System.out.println("[4] 💸 출금하기");
-			System.out.println("[5] 🗑️ 계좌 삭제");
-			System.out.println("[9] 💀 종료\n");
-			System.out.print("👉 번호를 선택하세요: ");
+			System.out.println("ID : " + user_id + "/" + "PW : " + user_pw);
+			System.out.println("========BANK========");
+			System.out.println("* 1.➕ 계좌 추가");
+			System.out.println("* 2.🔍 계좌 조회");
+			System.out.println("* 3.💵 입금하기");
+			System.out.println("* 4.💸 출금하기");
+			System.out.println("* 5.🗑️ 계좌 삭제");
+			System.out.println("* 9.✖ 종료");
+			
+			System.out.print("입력 >>> ");
 			num = sc.nextInt();
 			
-			// 처리
-			if (num == 9) { // [9] 💀 종료
-				break;
+			if(num == 9) { System.out.println("종료합니다."); break; }
+			
+			else if(num == 1) {
+				System.out.print("아이디 입력 : "); user_id = sc.next().charAt(0);
+				System.out.print("비밀번호 입력 : "); user_pw = sc.next().charAt(0);
+				System.out.print("나이 입력 : "); age = sc.nextInt();
+				System.out.print("잔액 입력 : "); balance = sc.nextInt(); } 
+			
+			else { 
+				if(user_id =='\u0000') {
+					System.out.println("등록된 계좌가 없습니다.");
+					continue; } // 계좌 유무 확인
+									
+				System.out.print("ID : ");
+				ch_id = sc.next().charAt(0);
+				System.out.print("PW : ");
+				ch_pw = sc.next().charAt(0);
 				
-			} else if (num == 1) { // [1] ➕ 계좌 추가
-				System.out.print("아이디 입력: ");
-				id = sc.nextInt();
-				System.out.print("비밀번호 입력: ");
-				pw = sc.nextInt();
-				System.out.print("잔액 입력: ");
-				balance = sc.nextInt();
-				
-			} else if (num == 2) { // [2] 🔍 계좌 조회
-				/////////////////////////////////////////////////
-				int tid = -1, tpw = -1;
-				
-				System.out.print("아이디 입력: ");
-				tid = sc.nextInt();
-				System.out.print("비밀번호 입력: ");
-				tpw = sc.nextInt();
-				
-				if (tid != id || tpw != pw) {
-					System.out.println("다시 입력해주세요");
-					//continue;   //1. continue 빼기
-				} else if (tid == id && tpw == pw) {
-					/////////////////////////////////////////////////	
-					System.out.println("🔍 계좌 조회");
-					System.out.println("아이디: " + id);
-					System.out.println("비밀번호: " + pw);
-					System.out.println("잔액: " + balance);
-				}
-				
-			} else if (num == 3) { // [3] 💵 입금하기
-				/////////////////////////////////////////////////	
-				int tid = -1, tpw = -1;
-				
-				System.out.print("아이디 입력: ");
-				tid = sc.nextInt();
-				System.out.print("비밀번호 입력: ");
-				tpw = sc.nextInt();
-				
-				if (tid != id || tpw != pw) {
-					System.out.println("다시 입력해주세요");
-					//continue; 
-				} else if (tid == id && tpw == pw) {
-					/////////////////////////////////////////////////	
-					System.out.print("입금: ");
-					money = sc.nextInt();
-					balance += money;
-					System.out.println("💵 입금완료");
-					System.out.println("잔액: " + balance);
-				}
-				
-			} else if (num == 4) { // [4] 💸 출금하기
-				/////////////////////////////////////////////////	
-				int tid = -1, tpw = -1;
-				
-				System.out.print("아이디 입력: ");
-				tid = sc.nextInt();
-				System.out.print("비밀번호 입력: ");
-				tpw = sc.nextInt();
-				
-				if (tid != id || tpw != pw) {
-					System.out.println("다시 입력해주세요");
-					//continue;
-				} else if (tid == id && tpw == pw) {
-					/////////////////////////////////////////////////	
-					System.out.print("출금: ");
-					money = sc.nextInt();
-					balance -= money;
-					System.out.println("💵 출금완료");
-					System.out.println("잔액: " + balance);
-				}
-				
-			} else if (num == 5) { // [5] 🗑️ 계좌 삭제
-				/////////////////////////////////////////////////	
-				int tid = -1, tpw = -1;
-				
-				System.out.print("아이디 입력: ");
-				tid = sc.nextInt();
-				System.out.print("비밀번호 입력: ");
-				tpw = sc.nextInt();
-				
-				if (tid != id || tpw != pw) {
-					System.out.println("다시 입력해주세요");
-					//continue;
-				} else if (tid == id && tpw == pw) {
-					/////////////////////////////////////////////////	
-					System.out.println("계좌를 삭제하시겠습니까? (y/n)");
-					answer = sc.next();
+				if(ch_id !=user_id || ch_pw != user_pw ) {
+					System.out.println("ID/PW를 다시 확인해주세요.");
+					continue; }
 					
-					if (answer.equals("y")) {
-						id = -1;
-						pw = -1;
-						balance = -1;
-						System.out.println("🗑️ 계좌 삭제 완료");
-					} else if (answer.equals("n")) {
-						continue;
-					} else {
-						System.out.println("(y/n)을 입력해주세요.");
-					}
-				}
+				switch (num) {
+					case 2: System.out.println("ID : " + user_id);
+					System.out.println("PW : " + user_pw);
+					System.out.println("나이 : " + age);
+					System.out.println("잔액 : " + balance); break; // 메뉴 2번 : 조회
+					
+					case 3: System.out.print("입금 : ");
+					price = sc.nextInt(); 
+					balance += price;
+					System.out.println("=== 입금 완료 === ");
+					System.out.println("잔액 : " + balance); break; // 메뉴 3번 : 입금하기
+					
+					case 4: System.out.print("출금 : "); 
+						price = sc.nextInt();
+						if(balance < price) {  System.out.println("잔액이 부족합니다.");
+							System.out.println("잔액 : " + balance); }
+						else { balance -= price;
+							System.out.println("=== 출금 완료 === ");
+							System.out.println("잔액 : " + balance); } break; // 메뉴 4번 : 출금하기 end
+							
+					case 5: System.out.print("계좌를 삭제하시겠습니까? (Y/N)");
+							char ans = sc.next().charAt(0);
+							if(ans == 'n' || ans == 'N') { break; }
+							else if (ans == 'y' || ans == 'Y') {
+								user_id = '\u0000'; user_pw = '\u0000'; 
+								age = 0; balance = 0; } break; // 메뉴 5번 : 계좌 삭제 end
+				} // switch
 				
-			} else {
-				System.out.println("1 ~ 5 숫자를 입력해주세요. (9. 종료)");
-				continue;
-			}
-		}
+			} // 아이디+패스워드 확인, 메뉴
+			
+		} // bank for
 		
-	}
-
-}
-
-//2~5메뉴사이에 겹치는 부분 줄이기- 도전~!
+	} // end main
+	
+} // end class
