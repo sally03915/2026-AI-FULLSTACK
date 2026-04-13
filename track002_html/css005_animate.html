@@ -25,7 +25,7 @@
    - 너비: 50%
    - 좌우 자동 마진으로 가운데 정렬 */ 
    .container {
-      width:80%;  margin: auto; border:1px solid red;
+      width:80%;  margin: auto;  
       display: flex;   /*  자식들 가로방향으로 배치  */  
       justify-content: center;    /* space-between 좌우 끝에 배치 */
       flex-wrap: wrap;  
@@ -54,25 +54,30 @@
       transition: all 0.3s  ease; /* ■ */
       position: relative;
       background-clip: padding-box;
+      opacity: 0;
+      animation: fadeInUp      1.8s      ease        forwards ;
+      /*         애니메이션이름  지속시간   등장시속도    애니메이션이 끝날때 마지막상태 유지  */  
    }
 /*                                                    */ 
-/*                                                    */ 
-/*                                                    */ 
+/*                                                    */  
 /* Q5: 두 번째 카드에 애니메이션 지연을 주려면?  - 지연 시간: 0.3초 
       .card를 대상으로  nth-of-type
        부모를 기준으로   nth-child
 */
+.card:nth-of-type(1){  animation-delay: 0.3s; }
+.card:nth-of-type(2){  animation-delay: 0.6s; }
+.card:nth-of-type(3){  animation-delay: 0.9s; }
 
  /*                                                    */ 
 /*                                                    */ 
 /*                                                    */ 
 
 /* Q6: 카드에 마우스를 올렸을 때 효과를 주려면?
-   - 위로 이동: 5px
+   - 위로 이동: 5px  ( animation 을 주면 효과 사라짐 )
    - 그림자 강조: 15px
    - 테두리 색상 변경: #00796b */
 .card:hover{
-   transform: translateY(-5px);
+   transform: translateY(-5px);  
    box-shadow: 0 0 15px  rgba(0,0,0,0.2);
    border: 3px solid #00796b;
 } 
@@ -139,18 +144,30 @@
   } 
  
 /* Q12: 버튼에 마우스를 올렸을 때 색상 변경과 흔들림 효과를 주려면? 
-    - 배경색 변경: #004d40    - 애니메이션: shake (0.3초) ####### */
+    - 배경색 변경: #004d40    
+    - 애니메이션: shake (0.3초) ####### */
  .more-btn:hover{
    background-color: #004d40;
+   animation: shake  0.3s  ease;
  }
 
 
-/* Q13: 흔들림(shake) 애니메이션을 정의하려면?   - 좌우/상하로 2px씩 이동 반복 */
- 
+/* Q13: 흔들림(shake) 애니메이션을 정의하려면?  - 좌우/상하로 2px씩 이동 반복 */
+@keyframes shake {
+   0%{   transform: translate(0,0); }
+   25%{  transform: translate(2px,2px); }
+   50%{  transform: translate(-2px,-2px); }
+   75%{  transform: translate(2px,-2px); } 
+   100%{ transform: translate(0,0); } 
+} 
  
 /* Q14: 카드가 아래에서 위로 부드럽게 등장하도록 애니메이션을 정의하려면?
    - 시작: opacity 0, translateY(20px)
    - 종료: opacity 1, translateY(0) */
+@keyframes fadeInUp {
+   from{   opacity: 0;  transform: translateY(20px); }
+   to  {   opacity: 1;  transform: translateY(0px);  }
+}   
  
 
 /* Q15: float를 끊고 아래 설명 박스를 만들려면?
@@ -160,7 +177,44 @@
    - 배경색: #e0f2f1
    - 둥근 모서리: 10px
    - 텍스트 가운데 정렬, 글자색: #333 */
- .clear{ clear:both;}
+ .clear{ clear:both;  margin: 50px auto;   padding:15px;
+   background-color: #e0f2f1;  border-radius: 10px;
+   text-align: center;   color:#333
+}
+   /* Q16: 물방울 요소를 화면 아래에서 시작하도록 고정하려면?
+   - 위치: fixed
+   - 시작 위치: bottom -100px   
+   - 크기: 20px × 20px
+   - 배경색: 청록색 반투명 (rgba)
+   - 모양: 원형
+   - 애니메이션: rise (8초, 반복, ease-in)   ■
+   - z-index: 0 (다른 요소보다 뒤에 배치)   ■
+   */
+   .bubble{ position: fixed;   bottom :-100px;     border-radius: 50%;
+      width: 20px;  height:20px; background-color: rgba(0, 121, 107, 0.2);
+      animation: rise 8s  infinite;  z-index:0;
+   } 
+   /* Q17: 물방울이 위로 올라가며 크기와 투명도가 변하는 애니메이션을 정의하려면?
+      - 시작: translateY(0), scale(1), opacity 0.5
+      - 중간: translateY(-300px), scale(1.2), opacity 1
+      - 종료: translateY(-600px), scale(0.8), opacity 0
+   */ 
+   @keyframes rise {
+      0%  { transform: translateY(0)        scale(1)     ; opacity: 0.5 ;}
+      50% { transform: translateY(-300px)   scale(1.2)   ; opacity: 1;   }
+      100%{ transform: translateY(-600px)   scale(0.8)   ; opacity: 0;   }
+   } 
+   /* Q18: 여러 개의 물방울을 서로 다른 위치와 크기, 지연 시간으로 등장시키려면?
+      - 1번: left 10%, delay 0s
+      - 2번: left 25%, delay 2s, 크기 15px
+      - 3번: left 40%, delay 4s, 크기 25px
+      - 4번: left 60%, delay 1s, 크기 18px
+      - 5번: left 75%, delay 3s, 크기 22px  */ 
+   .bubble:nth-of-type(1){ left:10%; animation-delay: 0s; }
+   .bubble:nth-of-type(2){ left:20%; animation-delay: 2s; width:15px; height:15px; }
+   .bubble:nth-of-type(3){ left:40%; animation-delay: 4s; width:25px; height:25px; }
+   .bubble:nth-of-type(4){ left:50%; animation-delay: 1s; width:15px; height:15px; }
+   .bubble:nth-of-type(5){ left:75%; animation-delay: 3s; width:22px; height:22px; }
 
   </style>
 </head>
@@ -196,5 +250,12 @@
       이 포트폴리오는 실제 프로젝트를 기반으로 구성되었으며, 각 프로젝트는 GitHub에서 확인할 수 있습니다.
     </div>
   </div>
+
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
 </body>
 </html>
