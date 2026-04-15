@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.myhidden{
+    position:absolute;  left:-9999px;   width:1px; height:1px; overflow: hidden;
+    border:0;   white-space: nowrap;  
+    clip:rect(0,0,0,0);  /* 요소를 잘라서 시각적으로 완전히 숨김 - 구형브라우저 호환 */
+}
+
+#demo{    height: 300px;   overflow: hidden;   }
