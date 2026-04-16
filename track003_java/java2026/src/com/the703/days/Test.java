@@ -2,39 +2,56 @@ package com.the703.days;
 
 public class Test {
 	public static void main(String[] args) {
-		
-		int [] [] arr = new int [5] [5];
-        int result1 [] [] = new int [5] [5];
-        int result2 [] [] = new int [5] [5];
-        int result3 [] [] = new int [5] [5];
-        int num=1;
-        
-        for(int i=0; i<arr.length; i++) {
-        for( int a=0; a<arr[i].length; a++) {
-              arr[i][a]=num++;   }}//arr배열에 1~25넣기
-        
-     
-        
-        for(int i=0; i<5; i++) {
-        for(int j=0; j<5; j++) {
-              result1[j][4-i]=arr[i][j];//90도 회전
-              result2[4-j][i]=arr[i][j];//-90도 회전
-              result3[4-i][4-j]=arr[i][j];} }//180도 회전
-        
-        for(int i=0; i<5; i++) {
-           for(int j=0; j<5; j++) {
-           System.out.print(result1[i][j]+"\t");//90도 회전 출력
-            }System.out.println();} System.out.println();
-        
-        for(int i=0; i<5; i++) {
-           for(int j=0; j<5; j++) {
-           System.out.print(result2[i][j]+"\t");//-90도 출력
-            }System.out.println();} System.out.println();
-        
-        for(int i=0; i<5; i++) {
-           for(int j=0; j<5; j++) {
-            System.out.print(result3[i][j]+"\t");//180도 회전 출력
-             }System.out.println();} System.out.println();
-        
-     }
-  }
+		int arr[] = new int[5];
+		String name[] = { "아이언맨", "헐크", "캡틴", "토르", "호크아이" };
+		int kor[] = { 100, 20, 90, 70, 35 };
+		int eng[] = { 100, 50, 95, 80, 100 };
+		int math[] = { 100, 30, 90, 60, 100 };
+		int avg[] = new int[5];
+		int top[] = new int[] {1,1,1,1,1}; // 등수
+		String pnp[] = new String[5]; // 합격여부
+		String j[] = new String[5]; // 장학생
+		String rank[] = new String[] { "", "", "", "", "" }; // 랭킹 (String : *)
+
+		int data = 0;
+
+		for (int i = 0; i < arr.length; i++) {
+			avg[i] = (kor[i] + eng[i] + math[i]) / 3;
+			pnp[i] = avg[i] < 60 ? "불합격" : "합격";
+			j[i] = avg[i] >= 95 ? "장학생" : "";
+		}
+
+		// 1) avg[i] / 10 갯수만큼 * 누적
+		// 2) for( 시작; avg[i]/10갯수만큼; 변화 ) {* 누적}
+		for (int i = 0; i < arr.length; i++) {
+			for (int a = 0; a < avg[i] / 10; a++) {
+				rank[i] += "*";
+			}
+		}
+
+		// 등수 top ...
+		// 아이언맨의 평균점수가 헐크평균점수보다 작다면 top[0] += 1;d
+		 if(avg[0] < avg[0]) { top[0] += 1; }
+		 if(avg[0] < avg[1]) { top[0] += 1; }
+		 if(avg[0] < avg[2]) { top[0] += 1; }
+		 if(avg[0] < avg[3]) { top[0] += 1; }
+		 if(avg[0] < avg[4]) { top[0] += 1; }
+		 
+		 if(avg[1] < avg[0]) { top[1] += 1; }
+		 if(avg[1] < avg[1]) { top[1] += 1; }
+		 if(avg[1] < avg[2]) { top[1] += 1; }
+		 if(avg[1] < avg[3]) { top[1] += 1; }
+		 if(avg[1] < avg[4]) { top[1] += 1; }
+
+		 
+		 
+		System.out.println("이름\t국어\t영어\t수힉\t평균\t등수\t합격여부\t장학생\t랭킹");
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = data;
+			data += 1;
+			System.out.printf("%s\t%d\t%d\t%d\t%d\t%d\t%s\t%s\t%s\n", name[i], kor[i], eng[i], math[i], avg[i], top[i],
+					pnp[i], j[i], rank[i]);
+		}
+
+	}
+}
