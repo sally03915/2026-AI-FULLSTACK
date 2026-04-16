@@ -44,7 +44,7 @@
     <section>
         <h3  class="myhidden">홍보</h3>     
         <!-- Carousel -->
-        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <div id="demo" class="carousel slide"   style="background-color:white" data-bs-ride="carousel">
 
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
@@ -178,77 +178,23 @@
         </div> 
     </section>
 
-
-  <!-- contact  - form  text-start   text-center   text-end  -->
-  <section  class="contact m-5">
-    <div class="container">
-        <h3 class="text-center">Contact Me</h3>
-        <p class="text-center">  열정적인 개발자 홍길동에 문의 주세요! </p>
-        
-        <script type="text/javascript"
-                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-        </script>
-        <script type="text/javascript">
-        (function(){
-            emailjs.init({
-                publicKey: "O33O496l0xG9wIbxL",
-            });
-        })();
-        ///////////////////////////////////
-        function sendEmail( e ){
-            e.preventDefault();  // 무조건 전송기능 막기
-            var templateParams = {
-                name: document.getElementById("name").value   ,
-                // email:document.getElementById("email").value ,
-                title: document.getElementById("title").value ,
-                message: document.getElementById("message").value ,
-            };
-
-            emailjs.send('sally03915', 'template_jwsr2w9', templateParams).then(
-            (response) => {
-                alert("✅ 메일이 성공적으로 전송되었습니다.");
-                document.getElementById("name").value ="";
-                document.getElementById("title").value="";
-                document.getElementById("message").value ="";
-                console.log('SUCCESS!', response.status, response.text);
-            },
-            (error) => {
-                alert("❌ 메일 전송에 실패했습니다.");
-                console.log('FAILED...', error);
-            },
-            );
-        }
-        ///////////////////////////////////
-        </script>
- 
-        <form onsubmit="sendEmail(event)">
+    <!--  CONTACT  -->
+    <section  class="p-5  mybg"> 
+        <div class="container  shadow  p-5  rounded"  style="background-color:white">
+            <h3  class="p-3 text-center">Contact Me</h3>     
+            <form action="/action_page.php">
             <div class="mb-3 mt-3">
-                <label for="name" class="form-label">name:</label>
-                <input type="text" class="form-control" id="name" 
-                       placeholder="이름을 적어주세요!" name="name">
-            </div>            
-            <!-- <div class="mb-3 mt-3">
-                <label for="email" class="form-label">Reply To email:</label>
-                <input type="email" class="form-control" id="email" 
-                       placeholder="email을 적어주세요!" name="email">
-            </div> -->
-            <div class="mb-3 mt-3">
-                <label for="title" class="form-label">title:</label>
-                <input type="text" class="form-control" id="title" 
-                       placeholder="제목을 적어주세요!" name="title">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
             </div>
             <div class="mb-3">
-                <label for="message">Comments:</label>
-                <textarea class="form-control" rows="5" id="message" name="message"></textarea>            
+                <label for="comment">Comments:</label>
+                <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
             </div>
-            <div class="mb-3 text-end">
-                <button type="submit" class="btn btn-success">메일보내기</button>
-            </div>
-        </form> 
-    </div><!--end container-->
-  </section>
-
- 
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </section>
 
     <!--  FOOTER  -->
     <!--  Q1. 글자를 페이지의 정중앙 / 배경색 좋아하는 색상  -->
@@ -258,4 +204,11 @@
 </body>
 </html>
 
- 
+<!-- 
+1. 부트스트랩에 해당하는 class와 문제를 풀으시오.
+
+<li class="btn  btn-danger">열정</li>
+
+- 버튼 스타일을 적용하는 기본 클래스     
+- 버튼 배경색을 빨간색으로 지정
+  -->

@@ -44,7 +44,7 @@
     <section>
         <h3  class="myhidden">홍보</h3>     
         <!-- Carousel -->
-        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <div id="demo" class="carousel slide"   style="background-color:white" data-bs-ride="carousel">
 
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
@@ -179,8 +179,21 @@
     </section>
 
     <!--  CONTACT  -->
-    <section>
-        <h3>Contact Me</h3>     
+    <section  class="p-5  mybg"> 
+        <div class="container  shadow  p-5  rounded"  style="background-color:white">
+            <h3  class="p-3 text-center">Contact Me</h3>     
+            <form action="/action_page.php">
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="comment">Comments:</label>
+                <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </section>
 
     <!--  FOOTER  -->
