@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>DBDBIG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<div class="p-3 bg-primary text-white ">
+  <h1>004. EVENT</h1>
+  <ol>
+    <li>알림창</li>
+    <li>EVENT 구조</li>
+    <li>EVENT mouseenter/mouseleave</li>
+  </ol>
+</div>
+<div class="container card  my-3">
+  <h2  class="card-header">004. EVENT- Step1. 알림창</h2>
+  <div class="card-body">
+    <h4>Step1. 알림창</h4>
+      <script>
+        //////////////////////////////
+        // 리턴값   메서드명(파라미터)
+        // alert("알림창")   prompt("질문")  confirm("yes,no")
+
+        // function alert(message?: any): void
+        // alert("haha");
+
+        //function prompt(message?: string, _default?: string): string | null
+        // let name =  prompt("당신의 이름은?" , "예) 홍길동");
+        // console.log(name);
+        // alert("당신의 이름은 " + name)
+
+        //function confirm(message?: string): boolean
+        // let answer = confirm("정말 취소하시겠습니까? ");
+        // console.log( answer,  typeof(answer)   );
+
+      </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX</h4>
+      <script>
+        //1. 나이를 입력받으세요  (prompt)
+        //2. 나이를 알림창으로 출력해주세요 (alert) 
+        //   예) 당신의 나이는 10살입니다.
+        //////////////////////////////
+        // let age = prompt("나이를 입력받으세요 > ")
+        // alert("당신의 나이는 "+age+"살입니다.");
+      </script>
+  </div>
+
+</div>
+<!--     -->
+<!--     -->
+<!--     -->
+<div class="container card  my-3">
+  <h2  class="card-header">004. EVENT- Step2. EVENT</h2>
+  <div class="card-body">
+    <h4>Step2. EVENT</h4>
+    <input type="button" value="EVENT1"  
+     title="버튼을 클릭하세요.(test)" 
+     class="btn btn-outline-primary"      
+     onclick="alert('haha')"
+     />
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX</h4>
+    <pre class="alert alert-warning">
+    1. DOG-멍멍 버튼을 클릭하면 멍멍 알림창
+    2. CAT-야옹 버튼을 클릭하면 야옹 알림창
+    2. FIVE-COUNT 버튼을 클릭하면   alert가 5번나오게 5 4 3 2 1 알림창
+    </pre>    
+    <input type="button"  value="DOG-멍멍"  
+      onclick="alert('멍멍')"
+      title="버튼1"    class="btn btn-success" />
+    <input type="button"  value="CAT-야옹"  
+      onclick="alert('야옹')"
+      title="버튼2"    class="btn btn-success" />
+    <input type="button"  value="FIVE-COUNT"  
+      title="버튼3"   class="btn btn-success" 
+      onclick="alert(5);alert(4);alert(3);alert(2);alert(1);"
+      onclick="alert('onclick은 2번사용 안됨')" 
+      />
+  </div>
+ </div>
+  <!--     -->
+  <!--     -->
+  <!--     -->
+  <div class="container card  my-3">
+    <h2  class="card-header">004. EVENT- Step2. EVENT mouseenter/mouseleave</h2>
+    <div class="card-body">
+      <h4>Step3. EVENT - mouseenter/mouseleave</h4>
+      <div id="box"    class="alert alert-success"
+        onmouseover="this.style.backgroundColor='#fff3cd'"
+        onmouseout ="this.style.backgroundColor='#cff4fc'"
+      >
+        <strong>Success!</strong> Java script:)
+      </div>
+      <script>
+      //////////////////////////////
+      </script>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>
+
+<!--
+#1.  알림창  -  alert, prompt , confirm
+#2.  이벤트  - 이벤트대상(div), 
+              이벤트(click), 
+              이벤트 핸들러(alert('haha'))
+    <div onclick = "alert('haha')">test</div>
+-->
