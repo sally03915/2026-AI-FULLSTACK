@@ -146,20 +146,36 @@
       <li id="pig">PIG</li>
     </ul>
     <script>
+    window.addEventListener("load" , function(){      
         //////////////////////////////
-      //1. step1 #animal 선택하기 
- 
-      //2. 그 안에 동물들(li) 찾기
- 
-
-      //3. 꾸미기 
+        //1. step1 #animal 선택하기  (document.getElementById)
+        let animal = document.getElementById("animal");
+        console.log(animal);
+        //2. 그 안에 동물들(li) 찾기  (document.getElementsByTagName)
+        let anis   = animal.getElementsByTagName("li");
+        console.log(anis , typeof(anis));
+        //3. 꾸미기 
+        anis[0].style.color="blue";
+        anis[1].style.color="#f00";
+    });
     </script>
     <script>
+      window.addEventListener("load" , function(){
         //////////////////////////////
-     //4. 만능 querySelector 
-
-      //5. 만능 모든요소가져오기 querySelectorAll
- 
+        //4. 만능 querySelector (css  id="animal"  #animal)
+        let animal = document.querySelector("#animal");
+        console.log(animal);
+        animal.style.border="5px  dotted crimson";
+        animal.style.padding="20px";
+        animal.style.borderRadius="20px";  
+        //5. 만능 모든요소가져오기 querySelectorAll
+        let alis =  document.querySelectorAll("#animal  li"); 
+        console.log(alis);
+        for(let i=0;  i<alis.length; i++){
+          alis[i].style.backgroundColor="black";
+          alis[i].style.color="white";
+        }
+      });
     </script>
 
 
@@ -169,7 +185,7 @@
       <li id="gold">GOLD</li>
     </ul>
     <script>
-        //////////////////////////////
+      //////////////////////////////
       // 6. querySelector
  
       //7. parentElement
@@ -191,14 +207,30 @@
       <li id="coconut">coconut</li>
     </ul>
     <script>
-        //////////////////////////////
-      //Q1) document.getElementsById 이용해서  #fruits 선택  
-      //Q2) document.getElementsByTagName 이용해서  
-      //   #fruits 안의 모든 li에 배경색 black, 글자색 white , 여백 10px주기
-      //Q2) document.getElementsById 이용해서 banana 선택 배경색 gold
-      //Q3) document.querySelector 이용해서 coconut 선택 
-      //  coconut를 클릭하면 width:200px; 로 수정
-      
+      // document.getElementById("id명")
+      // document.getElementsByTagName("li")
+      // document.querySelector("#id")
+      //////////////////////////////
+      window.addEventListener("load" ,function(){     
+        //Q1) document.getElementsById 이용해서  #fruits 선택  
+        let fruits = document.getElementById("fruits");     console.log(fruits);
+        //Q2) document.getElementsByTagName 이용해서  
+        //   #fruits 안의 모든 li에 배경색 black, 글자색 white , 여백 10px주기
+        let lis = fruits.getElementsByTagName("li");        console.log(lis);
+        for(let i=0; i<lis.length; i++){
+            lis[i].style.backgroundColor = "black";
+            lis[i].style.color = "white";
+            lis[i].style.padding = "10px";
+        }
+        //Q3) document.getElementsById 이용해서 banana 선택 배경색 gold
+        //lis[1].style.backgroundColor="gold";
+         document.getElementById("banana").style.backgroundColor="gold";
+        //Q4) document.querySelector 이용해서 coconut 선택 
+        //  coconut를 클릭하면 width:200px; 로 수정
+         document.querySelector("#coconut").onclick = function(){
+            this.style.width="200px";
+         };
+      });
     </script>
   </div>
 </div>

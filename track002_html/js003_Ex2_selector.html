@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>DBDBIG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<div class="mt-5  p-3 bg-primary text-white ">
+  <h1>005.선택자 </h1>
+  <ol>
+    <li>document.getElementById</li>
+    <li>window.addEventListener</li>
+    <li>document.getElementById / getElementsByTagName / querySelector</li> 
+  </ol>
+</div> 
+
+<div class="container card  my-5">
+  <h2  class="card-header">005.선택자 - Step3. document.getElementById / getElementsByTagName / querySelector  </h2>
+  <div class="card-body"> 
+    <h4>EX1</h4>
+    <ul id="animals">
+      <li id="dog">dog</li>
+      <li id="cat">cat</li>
+      <li id="tiger">tiger</li>
+    </ul>
+    <script>
+      // 브라우저가            로딩될때
+      // 이벤트대상.             이벤트   이벤트핸들러
+      window.addEventListener("load" , function(){
+          //Q1) document.getElementById 이용해서 #animals 선택
+          let animals =  document.getElementById("animals");   console.log( animals );
+
+          //Q2) document.querySelectorAll 이용해서 모든 li에 글자크기 20px 적용
+          let lis     = document.querySelectorAll("#animals li");   console.log( lis );
+          // lis[0].style.fontSize="20px";
+          // lis[1].style.fontSize="20px";
+          for(let i=0; i<lis.length; i++){ lis[i].style.fontSize="20px";  }
+
+          //Q3) document.getElementById 이용해서 cat 선택 → 배경색 skyblue
+          document.getElementById("cat").style.backgroundColor = "skyblue";
+
+          //Q4) document.querySelector 이용해서 tiger 선택 → 클릭 시 글자색 red로 변경
+          document.querySelector("#tiger").onclick=function(){
+              //document.querySelector("#tiger").style.color="red";
+              //this.style.color="red";
+               lis[2].style.color="red";
+          };
+      });
+      
+      
+      
+      
+      
+    </script>
+</div>
+ 
+<div class="card-body">
+  <h4>EX2</h4>
+  <ol id="numbers">
+    <li id="one">1</li>
+    <li id="two">2</li>
+    <li id="three">3</li>
+  </ol>
+  <script>
+    //이벤트대상              이벤트     이벤트핸들러
+    window.addEventListener("load" , function(){
+        //Q1) document.getElementById 이용해서 #numbers 선택
+        let numbers =  document.getElementById("numbers");   console.log(numbers);
+
+        //Q2) getElementsByTagName 이용해서 모든 li에 테두리 1px solid #123456 적용
+        let lis = numbers.getElementsByTagName("li");   console.log(lis);  
+        //lis[0].style.border="1px solid #123456";
+        for(let i=0; i<lis.length; i++) {   lis[i].style.border="1px solid #123456";       } 
+
+        //Q3) #two 선택해서 hover 시 배경색 lime으로 변경
+        document.getElementById("two").onmouseover = function(){
+            //document.getElementById("two").style.backgroundColor="lime";
+            //this.style.backgroundColor="lime";
+            lis[1].style.backgroundColor="lime";
+        };
+        document.getElementById("two").onmouseout = function(){
+            document.getElementById("two").style.backgroundColor="skyblue";
+        };
+        //Q4) #three 선택해서 클릭 시 글자크기 30px로 변경
+        //document.getElementById("three")
+        //document.getElementsByTagName("li")  카운트할때 힘듬 (맨위의 li부터 찾음)
+        document.querySelector("#three").onclick = function(){
+             this.style.fontSize="30px";
+        };
+    });
+    
+    
+
+
+    
+  </script>
+</div>
+ 
+<div class="card-body">
+  <h4>EX3</h4>
+  <ul id="colors">
+    <li id="red">red</li>
+    <li id="blue">blue</li>
+    <li id="green">green</li>
+  </ul>
+  <script>
+    //윈도우                  로딩      발생
+    window.addEventListener("load" , function(){
+        //Q1. querySelector 이용해서 #colors 선택
+        let colors = document.querySelector("#colors");    console.log(colors);
+        //Q2.  querySelectorAll 이용해서 모든 li에 margin 5px 적용
+        let lis  = document.querySelectorAll("#colors li");  console.log(lis);
+        //lis[0].style.margin="5px";
+        for(let i=0; i<lis.length; i++){   lis[i].style.margin="5px";  }
+
+        //Q3) #red 클릭 시 배경색 red, 글자색 white
+        //lis[0]  ,   document.querySelector("#red")
+        document.getElementById("red").onclick = function(){
+          this.style.backgroundColor="red";
+          this.style.color="white"
+        }; 
+        //Q4) #blue 더블클릭 시 width 150px로 변경
+        document.getElementById("blue").style.backgroundColor="blue";
+        document.getElementById("blue").ondblclick = function(){
+          this.style.width="150px";
+        };
+        //Q5) #green 마우스오버 시 글자크기 25px로 변경
+        document.getElementById("green").onmouseover = function(){
+          this.style.fontSize="25px"
+        };
+    });
+  
+  </script>
+</div>
+ 
+</div> 
+
+
+
+</body>
+</html>
