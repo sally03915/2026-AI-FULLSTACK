@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>NodeList vs HTMLCollection</title>
+  <style>
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+    .added {
+      color: red;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h2>과일 목록</h2>
+  <ul id="fruits">
+    <li class="fruit">Apple</li>
+    <li class="fruit">Banana</li>
+    <li class="fruit">Cherry</li>
+  </ul>
+
+  <button id="addFruit">과일 추가하기</button>
+  <button id="highlight">첫 번째 과일 강조하기</button>
+
+  <script>
+    window.addEventListener("load" , function(){
+        // HTMLCollection (실시간)   id + tagname
+        const fhtml = document.getElementsByClassName("fruit");
+        // NodeList (정적) 
+        const fnode = document.querySelectorAll(".fruit");
+
+        // 버튼 이벤트 
+        document.getElementById("addFruit").onclick = function(){
+          const newli =  document.createElement("li");// createElement 태그만들기
+          newli.textContent="Mango"; // 태그안에 콘텐츠-test
+          newli.classList.add("fruit" , "added");  //#2. css 추가 (css 들)  fruit , added
+          document.getElementById("fruits").appendChild(newli);  //#1 망고추가되는지 확인
+
+          console.log( fhtml  , fhtml.length);
+          console.log( fnode  , fnode.length);
+        };
+
+        document.getElementById("highlight").addEventListener("click", () => {
+        //fhtml[0].classList.add("highlight"); 
+        fnode[0].classList.add("highlight");
+      });
+    });
+
+
+  </script>
+</body>
+</html> 

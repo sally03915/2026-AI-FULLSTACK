@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>이벤트 연습</title>
+  <style>
+    .result_target {
+      background-color: black;
+      color: white;
+      padding: 20px;
+      font-size: 20px;
+      text-align: center;
+      transition: all 0.3s ease; /* 부드러운 애니메이션 효과 */
+    }
+    .big {
+      font-size: 40px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-body">
+    <h4>EX</h4>
+    <input type="button" value="이름 입력" id="test1" class="btn btn-success" />
+    <input type="button" value="버튼 글자 바꾸기" id="test2" class="btn btn-success" />
+    <input type="button" value="텍스트 수정" id="test3" class="btn btn-success" />
+    <input type="button" value="마우스 이벤트" id="test4" class="btn btn-success" />
+    <input type="button" value="크게/작게" id="test5" class="btn btn-success" />
+    <input type="button" value="숨기기/보이기" id="test6" class="btn btn-success" />
+    <div class="result_target my-5">JAVASCRIPT</div>
+  </div>
+
+  <script>
+    const result = document.querySelector(".result_target");
+
+    // Q1: 이름 입력받아 알림창 띄우기
+    document.getElementById("test1").onclick = () => {
+      const name = prompt("이름을 입력하세요:");
+      if (name) alert("입력한 이름: " + name);
+    };
+
+    // Q2: 버튼 글자 바꾸기
+    document.getElementById("test2").onclick = function() {
+      this.value = "바뀐 글자!";
+    };
+
+    // Q3: result 영역 문자열 알림창 → 이름으로 수정
+    document.getElementById("test3").onclick = () => {
+      alert("현재 내용: " + result.innerHTML);
+      const name = prompt("새로운 텍스트를 입력하세요:");
+      if (name) result.innerHTML = name;
+    };
+
+    // Q4: 마우스 올리면/떼면 배경색 변경
+    const test4 = document.getElementById("test4");
+    test4.onmouseover = () => result.style.backgroundColor = "crimson";
+    test4.onmouseout  = () => result.style.backgroundColor = "black";
+
+    // Q5: 글자 크게/작게 토글
+    document.getElementById("test5").onclick = () => {
+      result.classList.toggle("big");
+    };
+
+    // Q6: 숨기기/보이기 토글
+    document.getElementById("test6").onclick = () => {
+      result.classList.toggle("hidden");
+    };
+  </script>
+</body>
+</html>
