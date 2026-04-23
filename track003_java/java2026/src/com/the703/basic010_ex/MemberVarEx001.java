@@ -36,12 +36,10 @@ class Sawon3{
     } 
 } 
 public class MemberVarEx001 {
-
 	public static void main(String[] args) {
 		   Sawon3   sola = new Sawon3();  
 		   sola.showAll001();
 	}
-
 }
 
 

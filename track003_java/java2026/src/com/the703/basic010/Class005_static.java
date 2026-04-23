@@ -20,7 +20,7 @@ class Farm{
 		System.out.println("::동물농장 인원 : " + Farm.FarmNum);
 	}
 }
-public class Class005 {
+public class Class005_static {
 	public static void main(String[] args) {
 		System.out.println("\n\n0. 동물농장");
 		System.out.println("::회사이름 > " + Farm.FarmName);
@@ -36,6 +36,30 @@ public class Class005 {
 		dog.show(); 
 	}
 }
+/*************
+1. 초기화순서
+	기본값			명시적초기화		초기화블록		생성자
+	
+    4-1)   [ 기본값     ]    : String ,객체 - null /  int - 0 으로 초기화
+    4-2)   [ 명시적초기화 ]   :  int a=10;    중요콘텐츠 명시적으로 알림!    
+    4-3)   [ 초기화블록  ]   :  { a=10; b=20; }   여러개초기화시
+    4-4)   [ 생성자     ]    : 최종은 생성자에서 사용함.  인스턴스변수 초기화
+
+2. runtime data area
+ [  method  ]  : 정보저장 , static, final
+ [  heap    ]  : 동적저장 - new ,  gc( garbage collecetor)가 처리소멸
+ [  stack   ]  : 임시값저장
+
+3. static
+- jvm 소스로딩시 메모리 할당받음
+- new연산자보다 먼저 실행되어 메모리(method 영역:runtime)에    (     1   )    회 생성
+- 클래스명.변수명  / 클래스명.메서드명   - 클래스변수/클래스메서드  Calc.name
+- 객체생성과 관련이 (  x  )
+- 인스턴스로 접근시 권장사항이 아니므로 경고발생
+
+*/
+
+
 //////////////////////////////////////////////////////
 /*
 초기화			기본값	명시적초기화		초기화블록			생성자

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>DBDBIG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<div class="p-3 bg-primary text-white ">
+  <h1>006. function </h1>
+  <ol>
+    <li>function- 명시적</li>
+    <li>a태그에서의 이벤트</li>
+  </ol>
+</div>
+<div class="container card  my-3">
+  <h3  class="card-header">006. FUNCTION - STEP1. function</h3>
+  <div class="card-body">
+    <h4>STEP1. function </h4>
+    <pre>
+    1.  function 선언   - function 함수이름(){}
+    2.  function 사용   - 함수이름();
+    </pre>
+		<input type="button"  value="FUNCTION1"  title="FUNCTION"  id="fn1"   class="btn btn-outline-primary" />
+    <script>
+      //이벤트대상                    이벤트   이벤트핸들러
+      //브라우저                        로딩  이벤트핸들러 
+      //#fn1 버튼클릭시 본인이름 알림창
+  </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX</h4>
+    <pre>
+      1. fn2를 누르면 - window.onload / getElementById 이용
+      2. fn2()  만들기 - 1,2,3,4,5 alert 창 5번 띄우기
+      3. #fn2에서 클릭할때 fn2() 호출
+      </pre>
+      <input type="button"  value="버튼2"  title="버튼2"    id="fn2"  class="btn btn-success" />
+      <script> 
+ 
+      </script>
+  </div>
+</div>
+
+
+
+
+<div class="container card  my-3">
+  <h3  class="card-header">006. FUNCTION - STEP2. a 태그에서 event</h3>
+  <div class="card-body">
+    <h4>STEP2. a 태그에서 event </h4>
+		<a href="https://www.naver.com/"   class="btn btn-outline-primary target_a" >EVENT</a>
+    <script>
+      //이벤트대상                    이벤트   이벤트핸들러
+      //브라우저  로딩  이벤트핸들러 
+  </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>STEP3. a 태그에서 event 사용예</h4>
+    <div class=" w-25  bg-primary    rounded  p-2 text-white  text-center ">
+      <h1>Score   <span class="target_num">0</span></h1>
+    </div>
+    <div class="w-25 text-center m-2">
+      <a href="#" class="btnPlus   btn btn-outline-primary">plus</a>
+      <a href="#" class="btnMinus  btn btn-outline-primary">minus</a>
+    </div>
+    <script>
+ 
+
+    </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX</h4>
+    <div class="w-25  bg-success  rounded  p-2  mx-auto text-white  text-center target_box">
+      <h1>ROTATE</h1>
+    </div>
+    <div class="w-25 text-center m-2">
+      <a href="#" class="btnLeft   btn btn-outline-success">LEFT ROTATE</a>
+      <a href="#" class="btnRight  btn btn-outline-success">RIGHT ROTATE</a>
+    </div>
+    <script>
+    
+
+    </script>
+  </div>
+</div>
+
+
+
+</body>
+</html>

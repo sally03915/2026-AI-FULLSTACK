@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+<body>
+     <input type="button"  value="addEventEx-1~5 Like"  
+           title="버튼5"  id="addEventEx"  class="btn btn-success" />
+    
+    <script>
+    window.addEventListener("DOMContentLoaded", function(){   //"load"
+      document.getElementById("addEventEx").onclick= function(){
+        let num1 = prompt("당신이 좋아하는 1~5사이의 숫자는? ");
+        console.log(typeof(num1));
+        for(let i=1;i<=Number(num1);i++){
+          alert(i);
+        }
+      };
+     });
+    </script> 
+</body>
+</html>
+
+<!-- bootstrap001.html  -->
+<!-- ! + enter          -->
