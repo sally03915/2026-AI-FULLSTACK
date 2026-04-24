@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>DBDBIG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+ 
+<!--                                    -->
+<!--                                    -->
+<div class="p-3 bg-primary text-white ">
+  <h1>007. CONTROL</h1>
+  <ol>
+    <li>IF</li>
+    <li>SWITCH</li>
+    <li>FOR/WHILE/DO WHILE</li>
+  </ol>
+</div>
+<!--                                    -->
+<!--                                    -->
+<div class="container card  my-3">
+  <h3  class="card-header">007. CONTROL - Step1. IF</h3>
+  <div class="card-body">
+    <h4>Step1. IF</h4>
+      <script>
+       // if(조건){조건이 true }
+       // else    {조건이 false}
+       let data = 2;
+
+            if(data == 1){  console.log("1이다.");    }
+       else if(data == 2){  console.log("2이다.");    }
+       else              {  console.log("1이 아니다.");}
+      </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX</h4>
+    <pre>
+      평균을 입력하세요 __입력받기
+      만약 평균이 60점 이상(60점포함)이라면 합격, 아니면 불합격 출력
+    </pre>
+    <input type="button" value="ex1"  id="ex1"  
+           title="버튼을 클릭하세요" class="btn btn-success"      />
+    <script>
+      //이벤트대상 이벤트 이벤트핸들러
+      window.addEventListener("load" , function(){
+         let ex1 = document.getElementById("ex1");
+         //ex.onclick = function(){};
+         ex1.addEventListener("click" , function(){
+            let answer = prompt("평균을 입력하세요.");
+            // if(answer >= 60){  alert("합격"); }
+            // else{  alert("불합격"); }
+            alert(answer >= 60? "합격" : "불합격");
+         });
+      });
+    </script>
+  </div>
+</div>
+
+
+
+
+<!--                                    -->
+<!--                                    -->
+<div class="container card  my-3">
+  <h3  class="card-header">007. CONTROL - Step2. SWITCH</h3>
+  <div class="card-body">
+    <h4>Step2. SWITCH</h4>
+      <script>
+      /*
+      swtich(  처리하고 싶은 대상    ){
+          case 대상의상태:    처리;  break;
+          case 대상의상태:    처리;  break;
+          case 대상의상태:    처리;  break;
+          default : 기본처리
+      } */
+      let data2 = 2; 
+      switch(data2){
+        case 1 : console.log("1이다");  break;
+        case 2 : console.log("2이다");  break;
+        case 3 : console.log("3이다");  break;
+        default : console.log("1,2,3 이 아니다.");
+      }
+
+      </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX</h4>
+    <pre>
+      4,5,6 중에 입력하세요
+      4번 월드콘  ,  5번 구구콘 , 6번 설레임 알림창을 띄우시오.
+    </pre>
+    <input type="button" value="switch1"  id="switch1"  
+           title="버튼을 클릭하세요" class="btn btn-success"      />
+    <script>
+      window.addEventListener("load" , function(){
+        let switch1 = document.getElementById("switch1");
+        switch1.addEventListener("click" , function(){
+            let ice = prompt("4,5,6 중에 입력하세요");
+            console.log(ice , "/" , typeof(ice));
+            switch( Number( ice ) ){
+               case 4: alert("월드콘"); break;
+               case 5: alert("구구콘"); break;
+               case 6: alert("설레임"); break;
+               default : alert("4,5,6 중에 입력");
+            }
+        });
+      });
+    </script>
+  </div>
+</div>
+
+
+
+
+<!--                                    -->
+<!--                                    -->
+<div class="container card  my-3">
+  <h3  class="card-header">007. CONTROL - Step3. FOR/WHILE/DO WHILE</h3>
+  <div class="card-body">
+    <h4>Step3. FOR/WHILE/DO WHILE</h4>
+      <script>
+      /*
+        STEP1 for  - 반복횟수 알때
+        for(  초기문; 조건문; 증감문 ){  }
+
+        STEP2 while- 반복횟수 모를때
+        초기문;
+        while(  조건문 ){     증감문;  }
+
+        STEP3 do while- 한번은 실행을 해야할때
+        초기문;
+        do{     증감문;  } while(  조건문 );
+
+        STEP4 향상된 for
+        for( index  in 객체 ){   }*/
+
+ 
+      </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX</h4>
+    <pre>
+    for, while, do while
+    Q1)		1	2	3	4	5
+    Q2)		5	4	3	2	1
+    Q3)		2	4	6
+    Q4)		hello1		hello2		hello3
+    Q5)		const list1 = [1 ,2, 3, 4, 5];
+    </pre>
+    <script>
+      // for, while, do while
+      //A1)		1	2	3	4	5
+      console.log("Q1)	for-1 : 	1	2	3	4	5")
+      for(let i=1; i<6; i++){  console.log(i); }
+      
+      console.log("Q1)	while-1 : 	1	2	3	4	5")
+      let i=1;  while(i<6){  console.log(i);  i++;}
+      
+      console.log("Q1)	do while-1 : 	1	2	3	4	5")
+          i=1;  do{  console.log(i);  i++;}while(i<6);
+     
+
+      //A2)		5	4	3	2	1
+        
+
+      //A3)		2	4	6
+        
+
+      //A4)		hello1		hello2		hello3
+        
+
+
+      // 향상된 for , forEach
+      //A5)		const list1 = [1 ,2, 3, 4, 5];
+      const list1 = [1 ,2, 3, 4, 5];
+      
+      for(let i5=0; i5<list1.length; i5++){  console.log(    list1[i5]      );  }
+      //     i(번호)      객체
+      for( let i     in  list1   ){  console.log(  i + "\t" + list1[i] ); } 
+
+      list1.forEach(  ( ele, index, list1 )=>{  // 한개씩, 번호, list
+        console.log(  ele , "/" , index , "/" , list1 );
+      });
+
+    </script>
+  </div>
+</div>
+
+
+</body>
+</html>

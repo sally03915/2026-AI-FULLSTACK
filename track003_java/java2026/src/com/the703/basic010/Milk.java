@@ -14,5 +14,4 @@ public class Milk { // basic010에 설정해주세요!
 	public Milk() { super(); }
 	public Milk(int mno, String mname, int mprice) { super(); this.mno = mno; this.mname = mname; this.mprice = mprice; }
 	@Override public String toString() { return "Milk [mno=" + mno + ", mname=" + mname + ", mprice=" + mprice + "]"; }
-	
 }

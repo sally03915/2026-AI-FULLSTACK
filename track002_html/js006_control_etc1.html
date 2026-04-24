@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>DBDBIG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<div class="p-3 bg-primary text-white ">
+  <h1>006. CONTROL</h1>
+  <ol>
+    <li>IF</li>
+    <li>SWITCH</li>
+    <li>FOR/WHILE/DO WHILE</li>
+  </ol>
+</div>
+
+
+<!--                                    -->
+<!--                                    -->
+<div class="container card  my-3">
+  <h3  class="card-header">006. CONTROL - Step1. IF</h3>
+  <div class="card-body">
+    <h4>Step1. IF</h4>
+      <script>
+       // if(조건){조건이 true }
+       // else    {조건이 false}
+       let data1=1;
+       if( data1==1 ){ console.log("1이다"); }
+       else{      console.log("1이 아니다."); }
+      </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX1</h4>
+    <pre>
+      나이를 입력하세요 __입력받기
+      만약 나이가 20세 이상(20세 포함)이라면 성인, 아니면 미성년자 
+    </pre>
+    <input type="button" value="ex1"  id="ex1"  title="버튼을 클릭하세요" class="btn btn-primary"      />
+    <script>
+       window.addEventListener("load" , function(){
+         let ex1=document.getElementById("ex1");
+         //ex1.addEventListener("click" , function(){   exfn1();  });
+         ex1.addEventListener("click" ,     exfn1 );
+       }); 
+      function exfn1(){
+          let result = "미성년자";
+          let avg = prompt("나이를 입력>");
+          if( avg >= 20 ){ result ="성인"; }
+          
+          alert(  result );
+      } 
+    </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX2</h4>
+    <pre>
+      사과 스펠링을 입력하세요 __입력받기
+      만약 사과스펠링을 apple을 입력하면 OK 아니면 NOT OK 출력
+    </pre>
+    <input type="button" value="ex2"  id="ex2"  title="버튼을 클릭하세요" class="btn btn-primary"      />
+    <script>
+      window.addEventListener("load" , function(){
+          let ex2 = document.getElementById("ex2");
+          //ex2.addEventListener("click" , function(){ exfn2();});
+           ex2.addEventListener("click" ,   exfn2 );
+      });
+      function exfn2(){
+        let result = "NOT OK";
+        let answer = prompt("사과 스펠링을 입력하세요");
+        if(answer == 'apple'){ result = "OK";  }
+        alert( result );
+      }
+    </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX3</h4>
+    <pre>
+      사과 스펠링을 적으세요
+      만약 apple	, APPLE	 ,  Apple 이 셋중에 하나라도 입력한게맞다면 ok
+      아니면 not ok
+    </pre>
+    <input type="button" value="ex3"  id="ex3"  title="버튼을 클릭하세요" class="btn btn-primary"      />
+    <script>
+      window.addEventListener("load" , function(){
+          let ex3 = document.querySelector("#ex3");
+          ex3.addEventListener("click" , function(){  ex3fn();  });
+      });
+      function ex3fn(){
+          let result = "NOT OK";
+          let answer = prompt("사과 스펠링을 적으세요 > ");
+          if(  answer == 'apple'||  answer=='Apple'|| answer=='APPLE'){ 
+            result ="OK";
+          }
+          alert(result); 
+      }
+    </script>
+  </div>
+
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX4</h4>
+    <pre>
+      어린이의 나이를 입력하세요
+      만약 0~5 사이를 입력했다면 어린이의 나이는 __세입니다.
+      아니라면 0~5세사이만 입력하세요 출력하기
+    </pre>
+    <input type="button" value="ex4"  id="ex4"  title="버튼을 클릭하세요" class="btn btn-primary"      />
+    <script>
+      window.addEventListener("load" , function(){
+        let ex4 = document.getElementById("ex4");
+        //ex4.addEventListener("click" , function(){  ex4fn();  });
+        ex4.addEventListener("click"   ,   ex4fn );
+      });
+      function ex4fn(){
+         let result = "0~5세사이만 입력하세요";
+         let age = prompt("어린이의 나이를 입력하세요 > ");
+         if( age >= 0 && age <=5 ){ result = "어린이의 나이는 " + age + "세입니다."; }
+         alert(result);
+      }
+    </script>
+  </div>
+
+</div><!-- end card3  -->
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<hr/>
+
+
+
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<div class="container card  my-3">
+  <h3  class="card-header">006. CONTROL - Step2. SWITCH</h3>
+  <div class="card-body">
+    <h4>Step2. SWITCH</h4>
+      <script>
+      /*
+      swtich(  처리하고 싶은 대상    ){
+          case 대상의상태:    처리;  break;
+          case 대상의상태:    처리;  break;
+          case 대상의상태:    처리;  break;
+          default : 기본처리
+      } */
+      let data2=2;
+      switch( data2 ){
+        case 1 : console.log("1이다"); break;
+        case 2 : console.log("2이다"); break;
+        case 3 : console.log("3이다"); break;
+        default : console.log("1,2,3이 아니다.");
+      }
+      </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+<div class="card-body">
+    <h4>EX</h4>
+    <pre>
+      1,2,3 중에 입력하세요
+      1번 공부하기 , 2번 운동하기 , 3번 영화보기 알림창을 띄우시오.
+    </pre>
+    <input type="button" value="switch2"  id="switch1"  title="버튼을 클릭하세요" class="btn btn-primary" />
+    <script>
+      window.addEventListener("load" , function(){
+         let switch1 = document.querySelector("#switch1");
+         switch1.addEventListener("click" , function(){  switchfn(); });
+      });
+      function  switchfn(){
+        let result = "1,2,3 중에 입력하세요.";
+        let num = prompt("1,2,3 중에 입력하세요");  //console.log(num , '/' , typeof(num) );
+        switch( Number( num ) ){
+          case 1: result = "공부하기"; break;
+          case 2: result = "운동하기"; break;
+          case 3: result = "영화보기"; break;
+        }
+        alert(result);
+      }
+    </script>
+</div>
+
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX2</h4>
+    <pre>
+      a,b,c 중에 입력하세요
+      a또는 A  Apple ,  b또는 B  Banana , c 또는 C Coconut
+    </pre>
+    <input type="button" value="switch2"  id="switch2"  title="버튼을 클릭하세요" class="btn btn-primary"      />
+    <script>
+      window.addEventListener("load" ,  function(){
+          let   switch2 = document.getElementById("switch2");
+          switch2.addEventListener("click" , function(){  switch2fn();  });
+      });
+      function switch2fn(){
+        let result = "a,b,c 중에 입력하세요";
+        let answer = prompt("a,b,c 중에 입력하세요");
+        switch(answer){
+            case 'a' : case 'A' : result = "Apple";   break;
+            case 'b' : case 'B' : result = "Banana";  break;
+            case 'c' : case 'C' : result = "Coconut"; break;
+        }
+        alert(result);
+      }
+    </script>
+  </div>
+</div>
+
+
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<hr/>
+
+
+
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<!--                                    -->
+<div class="container card  my-3">
+  <h3  class="card-header">006. CONTROL - Step3. FOR/WHILE/DO WHILE</h3>
+  <div class="card-body">
+    <h4>Step3. FOR/WHILE/DO WHILE</h4>
+      <script>
+      /*
+        STEP1 for  - 반복횟수 알때
+        for(  초기문; 조건문; 증감문 ){  }
+
+        STEP2 while- 반복횟수 모를때
+        초기문;
+        while(  조건문 ){     증감문;  }
+
+        STEP3 do while- 한번은 실행을 해야할때
+        초기문;
+        do{     증감문;  } while(  조건문 );
+
+        STEP4 향상된 for
+        for( index  in 객체 ){   }*/
+
+
+        console.log("step1 - for");  
+
+        console.log("step2 - while"); 
+
+        console.log("step3 - do while"); 
+
+        console.log("step4 - 향상된 for1");
+        //let list = [1,2,3];
+        const list = ['a','b','c'];   // array 
+
+        console.log("step4 - 향상된 for2");
+     
+      </script>
+  </div>
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+      <h4>EX</h4>
+      <pre>
+      for, while, do while
+      Q1)     10  20  30  40  50
+      Q2)     100 90  80  70  60
+      Q3)     1   4   9   16
+      Q4)     2   5   8   11  14
+      Q5)     hi1     hi2     hi3     hi4
+      Q6)     bye     bye     bye     bye     bye
+
+      향상된 for , forEach
+      Q7)     const list1 = [10,20,30,40,50];
+      Q8)     const list2 = ['dog','cat','bird','fish','lion'];
+      Q9)     const list3 = ['spring','summer','autumn','winter'];
+      </pre>
+      <script>
+        // for, while, do while
+        //A1) 10 20 30 40 50 
+
+        //A2) 100 90 80 70 60 
+
+        //A3) 1 4 9 16
+         
+        //A4) 2 5 8 11 14
+
+        //A5) hi1 hi2 hi3 hi4
+         
+        //A6) bye bye bye bye bye
+        
+        // 향상된 for , forEach
+        //A7) const list1 = [10,20,30,40,50];
+        
+        //A8) const list2 = ['dog','cat','bird','fish','lion'];
+
+        //A9) const list3 = ['spring','summer','autumn','winter'];
+        
+      </script>
+  </div>
+ 
+
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>Step3. FOR/WHILE/DO WHILE - break vs  continue </h4>
+    <pre>
+    * break vs  continue
+      break    - 탈출!
+      continue - 탈출!
+
+    * 무한반복
+      for(;;){ 빠져나올조건-break}
+      for(;빠져나올조건;){}
+      while(true){ 빠져나올조건-break}
+      while(빠져나올조건){}
+    </pre>
+    <script>
+      console.log(".......break");
+      //1 2
+      for(let i=1; i<=10;i++){
+          if(i==3){break;}
+          // 조건이 맞으면 나와(가장가까운 for 빠져나오기!)
+          console.log(i);
+      }
+      console.log(".......continue");
+      //1 2 (3안나옴!) 4 5 6 7 8 9 10
+      for(let i=1; i<=10;i++){
+          if(i==3){continue;}  //아래내용 skip
+          console.log(i);
+      }
+    console.log(".......무한반복");
+ 
+    </script>
+  </div>
+
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX2</h4>
+    <pre>
+      Q 어린이의 나이를 0~5세사이만 입력하세요
+      0~5세가 아니라면 무한반복되게 작성하시오.
+    </pre>
+    <input type="button"  id="age"
+           value="무한반복-어린이나이"   class="btn btn-primary"
+           title="어린이의 나이를 0~5세사이만 입력하세요."
+    />
+    <script>
+ 
+    </script>
+  </div>
+
+  <!--     -->
+  <!--     -->
+  <hr/>
+  <div class="card-body">
+    <h4>EX3</h4>
+    <pre>
+    다음과 같이 계산기 기능을 구현하시오.
+    1. 빈칸검사를 하시오.
+    2. 숫자는
+      0~100 사이의 숫자를 입력받지 못하면 무한반복으로 다시 입력받게 하시오.
+    3. 연산자는
+      +,-,*,/를 입력받지 못하면 무한반복으로 다시 입력받게 하시오.
+    4. 각 연산에 맞게 계산기를 구현하시오. (+,-,*,/)
+    </pre>
+    <form action="" method="post"  id="calc_form">
+      <fieldset>
+      <legend class="myhidden"> 계산기 </legend>
+          <p class="">
+            <input type="button"    class="btn btn-primary"
+                            id="calc" value="계산기시작"  />
+          </p>
+          <p class="my-4">
+            <label for="num1"> 숫자1</label>
+            <input type="text"  id="num1"
+                              name="num1"  readonly  class="form-control" />
+          </p>
+          <p class="my-4">
+            <label for="abc"> 연산자</label>
+            <input type="text"  id="abc"  name="abc" readonly  class="form-control" />
+          </p>
+          <p class="my-4">
+            <label for="num2"> 숫자2</label>
+            <input type="text"  id="num2"  name="num2" readonly class="form-control" />
+          </p>
+          <p class="my-4">
+            <label for="result1"> 결과확인</label>
+            <input type="text"  id="result1"  name="result1" readonly class="form-control" />
+          </p>
+      </fieldset>
+    </form>
+    <script>
+    </script>
+</div> <!-- end contianer  -->
+
+
+</body>
+</html>
