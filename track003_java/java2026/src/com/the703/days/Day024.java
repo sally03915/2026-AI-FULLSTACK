@@ -24,7 +24,7 @@ class A11 {
     }
 }
 
-public class Day025 {
+public class Day024 {
 
 	public static void main(String[] args) {
 		int a = 0; 

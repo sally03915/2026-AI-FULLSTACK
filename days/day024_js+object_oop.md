@@ -8,126 +8,6 @@
 .... JAVA 복습문제 먼저 준비~!
 
 ■ OOP
-Q1. 클래스와 인스턴스의 관계를 설명하시오    
-클래스는 객체를 만들기 위한 (①   설계도  ) 역할을 한다.
-인스턴스는 클래스의 구조를 기반으로 (②   실체화   ) 되어 메모리에 생성된 실체이다.
-같은 클래스라도 인스턴스는 서로 다른 (③  특징 / 주소  ) 값을 가질 수 있다.
-
-Q2. 다음 코드의 실행 결과와 메모리 구조를 설명하시오
-```java
-Car myCar = new Car("Hyundai", 2023);
-```
-new Car(...)는 객체를 생성하고 (④   heap  / 힙   ) 영역에 저장된다.
-myCar는 해당 객체의 (⑤   주소   ) 를 참조한다.
-생성자 내부에서는 전달받은 값을 (⑥   초기화   ) 한다.
-
-------------------------------------------------
-method(정보) : Car.class [설계도]
-------------------------------------------------
-heap                            stack
-
-[2번지]{"Kia", 2026 }         ← mycar2: 2번지
-[1번지]{"Hyundai", 2023 }     ← mycar: 1번지
-------------------------------------------------
-
-
-Q3. 생성자에 대한 설명으로 옳은 것을 고르시오
---------------------------------------------------
-Car myCar = new Car("Hyundai", 2023);
---------------------------------------------------
-
-생성자는 클래스명과 (⑦   이름  ) 이 같아야 한다.
-생성자는 객체 생성 시 자동으로 (⑧   호출  ) 된다.
-생성자는 반환값이 (⑨  없다 / X     )
-
-※ 초기값 > 명시적초기화 > 초기화블록  > 생성자
-
-
-Q4. 기본 생성자가 자동으로 생성되지 않는 경우는?
-클래스에 (⑩   오버로딩   ) 생성자가 이미 정의되어 있을 경우
-상속받은 클래스에서 부모 생성자 호출이 필요한 경우
-
-------------------------------------
-Book b1 = new Book("Java", 500);
-Book b2 = new Book();
-------------------------------------
-
-오버로딩 : 같은이름의 메서드 / 파라미터의 타입과 갯수
-
-
-Q5. 다음 코드에서 객체가 저장되는 메모리 영역과 메서드 실행 흐름을 설명하시오
-```java
-Book b1 = new Book("Java", 500);
-Book b2 = new Book();
-b2.setTitle("Spring");
-```
-Book 클래스의 인스턴스는 (⑪   heap  ) 영역에 저장된다.
-b1, b2는 각각 객체의 (⑫  주소   ) 를 참조한다.
-setTitle() 메서드는 (⑬  stack   ) 영역에서 실행된다.
-
-Q6. 자바 메모리 구조에서 각 영역의 역할을 설명하시오
-Method Area : 클래스 정보 및 static 변수 저장
-Heap Area : (⑭  인스턴스 객체    ) 저장, GC가 관리
-Stack Area : (⑮ 지역변수    ) 저장, 메서드 호출 시 사용됨
-
-
-Q7. 변수의 종류와 메모리 위치를 연결하시오
-1) 클래스는 부품객체  
-2) 상태(속성: 멤버변수-클래스변수/인스턴스변수 )와 행위(기능:멤버메서드 - 클래스메서드/인스턴스메서드)
-
-클래스 변수 → (⑯    method   ) 영역   (static)
-인스턴스 변수 → (⑰   heap   ) 영역
-지역 변수 → (⑱    stack  ) 영역
-
-Q8. 접근자를 넓은 범위에서 좁은 범위로 적으시오
-(⑲  public  → ⑳  protected    → ㉑ default(package)   → ㉒  private )
- 어디서든지       상속자식              해당폴더                클래스내부
-
-
-Q9. 다음을 private으로 설정했다. 외부에서 접근 가능하게 설정해야 하는 것
-(㉓  getter  / ㉔  setter  ) 이다. 
-
-Q10. 상속에 대한 설명으로 옳은 것을 고르시오  
-상속은 기존 클래스의 (㉕  속성 / 멤버변수  )와 기능을 재사용하기 위해 사용된다.
-자식 클래스는 부모 클래스의 (㉖   필드/속성/멤버변수  )와 메서드를 물려받는다.
-상속을 통해 코드의 (㉗  유지보수  )성과 재사용성을 높일 수 있다.
-자바에서 상속은 (㉘ extends   ) 키워드를 사용하여 구현한다.
-
-Q11. 오버로딩과 오버라이딩의 차이를 설명하시오  
-오버로딩은 같은 클래스 내에서 (㉙  메서드이름  )이 같고 (㉚ 파라미터/알규먼트/재료   )이 다른 메서드를 정의하는 것.
-오버라이딩은 부모 클래스의 메서드를 자식 클래스에서 (㉛  오버라이디 / Override  )하여 재정의하는 것.
-오버로딩은 (㉜  컴파일  ) 시점에 결정되고, 오버라이딩은 (㉝ 실행   ) 시점에 결정된다.
-오버라이딩 시 접근 제어자는 부모 메서드보다 (㉞  넓은  ) 범위로만 변경 가능하다.
-
- 
----
-
-### ■2. Todo1:  js
- 
-
-
----
-
-### ■3.   Todo2:  java  method
- 
- 
-
-★협업마스터 - 
- 
-
-| 이름 | 특징 | 링크 |
-|------|------|------|
-| **이정민 포트폴리오** | 미니멀한 UI, 섹션별 애니메이션 효과 | [leejeongmin.vercel.app](https://leejeongmin.vercel.app) |
-| **박세빈 포트폴리오** | 감성적인 컬러와 인터랙션, 프로젝트 중심 구성 | [savinpark.github.io/portfolio](https://savinpark.github.io/portfolio) |
-| **강모대 포트폴리오** | Azure 기반 배포, 깔끔한 구성 | [onlyone-modaekang.azurewebsites.net](https://onlyone-modaekang.azurewebsites.net) |
-| **이보아 포트폴리오** | 디자이너 감성의 레이아웃, 섬세한 타이포그래피 | [leeboa.com](http://leeboa.com) |
-
-
----
-
-### ■4.  복습문제
- 
-■ OOP
 class A11 {
     int a; // (1)
 
@@ -218,4 +98,126 @@ public class PolyEx002 {
    }
 }
 
+ 
+---
+
+### ■2. Todo1:  js
+ 
+
+
+---
+
+### ■3.   Todo2:  java  method
+ 
+ 
+
+★협업마스터 - 
+ 
+
+| 이름 | 특징 | 링크 |
+|------|------|------|
+| **이정민 포트폴리오** | 미니멀한 UI, 섹션별 애니메이션 효과 | [leejeongmin.vercel.app](https://leejeongmin.vercel.app) |
+| **박세빈 포트폴리오** | 감성적인 컬러와 인터랙션, 프로젝트 중심 구성 | [savinpark.github.io/portfolio](https://savinpark.github.io/portfolio) |
+| **강모대 포트폴리오** | Azure 기반 배포, 깔끔한 구성 | [onlyone-modaekang.azurewebsites.net](https://onlyone-modaekang.azurewebsites.net) |
+| **이보아 포트폴리오** | 디자이너 감성의 레이아웃, 섬세한 타이포그래피 | [leeboa.com](http://leeboa.com) |
+
+
+---
+
+### ■4.  복습문제
+ 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////// 복습문제 (1)
+Q1. 다음의 상속도를 그리시오.
+Q2. 상속도에서  각각의 클래스에서 사용가능한 멤버변수/멤버함수를  적으시오.
+
+abstract class Animal{    
+	String name; 
+	abstract void eat();   
+	abstract void sleep(); 
+	abstract void poo();  
+}
+class Cat  extends Animal{  // 구현클래스 - 고양이는 동물이다
+	@Override void eat()   {  System.out.println(super.name + "고양이 냠냠!");  }
+	@Override void sleep() {  System.out.println(super.name + "고양이 수면!");  }
+	@Override void poo()   {  System.out.println(super.name + "고양이 시원");  }
+}
+class Dog  extends Animal{  // 구현클래스 - 강아지는 동물이다
+	@Override void eat()   {  System.out.println(super.name + "강아지 냠냠!");  }
+	@Override void sleep() {  System.out.println(super.name + "강아지 수면!");  }
+	@Override void poo()   {  System.out.println(super.name + "강아지 시원");  }
+}
+public class Abstract001 {
+	public static void main(String[] args) {
+		//1. abstract  class : 일반클래스 + 설계
+		Animal ani = new Animal();   Q3. 이코드에서 오류나는 이유는? 
+	 
+		Animal ani = null;
+		ani = new Cat();   //Q4.    업캐스팅/다운캐스팅 ?
+		ani.name = "sally";   ani.eat();
+ 
+		
+		//2. 사용목적
+		Animal [] arr = {new Cat() , new Cat() , new Dog() , new Dog() , };
+		int cnt=0;
+		//Q5.  다음이 출력되게 코드를 작성하시오.
+		/*ani1고양이 냠냠!
+		  ani2고양이 냠냠!
+		  ani3강아지 냠냠!
+		 ani4강아지 냠냠!   */
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////// 복습문제 (2)
+
+// Q6. 오류나는 부분을 주석달고 이유를 적으시오.
+
+class Papa{   int brain; }
+class Mama{   int brain; }
+class Son extends Papa, Mama{}  
+
+interface Animal2{
+	String company="(주) thejoa";    //Q7.  interface에서의 멤버변수에 붙는 키워드는? 
+	void eat();     //Q8.  interface에서의 멤버함수에 붙는 키워드는? 
+}
+class Saram implements Animal2{ 
+	@Override public void eat() { 
+		company="kakao";  
+		System.out.println( Animal2.company  + " 랍스탑.... 냠냠 "   );
+	}
+} 
+ 
+
+////////////////////////////////////////////////////////////////////////////////////////// 복습문제 (3)
+
+//Q9.  Driver 클래스를 작성하시오.   
+
+interface Vehicle {  public void run();    } 
+class MotorCycle implements Vehicle {
+   @Override   public void run() {   System.out.println("오토바이가 달립니다.");   }
+    public void helmat() {   System.out.println("헬멧을 착용합니다.");   }
+}
+class Car implements Vehicle {
+   @Override  public void run() {     System.out.println("자동차가 달립니다.");   }
+}
+public class InterfaceEx002{
+   public static void main(String[] args) {
+      Driver driver = new Driver();
+      
+      Car car = new Car();
+      MotorCycle mo = new MotorCycle();
+      
+      driver.drive(car);
+      driver.drive(mo);
+   }
+}
+
+>> 실행화면
+자동차가 달립니다.
+
+헬멧을 착용합니다.
+오토바이가 달립니다.
  
