@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>DBDBIG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!--                                    -->
+    <!--                                    -->
+    <!--                                    -->
+    <!--                                    -->
+    <!--                                    -->
+<div class="p-3 bg-primary text-white ">
+    <h1>009. OBJECT  </h1>
+    <ol>
+        <li>array</li>
+        <li>object</li>
+        <li>ajax</li>
+    </ol>
+</div><!-- end navi  -->
+
+
+
+
+    <!--                -->
+    <!--                -->
+    <!--                -->
+    <br/>
+    <br/>
+    <br/>
+    <hr/>
+<div class="container card my-3">
+  <h3 class="card-header">009. OBJECT - STEP.4 우편번호 / 지도</h3>
+
+  <!-- STEP1 TEXT -->
+  <div class="card-body">
+    <h4>STEP4. 우편번호 </h4>
+    <pre>
+    1. 다음우편번호 사이트   
+    - 다음에서 제공하는 postcode.v2.js 스크립트를 불러옵니다.
+    https://postcode.map.kakao.com/guide
+    - new daum.Postcode({...}) 객체를 생성해 팝업을 띄우고, 선택한 주소와 우편번호를 입력창에 자동으로 채워 넣습니다.
+    </pre>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <input type="text" id="postcode" placeholder="우편번호" title="우편번호">
+    <input type="text" id="address" placeholder="주소" title="주소">
+    <input type="text" id="address2" placeholder="주소" title="상세주소">
+    <button onclick="postcode()">우편번호 찾기</button>
+
+    <script> 
+    // 이벤트대상(button)  이벤트(click)  이벤트핸들러(postcode())
+    // Q) postcode() 함수 정의 내리기 - 버튼클릭 시 우편번호를 검색합니다 알림창(alert)
+    // function  hi(){  alert("브라우저에 등록");  }
+    window.addEventListener("load" ,  function(){
+    });
+
+    function postcode(){
+      alert("우편번호를 검색합니다.");
+      new kakao.Postcode({
+          oncomplete: function(data) {
+              console.log(data);
+              // data = {zonecode: '21391', postcode1: '', postcode2: '', postcodeSeq: '', zonecode: '13529', …}
+              // data는 사용자가 선택한 주소 정보를 담고 있는 객체이며, 
+              // 상세 설명은 아래 목록에서 확인하실 수 있습니다.
+              document.getElementById("postcode").value = data.zonecode;
+              document.getElementById("address").value  = data.address;
+              document.getElementById("address2").focus();   //커서가게
+          }
+      }).open();
+    } 
+    </script>
+  </div>
+ 
+
+</div>
+
+<script>
+//1. 출력
+document.write("하이");
+console.log("브라우저 확인");
+
+//2. 자료형 - var(전역)  let(지역)  const(상수)
+let num = 10;
+console.log( num + "10"); //20
+console.log( typeof( num  ) ,  typeof("10") );  //number, string
+console.log( num + Number("10") ); // 문자열을 숫자로
+
+//3. 이벤트대상-이벤트-이벤트핸들러
+// document.getElementById("아이디값")
+// document.getElementsByTagName("태그이름")
+// document.querySelector("#id")  //css표현법
+
+//4. 함수
+
+</script>
+
+</body>
+</html>
