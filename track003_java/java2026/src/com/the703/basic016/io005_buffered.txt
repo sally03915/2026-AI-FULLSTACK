@@ -1,0 +1,3 @@
+1,white,1200
+2,choco,1500
+3,banana,1800
