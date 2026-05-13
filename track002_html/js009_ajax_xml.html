@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>DBDBIG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!--                                    -->
+    <!--                                    -->
+    <!--                                    -->
+    <!--                                    -->
+    <!--                                    -->
+<div class="p-3 bg-primary text-white ">
+    <h1>009. OBJECT  </h1>
+    <ol>
+        <li>array</li>
+        <li>object</li>
+        <li>ajax</li>
+    </ol>
+
+    <div class="card-body">
+      <h3>   Ajax (Asynchronous JavaScript and XML) </h3>
+      <p> 비동기 통신 : 페이지 전체를 새로고침 안해도 서버와 데이터를 주고 받을 수 있음</p>
+      <p> 데이터 포맷 : xml, json, csv </p> 
+    </div>
+</div><!-- end navi  -->
+
+<!--  Ajax-xml   -->
+<div class="container my-5  card-body">
+  <h4> Ajax-xml   fetch()   로컬xml파일 가져오기</h4>
+  <pre>
+    <!-- 
+    <?xml version="1.0" encoding="UTF-8"?>
+    <item>
+        <name>apple</name>
+        <price>1500</price>
+    </item>  
+    -->
+  </pre> 
+  <p><input type="button" id="btn1" value="fetch-xml" 
+        class="btn btn-outline-primary" onclick="xml()"/></p>
+  <div class="alert alert-primary result r0" id="result0"></div>
+<script>
+function xml(){
+fetch("./data/xml1.xml")   // 파일경로
+    .then( res => res.text() )  //결과물
+    .then( xml => {  
+        console.log(xml , typeof(xml));  // string
+        //1. 문자열을 xml dom으로 변환
+        let parser = new DOMParser();  // DOM으로 만들어주는 도구
+        let xmlDoc = parser.parseFromString(xml , "application/xml")  // XML형식으로
+        //2. 원하는 태그값 추출
+        console.log(xmlDoc , typeof(xmlDoc));
+        let item  =    xmlDoc.getElementsByTagName("item");
+        console.log( item  );  // 배열 [0] 순번이 자동으로 매겨짐
+        let name  =    item[0].getElementsByTagName("name")[0].textContent;
+        let price =    item[0].getElementsByTagName("price")[0].textContent;
+        document.getElementById("result0").innerHTML = 
+         `<div  class="alert alert-info"><strong>${name}</strong><span>${price}</span></div>`;
+        })  //성공
+    .catch(err => {  
+            document.getElementById("result0").innerHTML = err.message;
+    }); //실패
+}
+</script>
+</div>    
+
+<!-- STEP3 XML -->
+  <div class=" container   my-5  card-body">
+    <h4>Q1. Ajax-xml (fetch)</h4>
+    <pre>
+      1. fetch()로 로컬 XML 파일 가져오기
+         경로: ./data/xml2.xml
+         예시 내용:
+         <items>
+           <item><name>사과</name><price>1000</price></item> 
+         </items>
+      2. 응답을 .text()로 받아서 DOMParser로 XML 파싱
+      3. item 태그를 순회하며 name, price 출력하기
+    </pre>
+    <p><input type="button" id="btnXml" value="fetch-xml" 
+          class="btn btn-outline-primary" onclick="showXml2()"/></p>
+    <div class="alert alert-primary result xml2" id="xml2"></div>
+    <script>
+      function showXml2(){
+        fetch("./data/xml2.xml")   // 경로
+          .then(res => res.text()) // 결과물
+          .then(xml2=>{     
+            //1. 문자열을 xml dom으로 변환
+            let parser = new DOMParser();  // dom 으로 만들어주는 도구
+            let xmlDoc = parser.parseFromString( xml2 , "application/xml"  );  // xml 형식으로
+            //2. 원하는 태그값을 추출
+            let item   = xmlDoc.getElementsByTagName("item")
+            let name    = item[0].getElementsByTagName("name")[0].textContent;  //태그에서
+            let price   = item[0].getElementsByTagName("price")[0].textContent; //text뽑기
+            document.getElementById("xml2").innerHTML = 
+               `<div  class="alert alert-info">
+                    <strong  class="text-warning w-25">${name}</strong>
+                    <span>${price}</span>
+                </div>`;
+          }) // 성공
+          .catch(err=>{   document.getElementById("xml2").innerHTML = err.message;      }) // 실패
+      }
+    </script>
+  </div>
+</div>
+
+
+
+
+<!-- STEP4 XML -->
+  <div class="container my-5 card-body">
+    <h4>Q2. Ajax-xml (fetch)</h4>
+    <pre>
+      1. fetch()로 로컬 XML 파일 가져오기
+         경로: ./data/xml3.xml
+         예시 내용:
+         <items>
+           <item><name>사과</name><price>1000</price></item>
+           <item><name>바나나</name><price>2000</price></item>
+           <item><name>포도</name><price>3000</price></item>
+         </items>
+      2. 응답을 .text()로 받아서 DOMParser로 XML 파싱
+      3. item 태그를 순회하며 name, price 출력하기
+    </pre>
+    <p><input type="button" id="btnXml" value="fetch-xml" 
+        class="btn btn-outline-primary" onclick="showXml3()"/></p>
+    <div class="alert alert-primary result xml3" id="xml3"></div>
+    <script>
+      function showXml3(){
+        fetch("./data/xml3.xml"   )      // 경로
+          .then( res=>res.text()  )    // 결과물
+          .then( xml=>{
+            let parser = new DOMParser();  // DOM으로 만들어주는 도구
+            let xmlDoc = parser.parseFromString(xml , "application/xml")  //xml 형식
+            let item   = xmlDoc.getElementsByTagName("item");  //console.log(item);
+            let result ="";
+            for( let it  of  item ){   //console.log(  it   );
+              let name  = it.getElementsByTagName("name")[0].textContent;
+              let price = it.getElementsByTagName("price")[0].textContent;
+              result += `<div class="alert alert-info">${name} - ${price}</div>`;
+            }
+            document.getElementById("xml3").innerHTML=result;
+          })    // 성공
+          .catch(err=>{
+            document.getElementById("xml3").innerHTML=err.message;
+          });  // 실패
+      }
+    </script>
+  </div>
+</div>
+
+
+
+
+
+<!-- STEP4 XML -->
+  <div class="container my-5 card-body">
+    <h4>Q3. Ajax-xml (fetch)</h4>
+    <pre>
+      1. fetch()로 로컬 XML 파일 가져오기
+         경로: ./data/xml4.xml
+         예시 내용:
+          <?xml version="1.0" encoding="UTF-8"?>
+          <members>
+            <member>
+              <name>홍길동</name>
+              <age>30</age>
+              <address>서울특별시 강남구</address>
+              <mobile>010-1234-5678</mobile>
+            </member>
+            <member>
+              <name>김철수</name>
+              <age>25</age>
+              <address>인천광역시 부평구</address>
+              <mobile>010-9876-5432</mobile>
+            </member>
+            <member>
+              <name>이영희</name>
+              <age>28</age>
+              <address>부산광역시 해운대구</address>
+              <mobile>010-5555-7777</mobile>
+            </member>
+          </members>
+      2. 응답을 .text()로 받아서 DOMParser로 XML 파싱
+      3. item 태그를 순회하며 name, price 출력하기
+    </pre>
+    <p><input type="button" id="btnXml" value="fetch-xml"
+         class="btn btn-outline-primary" onclick="showXml4()"/></p>
+    <div class="alert alert-primary result xml4" id="xml4"></div>
+    <script>
+      function showXml4(){
+        fetch("./data/xml4.xml")  //경로
+          .then( res => res.text() ) //결과물
+          .then( xml => {  
+            let parser  = new DOMParser();  //dom으로 만들어주는 도구
+            let xmlDoc  = parser.parseFromString(xml, "application/xml"); //xml형식
+            let member = xmlDoc.getElementsByTagName("member");
+            let result  = "";
+            //  name    -   age     - address   - mobile
+            for(let mem  of member){
+              let name    = mem.getElementsByTagName("name")[0].textContent;
+              let age     = mem.getElementsByTagName("age")[0].textContent;
+              let address = mem.getElementsByTagName("address")[0].textContent;
+              let mobile  = mem.getElementsByTagName("mobile")[0].textContent;
+              result += `<div class="alert alert-info"> ${name} - ${age} - ${address} - ${mobile} </div>`;
+            }
+            document.getElementById("xml4").innerHTML=result;
+          }) // 성공
+         .catch(err => {  document.getElementById("xml4").innerHTML=err.message; } ); //실패
+      } 
+
+    </script>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>

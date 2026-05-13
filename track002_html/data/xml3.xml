@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+  <item><name>사과</name><price>1000</price></item>
+  <item><name>바나나</name><price>2000</price></item>
+  <item><name>포도</name><price>3000</price></item>
+</items>

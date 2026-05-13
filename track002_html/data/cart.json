@@ -1,0 +1,5 @@
+[
+  { "product": "노트북", "price": 1200000, "qty": 1, "img":"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300&h=200&fit=crop" },
+  { "product": "무선 마우스", "price": 25000, "qty": 2, "img":"https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=300&h=200&fit=crop" },
+  { "product": "USB 메모리", "price": 15000, "qty": 3, "img":"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300&h=200&fit=crop" }
+]

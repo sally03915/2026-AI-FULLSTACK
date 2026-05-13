@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<members>
+  <member>
+    <name>홍길동</name>
+    <age>25</age>
+    <address>서울특별시 강남구</address>
+    <mobile>010-1234-5678</mobile>
+  </member>
+  <member>
+    <name>김철수</name>
+    <age>30</age>
+    <address>인천광역시 남동구</address>
+    <mobile>010-9876-5432</mobile>
+  </member>
+  <member>
+    <name>이영희</name>
+    <age>28</age>
+    <address>부산광역시 해운대구</address>
+    <mobile>010-5555-6666</mobile>
+  </member>
+</members>
