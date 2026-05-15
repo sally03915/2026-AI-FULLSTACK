@@ -1,4 +1,4 @@
-
+##############################################################################
 -- #### 3. 테이블 
 
 -- 1. RDBMS (Relational Data Management System)
@@ -22,6 +22,8 @@
 --     필수입력 - not null
 --     숫자자동증가 - auto_increment
 --     기본키 - primary key    
+
+
 
 -- [실습1]
 -- create table t1(   
@@ -96,6 +98,8 @@
 -- +-------+------+------+
 -- 2 rows in set (0.00 sec)
 
+##############################################################################
+
 
 -- ------------------------------------------------------------
 -- ------------------------------------------------------------ [연습문제]
@@ -112,12 +116,7 @@
 -- +--------+-------------+------+-----+---------+----------------+
 
 
-create table coffee(
-   cno    int             not null  primary key   auto_increment  , 
-   cname  varchar(50)     not null , 
-   cprice int             not null
-);
-
+ 
 
 -- [002] 다음과 같이 DB와 테이블을 만드시오  			>> milk
 -- 우유번호 : mno      int           필수입력     primary key
@@ -136,15 +135,7 @@ create table coffee(
 -- | mnum   | int(11)     | NO   |     | NULL    |                |
 -- | mtotal | int(11)     | NO   |     | NULL    |                |
 -- +--------+-------------+------+-----+---------+----------------+
-create table milk(
-       mno     int          not null      primary key,
-       mname   varchar(50)  not null  ,
-       mprice  int          not null  , 
-       mnum    int          not null  , 
-       mtotal  int          not null  
-);
-
-
+ 
 
 -- [003] 다음과 같이 DB와 테이블을 만드시오    >> score
 -- +----------+-------------+------+-----+---------+----------------+
