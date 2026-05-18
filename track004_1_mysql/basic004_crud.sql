@@ -523,4 +523,5 @@ delete from delete_emp  where JOB='MANAGER'  and  ENAME='JONES';
 -- [003] [TABLE : delete_emp] (delete_emp 테이블의 모든 데이터를 삭제하시오. )
 delete from  delete_emp; 
  
+select * from delete_emp; 
  
