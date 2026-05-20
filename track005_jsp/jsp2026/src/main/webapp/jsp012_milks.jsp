@@ -80,6 +80,158 @@
 
 <!-- 		주문현황표				 -->
 <!-- 		주문현황표				 -->
+
+   <div class="container card my-5  bg-warning  text-white ">
+      <h2 class="card-header">Milk 주문현황표</h2>  
+      <table  class="table table-striped table-bordered table-hover">
+      	<caption>주문현황표</caption>
+      	<thead>
+			<tr>
+				<th scope="col">NO</th>
+				<th scope="col">NAME</th>
+				<th scope="col">NUM</th>
+				<th scope="col">DATE</th>
+			</tr>
+		</thead>
+		<tbody>
+		<%
+		try{
+			//1. 드라이버연동 Class.forName
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			 
+			Connection conn = null; PreparedStatement pstmt = null;  ResultSet rset = null;
+			String url = "jdbc:mysql://localhost:3306/mbasic";
+			String sql = "select * from milk_order  order by ono desc";
+			
+			//2. jdbc 연동 DriverManager.getConnection
+			conn = DriverManager.getConnection(url , "root","1234");
+			//3. pstmt 사용sql-처리   pstmt.executeQuery()   
+			pstmt = conn.prepareStatement(sql);
+			rset  = pstmt.executeQuery(); //표  executeQuery(select)   
+										  //   executeUpdate(insert,update,delete)
+			while(rset.next()){ //줄
+				out.println("<tr><td>"+rset.getInt("ono")  //칸
+						+"</td><td>"+rset.getString("oname")
+						+"</td><td>"+rset.getInt("onum")
+						+"</td><td>"+rset.getString("odate")+"</td></tr>");
+			}
+			//4. jdbc close
+			if( rset != null ){ rset.close(); }
+			if( pstmt != null){ pstmt.close();}
+			if( conn != null ){ conn.close(); }
+		}catch(Exception e){e.printStackTrace();   }
+		%>
+		</tbody>
+      </table>
+   </div>   
+
+
+
+<!-- 		주문삽입, 수정, 삭제	-->
+<!-- 		주문삽입, 수정, 삭제	-->
+<!-- https://www.w3schools.com/bootstrap5/bootstrap_collapse.php -->
+	<div class="container card  bg-secondary my-5 p-3">
+		<h3	class="card-header text-white my-3"> MILK 주문, 수정, 삭제</h3>
+				
+		<div id="accordion" >
+		
+		  <div class="card ">
+		    <div class="card-header   bg-warning">
+		      <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
+		        주문하기
+		      </a>
+		    </div>
+		    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+		      <div class="card-body">
+		        	<form action="jsp012_insert.jsp"  method="post"   onsubmit = "return  order()">
+		        		<div class="my-3">
+		        			<label for="oname"  class="form-label">주문할 우유 이름</label>
+		        			<input type="text" class="form-control"  id="oname"   name="oname" />
+		        		</div>
+		        		<div class="my-3">
+		        			<label for="onum"  class="form-label">주문할 우유 갯수</label>
+		        			<input type="text" class="form-control"  id="onum"   name="onum" />
+		        		</div>
+		        		<div class="my-3"> 
+		        			<button  type="submit"  class="btn btn-warning" >  주문하기 </button>
+		        		</div>
+		        	</form> 
+		        	<!--  
+						1)  form 만들기 2) 빈칸검사 
+						3)  처리해결사 jsp012_insert.jsp 데이터 노출x 보관용기 oname, onum
+		        	 -->
+		      </div>
+		    </div>
+		  </div>
+		
+		  <div class="card">
+		    <div class="card-header  bg-primary">
+		      <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+		         주문수정
+		      </a>
+		    </div>
+		    <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+		      <div class="card-body">
+		        	<form action="jsp012_update.jsp"  method="post"   onsubmit = "return  order1()">
+		        		<div class="my-3">
+		        			<label for="ono1"  class="form-label">수정할 우유번호</label>
+		        			<input type="text" class="form-control"  id="ono1"   name="ono" />
+		        		</div>
+		        		<div class="my-3">
+		        			<label for="oname1"  class="form-label">주문할 우유 이름</label>
+		        			<input type="text" class="form-control"  id="oname1"   name="oname" />
+		        		</div>
+		        		<div class="my-3">
+		        			<label for="onum1"  class="form-label">주문할 우유 갯수</label>
+		        			<input type="text" class="form-control"  id="onum1"   name="onum" />
+		        		</div>
+		        		<div class="my-3"> 
+		        			<button  type="submit"  class="btn btn-warning" >  주문하기 </button>
+		        		</div>
+		        	</form> 	 
+		        	<!--  
+						1)  form 만들기 2) 빈칸검사 
+						3)  처리해결사 jsp012_update.jsp 데이터 노출x 보관용기 oname, onum , ono
+		        	 -->
+		      </div>
+		    </div>
+		  </div>
+		
+		  <div class="card">
+		    <div class="card-header   bg-primary">
+		      <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
+		        주문삭제
+		      </a>
+		    </div>
+		    <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+		      <div class="card-body">
+		       		 <!--  
+						1)  form 만들기 2) 빈칸검사 
+						3)  처리해결사 jsp012_delete.jsp 데이터 노출x 보관용기  ono
+		        	 -->
+		      </div>
+		    </div>
+		  </div>
+		
+		</div>
+		
+	</div>
+
+
+<!-- 
+2. milk 주문하러가기
+1)  form 만들기
+2) 빈칸검사
+3)  처리해결사
+   jsp012_insert.jsp
+   데이터 노출x
+   보관용기 mname, mprice 
+ --> 
+
+</body>
+</html>
+
+
 <!-- 
 = MODEL
 ★ 다음과 같이 테이블을 준비해주세요!
@@ -107,14 +259,14 @@ create table milk_order(
 	insert into milk_order (oname, onum, oip) values ('banana',1,  '198.160.0.1'  );
 	
 -- Q2.  milk_order ono가 1인데이터 조회 
-
+    select    *     from      milk_order    where     ono=1; 
+    
 -- Q3.  milk_order 전체데이터조회
+    select    *    from   milk_order;
+
 -- Q4.  milk_order 해당번호의 이름과 갯수 수정   
+	update milk_order  set  oname='choco' , onum=3  where ono=1;
+
 -- Q5.  milk_order 해당번호의 데이터 삭제
+    delete from milk_order  where ono=1;
  -->
-
-<!-- 		주문삽입, 수정, 삭제	-->
-<!-- 		주문삽입, 수정, 삭제	--> 
-
-</body>
-</html>

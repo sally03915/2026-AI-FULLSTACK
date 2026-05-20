@@ -1012,8 +1012,13 @@ where   deptno=30   and  ename  like '%E%'
 -- -- 상급자(mgr)은 존재하며
 -- -- 직책(JOB) 'MANAGER', 'CLERK' 중에서 
 -- -- 사원이름의 두번째 글자가 L이아닌
--- -- 사원데이터를  조회하시오
---  
+-- -- 사원데이터를  조회하시오 
+select   *
+from     emp
+where    comm  is null   
+and        mgr is not null
+and      job in ('MANAGER', 'CLERK')
+and      ename  not like '_L%';
 
 -- +-------+--------+---------+------+------------+------+------+--------+
 -- | empno | ename  | job     | mgr  | hiredate   | sal  | comm | deptno |
