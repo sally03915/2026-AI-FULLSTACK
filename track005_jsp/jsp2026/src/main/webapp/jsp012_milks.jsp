@@ -205,9 +205,18 @@
 		    </div>
 		    <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
 		      <div class="card-body">
+					<form action="jsp012_milk_delete.jsp"    method="get">
+					  <div class="mb-3">
+					    <label for="ono_delete" class="form-label"> 취소 주문번호</label>
+					    <input type="number" class="form-control" id="ono_delete" 
+					    		placeholder="취소할 주문번호를 적어주세요!" name="ono">
+					  </div>
+					  <button type="submit" class="btn btn-danger">주문하기</button>
+					</form> 		      
+		      
 		       		 <!--  
 						1)  form 만들기 2) 빈칸검사 
-						3)  처리해결사 jsp012_delete.jsp 데이터 노출x 보관용기  ono
+						3)  처리해결사 jsp012_delete.jsp 데이터 노출o 보관용기  ono
 		        	 -->
 		      </div>
 		    </div>

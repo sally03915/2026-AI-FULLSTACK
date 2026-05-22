@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.myhidden{
+    position:absolute;  left:-9999px;   width:1px; height:1px; overflow: hidden;
+    border:0;   white-space: nowrap;  
+    clip:rect(0,0,0,0);  /* 요소를 잘라서 시각적으로 완전히 숨김 - 구형브라우저 호환 */
+}
+
+/*  각 디바이스에 맞게 원하는 사이즈 지정해서  CSS 적용 */
+@media (max-width: 575px) { 
+    .myvisual {  display: none; }
+}

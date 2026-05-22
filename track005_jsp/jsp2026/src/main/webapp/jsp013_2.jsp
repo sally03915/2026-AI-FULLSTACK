@@ -1,5 +1,3 @@
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
 <!DOCTYPE html>
@@ -15,21 +13,14 @@
 </head>
 <body>
    <div class="container card my-5">
-      <h3 class="card-header"></h3>
-      <%
-      
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/mbasic",
-                "root",
-                "1234"
-            );
-            System.out.println("DB 연결 성공!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        %> 
+      <h3 class="card-header">request-getParameterValues</h3>
+      <%@page import="java.util.Arrays"%>
+      <% 
+      String username  = request.getParameter("username");
+      String[] options = request.getParameterValues("option1"); 
+      %> 
+      <%=username%>
+      <%=Arrays.toString( options )%>
    </div>
 </body>
 </html>
