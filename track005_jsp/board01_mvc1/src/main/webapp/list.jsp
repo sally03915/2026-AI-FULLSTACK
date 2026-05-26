@@ -26,7 +26,11 @@
             	///////////////////////////   
 	            //-1) list.jsp   전체 리스트 출력   select * from   mvcboard1 order bno desc
 				Connection conn = null;  PreparedStatement pstmt = null;   ResultSet rset = null;
-				String sql="select * from   mvcboard1 order by bno desc";
+				//String sql1="select count(*) from   mvcboard1 order by bno desc";				
+				//String sql2="select *        from   mvcboard1 order by bno desc";
+				
+				String sql="select b.* , ( select count(*)  from mvcboard1 ) `cnt` "
+						  +" from   mvcboard1 b  order by bno desc";
 				String url="jdbc:mysql://localhost:3306/mbasic";   
 				String user ="root" , pass="1234";
 				
@@ -35,11 +39,24 @@
 	            //2. jdbc연동
 	            conn = DriverManager.getConnection(url, user, pass);
 	            //3. sql 구문처리
-	            pstmt = conn.prepareStatement(sql);
-	            // select:executeQuery / insert, update, delete:executeUpdate	
+	            pstmt = conn.prepareStatement(sql , ResultSet.TYPE_SCROLL_INSENSITIVE, 
+	            									ResultSet.CONCUR_READ_ONLY);
+	            
+	            
+	            
+	            
+	            // select:executeQuery / insert, update, delete:executeUpdate	 
 				rset = pstmt.executeQuery(); //표
+				//1) 먼저 전체글 갯수 출력
+				int cnt =-1; 
+				//      줄
+				if(rset.next()){ 
+					cnt = rset.getInt("cnt");  //칸
+					rset.beforeFirst();        // 다시 처음으로 표부터 처리
+				} 
+				//2) 
 				while(rset.next()) { //줄
-					out.println("<tr><td>"+rset.getInt("bno") 
+					out.println("<tr><td>"+  cnt--
 					 +"</td><td><a href='detail.jsp?bno="+rset.getInt("bno")+"'>"
 					 + rset.getString("btitle") 
 					 +"</a></td><td>"
@@ -69,4 +86,6 @@
 
 
 
- 
+ <!-- SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) AS totalCount
+FROM mvcboard1 b
+ORDER BY bno DESC; -->

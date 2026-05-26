@@ -112,15 +112,58 @@
 	 </form>
 	 
       <hr/>
-      <h4>004. scope</h4>
+      <h4>004. scope (내장객체 유효범위)</h4>
+      <pre  class="alert alert-success">
+1. application(웹애플리케이션이 실행되고 있는동안 , 서버가 꺼질때까지 유지) 
+		> session (특정브라우저와 연결된 세션, 브라우저 종료시 소멸)
+			> request(요청: form, a 요청) 
+				> page (해당jsp 페이지에서만)     
+2. 객체.setAttribute("속성" , "값")      / 객체.getAttribute("속성")
+      </pre>
+      <%
+      	application.setAttribute("name", "D.application-웹애플리케이션 실행");
+    	    session.setAttribute("name", "C.   session -브라우저종료 /로그인 후 아이디 유지");
+      	    request.setAttribute("name", "B.   request -a.jsp → b.jsp 요청할때");
+      	pageContext.setAttribute("name", "A.   현재페이지에서만 유지");
+      %>
       
+	  <table class="table table-striped">
+		<caption>SCOPE- 내장객체 유효범위</caption>
+		<tbody>
+			<tr><th scope="row">page</th>       <td><%=pageContext.getAttribute("name")%></td></tr>
+			<tr><th scope="row">request</th>    <td><%=request.getAttribute("name")%></td></tr>
+			<tr><th scope="row">session</th>    <td><%=session.getAttribute("name")%></td></tr>
+			<tr><th scope="row">application</th><td><%=application.getAttribute("name")%></td></tr>			
+		</tbody>
+	  </table>
+	  <p><a href="jsp013_5.jsp" class="btn btn-danger">SCOPE2</a></p> 
       
       <hr/>
       <h4>005. error</h4>
+      <pre    class="alert alert-success">
+error
+1. 4xx : 클라이언트 오류
+	404 (페이지 없음) / 400 (bad quest)  
+2. 5xx : 서버오류    
+    500 (내부서버오류) / 502 (서버과부하)   
+
+* 해결방안
+1. error페이지만들기
+2. [src] - [main]-[webapp] - [WEB-INF] - web.xml 에러처리 설정    
+    
+      </pre>
+	 <h4 class="card-haeder">1. ERROR 404 </h4>
+	 <p><a href="no.jsp" class="btn btn-danger">NO PAGE</a></p>
+	
+	 <h4 class="card-haeder">2. ERROR 500 </h4>
+	 <%   int i=40/0;  %> 
       
    </div>
 </body>
 </html>
+
+
+
 
 
 
