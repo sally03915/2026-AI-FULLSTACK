@@ -66,6 +66,7 @@ values              ('aaa' , '1111' , 'aaa@gmail.com', '010-111-1111' , '127.0.0
 
 -- select (login, ,,,,)
 select  count(*)  from users  where  bpass='1111' and email='aaa@gmail.com';
+select        *   from users  where  bpass='1111' and email='aaa@gmail.com';
 
 
 
