@@ -28,27 +28,15 @@
                 </button>
                 <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav ms-auto">
-                <!--  애플리케이션 루트기준  --> 
-                <%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-                <c:if test="${empty  sessionScope.email}">
                     <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/LoginAction">Login</a>
+                    <a class="nav-link" href="login.jsp">Login</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/JoinAction">Join</a>
+                    <a class="nav-link" href="join.jsp">Join</a>
                     </li>
-                </c:if>
-                
-                <c:if test="${not empty  sessionScope.email}">
                     <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MyAction">${sessionScope.email}</a>
+                    <a class="nav-link" href="mypage.jsp">Mypage</a>
                     </li>
-
-                    <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/Logout">Logout</a>
-                    </li>
-                </c:if>
-                
                 </ul> 
                 </div>
             </div>
