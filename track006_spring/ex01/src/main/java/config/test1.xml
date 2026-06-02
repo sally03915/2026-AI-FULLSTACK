@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<!--  Q1. Vanilla vanilla = new Vanilla() -->
+	<bean id="vanilla"  class="com.company.ioc1.Vanilla"  />
+
+<!--  Q2. Chocolate chocolate = new Chocolate() -->
+	<bean id="chocolate"  class="com.company.ioc1.Chocolate"  />
+
+<!--  Q3. IceCreamShop shop = new IceCreamShop()
+     shop.setShopName("SweetHouse");
+     shop.setIceCream(vanilla);
+-->	
+	<bean id="shop"   class="com.company.ioc1.IceCreamShop"  >
+		<property name="shopName"  value="SweetHouse" />
+		<property name="iceCream"  ref="vanilla" />
+	</bean>
+	
+</beans>

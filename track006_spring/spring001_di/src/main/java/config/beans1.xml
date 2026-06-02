@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!--  1. Cat     cat     = new Cat()  → ic  -->
+	<bean     id="cat"    class="com.the703.di1.Cat" />
+	
+	<!--  Dog     dog     = new Dog() -->
+	<bean     id="dog"    class="com.the703.di1.Dog" />	
+	
+	<!-- 2. AnimalFarm  animalFarm = new AnimalFarm();
+					 animalFarm.setName("sally");   ← property
+					 animalFarm.setAni(cat);
+	 -->
+	<bean  id="animalFarm"    class="com.the703.di1.AnimalFarm">
+	   <property name="name"   value="sally" />
+	   <property name="ani"    ref="cat"/>
+	</bean>
+	
+	<!-- 3. AnimalFarm  animalFarm = new AnimalFarm("alpha" , dog); 
+	 -->
+	<bean id="animalFarm2" class="com.the703.di1.AnimalFarm">
+		<constructor-arg    index="0"  value="alpha" />
+		<constructor-arg    index="1"      ref="dog" />
+	</bean>
+	
+</beans>
