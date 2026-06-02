@@ -264,7 +264,7 @@ public void test1() {
 ---------------------
 
 1.  xml   vs  Annotation
->> xml : 운영
+>> xml        : 운영
 >> Annotation : 개발
 XML - [운영] , 모든 Bean을 명시적으로 xml에 등록
     - 여러개발자가 같은 설정파일을 공유해서 개발하면 
@@ -303,6 +303,71 @@ XML - [운영] , 모든 Bean을 명시적으로 xml에 등록
 root-context.xml   환경정보설정
 db.propertis       db정보설정
 SqlSessionFacotryBean  : SqlSession 생성 및 관리
-SqlSession           :  sql 실행 , 트랜잭션
+SqlSession             :  sql 실행 , 트랜잭션
 mapper.xml
+
+
+>1. 테이블 만들기
+mysql> desc userinfo_e;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| no    | int          | NO   | PRI | NULL    | auto_increment |
+| email | varchar(100) | NO   |     | NULL    |                |
+| age   | int          | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec) 
+
+>2. crud - insert, select, update, delete
+insert                : insert     into   userinfo_e  (email , age)  values (? , ?) 
+select (전체)          : select  * from    userinfo_e
+select (해당번호의 읽기) : select  * from    userinfo_e  where no = ? 
+update (해당번호 수정)   : update    userinfo_e   set  email=? , age=?  where  no=?
+delete (해당번호 삭제)   : delete    from   userinfo_e     where  no=?
+
+
+
+
+[실습]
+1. project 만들기
+    1. dynamic web project - ex02
+    2. configure  - [Convert to Maven Project]
+    3. spring      - add Spring project Nature
+    4. java se-11 / project facts, build path
+    5. build path - add Libraries - JUnit 4
+    
+2. pom.xml 에  jar 파일 다운로드 받기
+...............................................  오늘 project 만들고  done!
+...............................................  연휴에 아래 도전하고 싶으신분들은 도전!
+
+3. root-context 에   내용설정
+   1) DataSource
+   2) Mybatis
+   3) Mapper
+4. 각종 설정파일들설정
+    com.the703.dao   - @Mapper 
+    com.the703.dto    
+    config       
+      ㄴ db.properties
+      ㄴ mybatis-config.xml
+      ㄴ board-mapper.xml
+5. 테스트파일설정
+      
+6. mvcboard
+mysql> desc mvcboard2;
++----------+---------------+------+-----+-------------------+-------------------+
+| Field    | Type          | Null | Key | Default           | Extra             |
++----------+---------------+------+-----+-------------------+-------------------+
+| bno      | int           | NO   | PRI | NULL              | auto_increment    |
+| bname    | varchar(20)   | NO   |     | NULL              |                   |
+| bpass    | varchar(50)   | NO   |     | NULL              |                   |
+| btitle   | varchar(1000) | NO   |     | NULL              |                   |
+| bcontent | text          | NO   |     | NULL              |                   |
+| bdate    | timestamp     | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| bhit     | int           | NO   |     | 0                 |                   |
+| bip      | varchar(50)   | NO   |     | NULL              |                   |
++----------+---------------+------+-----+-------------------+-------------------+
+8 rows in set (0.00 sec)
+
+mysql>      
 
