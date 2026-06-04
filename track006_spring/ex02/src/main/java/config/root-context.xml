@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd"> 
+
+	<!-- 3. Mapper  : MapperScannerConfigurer -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"      value="com.the703.dao" />
+		<property name="annotationClass"  value="com.the703.dao.Mapper" />
+	</bean> 
+	<!-- 2. Mybatis :	SqlSessionFactoryBean  / SqlSession -->
+	<context:component-scan base-package="com.the703" />
+	<bean id="sqlSessionFactory"  class="org.mybatis.spring.SqlSessionFactoryBean" >
+		<property name="dataSource"         ref="dataSource "/>
+		<property name="configLocation"     value="classpath:config/mybatis-config.xml"/>
+		<property name="mapperLocations">
+			<list>
+ 		    <value>classpath:config/test-mapper.xml</value>
+			<value>classpath:config/board-mapper.xml</value> 
+			</list>
+		</property>
+	</bean>
+	<bean id="sqlSession"  class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
+	<!-- 1. DataSource  :  SimpleDriverDataSource
+		Driver driver, String url, String username, String password
+	 
+	<context:property-placeholder  location="classpath:config/db.properties" />
+	<bean  id="dataSource " 
+		   class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		   <property name="driverClass"  value="${db.driverClass}" />
+		   <property name="url"  		 value="${db.url}" />
+		   <property name="username"     value="${db.username}" />
+		   <property name="password"     value="${db.password}" />
+	</bean> -->   
+	
+	<context:property-placeholder  location="classpath:config/db.properties" />
+	<bean  id="dataSource " 
+		   class="com.zaxxer.hikari.HikariDataSource">
+		   <property name="driverClassName"  value="${db.driverClass}" />
+		   <property name="jdbcUrl"  		 value="${db.url}" />
+		   <property name="username"     value="${db.username}" />
+		   <property name="password"     value="${db.password}" />
+	</bean>
+</beans>
+<!-- 
+mybatis-config.xml
+db.properties
+ -->
