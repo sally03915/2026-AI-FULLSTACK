@@ -1,7 +1,7 @@
 package ex02;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 
 import javax.sql.DataSource;
 
@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.the703.dao.BoardMapper;
 import com.the703.dao.TestMapper;
 import com.the703.dto.BoardDto;
+import com.the703.service.BoardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)  //1. spring 구동테스트
 @ContextConfiguration(locations = "classpath:config/root-context.xml")  //2. 설정
@@ -27,8 +28,45 @@ public class ModelTest {
 	@Autowired  TestMapper  testMapper;  
 	
 	@Autowired  BoardMapper  boardMapper;  
+	@Autowired  BoardService  service;
 	
-	@Test
+	
+	@Test 	public void test6() {
+		//2. 최신글 10개씩
+		HashMap<String,Integer> map = new HashMap<>();
+		map.put("start",  0);
+		map.put("end"  ,  10);
+		System.out.println( boardMapper.select10(map));
+		
+		//1. 전체갯수 
+		System.out.println( boardMapper.selectCnt() ); 
+	
+	}	
+	
+	@Ignore @Test 	public void test5() {
+		//삭제
+		BoardDto dto = new BoardDto();   dto.setBno(4);
+		System.out.println(  service.delete(dto) );
+		//수정
+		//		BoardDto dto = new BoardDto();
+		//		dto.setBname("first");        dto.setBpass("1111"); dto.setBno(4);
+		//		dto.setBtitle("NEW-service-첫번째 글쓰기");  dto.setBcontent("NEW-service-내용");
+		//		System.out.println(  service.edit(dto) ); 
+		
+		//검색
+		System.out.println(service.detail(4)); 
+		//삽입  -  4
+		//		BoardDto dto = new BoardDto();
+		//		dto.setBname("first");        dto.setBpass("1111");
+		//		dto.setBtitle("service-첫번째 글쓰기");  dto.setBcontent("service-내용");
+		//		System.out.println(  service.insert(dto) );
+		
+		//전체리스트
+		//System.out.println(service.selectAll());
+	}
+	
+	
+	@Ignore @Test
 	public void test4() throws UnknownHostException {
 //		//삭제
 //		System.out.println(boardMapper.delete(1));
