@@ -4,10 +4,24 @@
 <%@include file="../inc/header.jsp"  %>
 <!-- 	header		 -->
 <!-- 	header		 -->
+<script>
+window.addEventListener("load" , function(){
+	let  result = '${result}';   // el
+	console.log(result);
+	
+	if( result == "글쓰기 실패" || result == "비밀번호 확인!"){  alert(result);  history.go(-1);  }  // 알림창, 뒤로 가기
+	else if(result.length != 0){  alert(result);                   }  
+}); 
+</script>
+
 
     <!--  content -->
     <section class="container  my-5">
         <h3> MultiBoard </h3>
+        <pre>
+        페이징 :  ${paging}
+        전체리스트 : ${list}
+        </pre>
         <table  class="table  table-striped  table-bordered table-hover">
             <caption> BOARD 목록 </caption>
             <thead>
@@ -19,13 +33,28 @@
                     <th scope="col">HIT</th>
                 </tr>
             </thead>
-            <tbody>
-
+            <tbody>  
+			
             </tbody>
+            <tfoot><tr><td colspan="5">
+            	<ul class="pagination  justify-content-center"> 
+            	<!-- 이전 -->
+            	
+            	<!-- 1,2,3,4,5,6,7,8,,10 -->
+            	<c:forEach  var="i"  begin="${paging.start}"  end="${paging.end}">
+            		<li   class="page-item   <c:if test="${i==paging.current}">  active </c:if> ">
+            			<a href="?pstartno=${i}"  class="page-link">${i}</a>
+            		</li>
+            	</c:forEach>
+            	<!-- 다음 -->
+            	
+            </ul></td></tr>
+            </tfoot>
         </table>
 
         <div  class="text-end">
-           <a href="write.jsp"  title="글쓰기 폼"  class="btn btn-primary" >글쓰기</a>
+           <a href="${pageContext.request.contextPath}/board/write.do"  
+           	  title="글쓰기 폼"  class="btn btn-primary" >글쓰기</a>
         </div>
 
     </section>
@@ -35,8 +64,24 @@
 <!-- 	footer		 -->
 <%@include file="../inc/footer.jsp"  %>
 
+<%-- <c:forEach  var="dto"   items="${list}"   varStatus="status" >
+	<tr>    <!--  전체갯수   -    상태.갯수   -->
+		<td>${ list.size() - status.index }</td>
+		<td> 
+		 	 <a href="${pageContext.request.contextPath}/board/detail.do?bno=${dto.bno}">   
+				${ dto.btitle }
+			 </a>
+		</td>
+		<td>${ dto.bname  }</td>
+		<td>${ dto.bdate  }</td>
+		<td>${ dto.bhit   }</td>
+	</tr>
+</c:forEach> --%>
 
-<!--                 
+
+<!--    
+http://localhost:8282/spring003_mvc/       
+      
 	<tr>
                  <td>1</td>
                  <td>첫번째 글쓰기</td>

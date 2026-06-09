@@ -6,7 +6,8 @@
 
    <div class="container  my-5">
       <h3 >글 삭제</h3>
-      <form  action ="#"  method="post"   onsubmit="return checkForm()"> 
+      <form  action ="${pageContext.request.contextPath}/board/delete.do?bno=${param.bno}"  
+      			method="post"   onsubmit="return checkForm()"> 
       	<div  class="my-3">
       		<label for="bpass"   class="form-label">비밀번호</label>
       		<input type="password"   class="form-control"    id="bpass"  name="bpass"  />
