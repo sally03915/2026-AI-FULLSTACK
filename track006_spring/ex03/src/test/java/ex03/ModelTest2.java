@@ -27,7 +27,14 @@ public class ModelTest2 {
 	// import  org.springframework.security.crypto.password.PasswordEncoder;
 	
 	/*  security		*/
-	@Test  public void test3() { 
+	@Test  public void test4() { 
+		//		AuthDto dto2 = new AuthDto();    dto2.setEmail("a@a");
+		//		System.out.println(  service.readAuth(dto2));
+		
+		System.out.println(service.findByEmailUserInfo("a@a"));
+	}
+	
+	@Ignore @Test  public void test3() { 
 		/* 로그인시 인가 */
 		AuthDto dto2 = new AuthDto();    dto2.setEmail("a@a");
 		System.out.println(  user.readAuth(dto2));
