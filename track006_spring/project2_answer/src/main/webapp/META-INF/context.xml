@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context  allowCasualMultipartParsing="true" path="/">
+	<!-- filter multipartFilter -->
+	<!-- filter multipartFilter -->
+	<filter>
+		<filter-name>multipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>multipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>   	
+   	
+</Context>
