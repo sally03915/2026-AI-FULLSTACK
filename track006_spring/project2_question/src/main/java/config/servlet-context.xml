@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+      http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
+   <!-- MVC Controller : annotation-driven: @Controller ,@RequestMapping 
+                          default-servlet-handler: 이미지나 정적리소스 -->
+   <context:component-scan base-package="com.the703"  />
+   <mvc:annotation-driven />
+   <mvc:default-servlet-handler/>
+   
+   <!-- View Resolver :  I -->
+   <bean id="viewResolver"  
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix"   value="/view/"/>
+      <property name="suffix"   value=".jsp"/>
+   </bean> 
+   
+   <bean  id="multipartResolver"  
+         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <property name="maxUploadSize"   value="10485760"></property>  
+      <property name="defaultEncoding" value="UTF-8"></property>
+   </bean>    
+   
+   <mvc:resources      mapping="/upload/**"  location="file:///C:/file/"></mvc:resources> 
+</beans>
