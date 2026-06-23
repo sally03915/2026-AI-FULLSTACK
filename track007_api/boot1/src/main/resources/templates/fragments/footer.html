@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html    xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head  lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title> 
+</head>
+<body> 
+<!-- header.html          fragments/footer 파일의  footer 블록   
+	<th:block th:replace="fragments/footer :: footer" /> -->
+<th:block th:fragment="footer" > 
+    <div class="mt-5 p-4 bg-dark text-white text-center">
+	  <p>Footer</p>
+	</div>
+</th:block>  
+</body>
+</html>

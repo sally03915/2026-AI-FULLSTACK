@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+      <h3 class="card-header"> MBTI 글수정</h3>
+	  <form th:action="@{/board/edit}"  method="post"  enctype="multipart/form-data"> 
+	      <input type="hidden"   name="id"  th:value="${dto.id}"> 
+	      <div class="mb-3">
+		    <label for="appUserId" class="form-label">WRITER:</label>
+		    <input type="text" class="form-control" id="appUserId"  name="appUserId"  th:value="${dto.appUserId}">
+		  </div>
+		  <div class="mb-3 mt-3">
+		    <label for="btitle" class="form-label">TITLE:</label>
+		    <input type="text" class="form-control" id="btitle" 
+		    	placeholder="내용을 입력해주세요" name="btitle"   th:value="${dto.btitle}">
+		  </div>
+		  <div class="mb-3">
+		    <label for="bpass" class="form-label">PASS:</label>
+		    <input type="password" class="form-control" id="bpass"
+		    	 placeholder="비밀번호를 입력해주세요" name="bpass">
+		  </div>
+		  <div class="mb-3">
+		    <label for="bcontent" class="form-label">CONTENT:</label>
+		    <textarea class="form-control" id="bcontent" placeholder="내용을 입력해주세요" 
+		    	name="bcontent"  th:text="${dto.bcontent}"></textarea>
+		  </div> 
+		  <div class="mb-3">
+		    <label for="file" class="form-label">FILE:</label>
+		    <input type="file" class="form-control" id="file" placeholder="비밀번호를 입력해주세요" name="file">
+		    <input type="text"  th:value="${dto.bfile}" name="bfile"  class="form-control" />
+		  </div>
+		  <div class="mb-3  text-end">
+		  	<button type="submit" class="btn btn-primary">글수정</button>  
+		  	<a th:href="@{/board/list}"  class="btn btn-primary">목록보기</a>
+		  </div>
+	 </form> 
+	</div>   
+	<!--    http://localhost:8484/boot001/board/list -->
+</body>
+</html>

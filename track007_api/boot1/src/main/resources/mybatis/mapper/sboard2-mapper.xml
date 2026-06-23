@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.the703.dao.Sboard2Dao"> 
+  <resultMap id="sboard2Map" type="Sboard2Dto">
+    <result property="id" column="ID"/>
+    <result property="appUserId" column="APP_USER_ID"/>
+    <result property="btitle"    column="BTITLE"/>
+    <result property="bcontent"  column="BCONTENT"/>
+    <result property="bpass"     column="BPASS"/>
+    <result property="bfile"     column="BFILE"/>
+    <result property="bhit"      column="BHIT"/>
+    <result property="bip" column="BIP"/>
+    <result property="createdAt" column="CREATED_AT"/>
+  </resultMap> 
+	<!-- 페이징 (1) -->
+	<select  id="select10"  parameterType="java.util.HashMap"  resultMap="sboard2Map">
+		select * from(
+			select row_number() over(order by id desc)  as rnum, 
+			       id, app_user_id, btitle, bcontent, bpass, bfile, bip, bhit, created_at
+			from  sboard2
+		) A  
+		where  A.rnum  between  #{start}  and #{end}
+	</select>
+	<!-- 페이징 (2) -->
+	<select  id="selectTotalCnt"  resultType="int">
+		select count(*)  from sboard2
+	</select>
+	<!-- 페이징+검색어(3) -->
+	<select  id="select3"  parameterType="java.util.HashMap"  resultMap="sboard2Map">
+		select * from(
+			select row_number() over(order by id desc)  as rnum, 
+			       id, app_user_id, btitle, bcontent, bpass, bfile, bip, bhit, created_at
+			from  sboard2
+			where btitle  LIKE '%' || #{search , jdbcType=VARCHAR} || '%'
+		) A  
+		where  A.rnum  between  #{start}  and #{end}
+	</select> 
+	
+	<!-- 페이징+검색어(4) 검색어 기준 전체 건수 -->
+	<select id="selectSearchTotalCnt" parameterType="string" resultType="int">
+	    SELECT COUNT(*)
+	    FROM sboard2
+	    WHERE btitle LIKE '%' || #{search, jdbcType=VARCHAR} || '%'
+	</select>
+
+
+
+	<insert     id="insert"  parameterType="Sboard2Dto">
+	insert into sboard2 ( ID    , APP_USER_ID , BTITLE , BCONTENT , BPASS , BFILE , BIP)  
+	values (sboard2_seq.nextval ,#{appUserId}, #{btitle},#{bcontent},#{bpass},  #{bfile , jdbcType=VARCHAR} , #{bip})
+	</insert>
+
+	<update     id="update"  parameterType="Sboard2Dto">
+	update  sboard2  
+	set     BTITLE=#{btitle} , BCONTENT=#{bcontent} , BFILE=#{bfile , jdbcType=VARCHAR}
+	where   id=#{id}   and BPASS= #{bpass} 
+	</update> 
+	
+	<update     id="updateHit"   parameterType="int">  update  sboard2   set     bhit = bhit + 1    where   id=#{id}   </update>	
+	<delete     id="delete"  parameterType="Sboard2Dto"> delete from sboard2   where    id=#{id}   and BPASS= #{bpass}  </delete>
+	
+	<select    resultMap  ="sboard2Map"  id="selectAll">  select * from sboard2  order by id desc  </select>
+	<select    resultMap  ="sboard2Map"   id="select"  parameterType="int"> 	select * from sboard2 where id=#{id}   </select>
+
+</mapper>
+
+
+
+
+

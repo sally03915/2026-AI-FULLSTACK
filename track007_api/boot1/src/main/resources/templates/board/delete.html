@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+      <h3 class="card-header"> MBTI 글삭제</h3> 
+	  <form th:action="@{/board/delete}"  method="post">  
+	      <input type="hidden"   name="id"  th:value="${param.id}"> 
+		  <div class="my-3">
+		    <label for="bpass" class="form-label">PASS:</label>
+		    <input type="password" class="form-control" 
+		    	id="bpass"  placeholder="비밀번호를 입력해주세요" name="bpass">
+		  </div> 
+		  <div class="my-3  text-end">
+		  	<button type="submit" class="btn btn-primary">글삭제</button>
+		  	<a href="javascript:history.go(-1)"  class="btn btn-danger">BACK</a>
+		  </div>
+	 </form>
+	</div>  
+	
+</body>
+</html>

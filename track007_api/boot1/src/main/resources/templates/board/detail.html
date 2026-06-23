@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+      <h3 class="card-header" > MBTI  QUEST 상세보기 </h3>  
+		<!--  알림메시지  -->
+        <div th:if="${success}" class="alert alert-info alert-dismissible fade show" role="alert">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>      
+	  <div>
+	      <input type="hidden"   name="app_user_id"  value=""> 
+		  <div class="mb-3 mt-3">
+		    <label for="hit" class="form-label">조회수</label>
+		    <input type="text" class="form-control" id="hit" name="bhit"  readonly   
+		    	th:value="${dto.bhit}">
+		  </div> 
+		  <div class="mb-3 mt-3">
+		    <label for="title" class="form-label">TITLE:</label>
+		    <input type="text" class="form-control" id="title" 
+		    		placeholder="내용을 입력해주세요" name="title"  readonly  th:value="${dto.btitle}">
+		  </div>  
+		  <div class="mb-3">
+		    <label for="bcontent" class="form-label">CONTENT:</label>
+		    <textarea class="form-control" id="bcontent" placeholder="내용을 입력해주세요"   
+		    	readonly name="bcontent"   th:text="${dto.bcontent}"></textarea>
+		  </div> 
+		  <div class="mb-3 mt-3">
+		    <label for="title" class="form-label">IMG:</label>
+		    <img  th:src="@{'/upload/'+${dto.bfile}}" class="img-fluid  rounded  border mb-3"  alt="" />
+		  </div> 
+			<div class="mb-3">
+				<a th:href="@{/board/edit(id=${dto.id})}" class="btn btn-success form-control">글수정</a>
+			</div>
+			<div class="mb-3">
+				<a th:href="@{/board/delete(id=${dto.id})}" class="btn btn-secondary form-control">글삭제</a>
+			</div>   
+		  <div class="mb-3"> <a th:href="@{/board/list}" class="btn btn-primary form-control">목록보기</a></div>
+	 </div>
+	</div> 
+	<!--    http://localhost:8484/boot001/board/list -->
+</body>
+</html>
