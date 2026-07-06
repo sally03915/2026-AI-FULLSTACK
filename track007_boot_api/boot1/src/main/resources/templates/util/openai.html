@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{fragments/layout}">
+<!--    #1. layout 렌더링    -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <div layout:fragment="content">
+       <h3>OpenAI - ChatGPT</h3>
+       <div  class="alert alert-primary"> 일기작성시 일기내용요약해서 이미지로 나타내기.</div>
+       <div  class="my-3">
+          <textarea  class="form-control"   placeholder="오늘의 일기를 작성해주세요"
+                id="userMessage" title="일기작성"></textarea>   
+       </div>
+       <div  class="my-3 text-end">
+          <input type="button"  id="sendBtn"  class="btn btn-primary" value="일기작성"/>
+       </div>
+       <div   id="response"  class="alert alert-warning"></div>
+       
+      <meta name="_csrf"        th:content="${_csrf.token}"/>
+      <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+       <script>
+         window.addEventListener("load", function() {
+            // CSRF 토큰 및 헤더 정보 가져오기
+            const token = document.querySelector("meta[name='_csrf']").getAttribute("content");
+            const header = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+            console.log(token);
+            console.log(header);
+
+            // 요소 선택
+            const sendBtn = document.getElementById("sendBtn");
+            const userMessageInput = document.getElementById("userMessage");
+            const responseDiv = document.getElementById("response");
+
+            // 일기작성 버튼 클릭 이벤트
+            sendBtn.addEventListener("click", function() {
+               const userMessage = userMessageInput.value.trim();
+
+               if (userMessage.length <= 0) {
+                  userMessageInput.focus();
+                  alert("일기를 작성해주세요");
+                  return;
+               }
+
+               // fetch - then - then 구조로 요청 전송
+               fetch( `/api/util/openai` , {  //1. 주소
+                  method: "POST",
+                  headers: {
+                     "Content-Type": "application/json; charset=UTF-8",
+                     [header]: token // CSRF 토큰 추가
+                  },
+                  body: JSON.stringify(userMessage)
+               })
+               .then(response => {   // 2. 자료형
+                  if (!response.ok) {
+                     return response.text().then(errText => { throw new Error(errText) });
+                  }
+                  return response.text();  
+               })
+               .then(result => {  //3. 결과물파싱
+            	   responseDiv.textContent=result;
+               })
+               .catch(error => {
+                  // 에러 발생 시 처리
+                  responseDiv.textContent = error.message;
+               });
+            });
+         });
+      </script>
+   </div>  
+
+</body>
+</html>

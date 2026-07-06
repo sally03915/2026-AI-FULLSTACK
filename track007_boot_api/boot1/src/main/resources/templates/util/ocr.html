@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head lang="ko">
+    <meta charset="UTF-8">
+    <title>네이버 OCR 테스트</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container my-5">
+            <h2>네이버 OCR 테스트</h2>
+            
+            <!-- 비동기 처리를 위해 th:action을 제거하고 id="ocrForm"을 추가했습니다 -->
+            <form id="ocrForm" enctype="multipart/form-data">
+                <label for="file">이미지 선택:</label> 
+                <input type="file" id="file" name="file" accept="image/*" required>
+                <button type="submit">OCR 실행</button>
+            </form>
+            
+            <hr>
+            
+            <!-- 결과 출력 영역 (Thymeleaf 조건문 대신 JS에서 직접 제어) -->
+            <div id="resultArea" style="display: none;">
+                <h3>OCR 결과</h3>
+                <pre id="resultDisplay" style="background: #f8f9fa; padding: 15px; border-radius: 5px; white-space: pre-wrap;"></pre>
+            </div>
+        </div>  
+
+    <!-- Spring Security CSRF 토큰 확보 (레이아웃 head에 없다면 여기에 선언) -->
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+        <!-- 비동기 처리 스크립트 -->
+        <script>
+            document.getElementById('ocrForm').addEventListener('submit', function(e) {
+                e.preventDefault(); // 폼 전송 시 새로고침 방지
+
+                const fileInput = document.getElementById('file');
+                if (fileInput.files.length === 0) {
+                    alert("파일을 선택해주세요.");
+                    return;
+                }
+
+                // FormData에 파일 적재
+                const formData = new FormData();
+                formData.append("file", fileInput.files[0]);
+
+                // Meta 태그에서 CSRF 토큰 정보 읽기
+                const token = document.querySelector("meta[name='_csrf']").getAttribute("content");
+                const header = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+
+                const resultArea = document.getElementById('resultArea');
+                const resultDisplay = document.getElementById('resultDisplay');
+
+                // 로딩 상태 표시
+                resultArea.style.display = "block";
+                resultDisplay.innerText = "OCR 분석 중입니다. 잠시만 기다려주세요...";
+
+                // 백엔드 API 호출 (/ocr/process)
+                fetch(`/api/util/ocr`, {
+                    method: 'POST',
+                    headers: {
+                        [header]: token // Spring Security 대응 CSRF 헤더
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // 기존에 사용하시던 resultMap 패턴(status == "success") 처리
+                    if (data.status === "success") {
+                        try {
+                            // 리턴된 결과가 JSON 문자열 구조라면 보기 좋게 정렬 포맷팅
+                            const formattedJson = JSON.stringify(JSON.parse(data.result), null, 2);
+                            resultDisplay.innerText = formattedJson;
+                        } catch (e) {
+                            // 만약 이미 파싱된 텍스트 내용물이 넘어온 거라면 그대로 출력
+                            resultDisplay.innerText = data.result;
+                        }
+                    } else {
+                        resultDisplay.innerText = "실패 사유: " + data.message;
+                    }
+                })
+                .catch(error => {
+                    console.error("OCR Request Error:", error);
+                    resultDisplay.innerText = "통신 중 오류가 발생했습니다.";
+                });
+            });
+        </script>
+    </div> 
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head lang="ko">
+<meta charset="UTF-8">
+<title>BOOKS API AJAX</title> 
+</head>
+<body>
+<div layout:fragment="content">
+    <h3 class="card-header bg-success text-white">BOOKS API AJAX</h3>
+    <div class="my-5">
+        <label for="search">BOOK SEARCH</label>
+        <input type="text" name="search" id="search" class="form-control"
+               placeholder="책검색어를 입력해주세요">
+    </div>
+    <table class="table table-bordered table-striped table-hover book_result" style="display: none;">
+        <caption>NAVER BOOK API</caption>
+        <thead>
+        <tr>
+            <th scope="col">TITLE</th>
+            <th scope="col">IMG</th>
+            <th scope="col">AUTHOR</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 호출 후 내용이 업데이트 될 영역 -->
+        </tbody>
+    </table>
+
+    <script th:inline="javascript"> 
+        window.addEventListener("load", function() {
+            let searchInput     = document.getElementById("search");
+            let bookResultTable = document.querySelector(".book_result");
+ 
+            ajax_api('ai');
+
+            searchInput.addEventListener("keyup", function() {
+                let searchQuery = this.value.trim();
+                if (searchQuery.length > 0) {
+                    bookResultTable.style.display = "table"; 
+                    ajax_api(searchQuery);
+                }
+            });
+        });
+
+        // 3. fetch().then().then()을 활용한 API 호출 함수
+        function ajax_api(search) {  
+             fetch(`/api/util/books/json?search=${encodeURIComponent(search)}`)  // 주소  ##
+            .then(response => {  // 자료형
+                if (!response.ok) { throw new Error(`${response.status} / ${response.statusText}`); }
+            	return response.json(); //##
+            })
+            .then(json => {  //결과물
+                console.log(json);
+                const tbody = document.querySelector(".book_result tbody");
+                tbody.innerHTML = ""; 
+                if (json && json.length > 0) {
+                    let rows = "";
+                    for (let i = 0; i < json.length; i++) {
+                        let title  = json[i].title;
+                        let img    = json[i].image;
+                        let author = json[i].author;
+                        rows += `
+                            <tr> 
+                               <td>${title}</td>
+                               <td><img src="${img}" alt="${title}" style="width:100px; height:auto;" /></td> 
+                               <td>${author}</td>
+                            </tr>
+                        `;
+                    } 
+                    tbody.innerHTML = rows;
+                } else { console.log("empty"); }
+            })
+            .catch(error => {  
+                alert("요청 실패: " + error.message);
+            });
+        }
+    </script>
+</div>
+</body>
+</html>      

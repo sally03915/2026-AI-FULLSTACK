@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 	<div  layout:fragment="content">
+ 		<h3>MAIL</h3>
+ 		
+ 		<form  th:action="@{/api/util/mail}"  method="post">
+        <!-- CSRF Token -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        
+        <table class="table table-striped">
+            <caption>관리자에게 메일 보내기</caption>
+            <tbody>
+            <tr>
+                <th scope="row"><label for="email">Email</label></th>
+                <td><input type="email" name="email" id="email" class="form-control"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="subject">Title</label></th>
+                <td><input type="text" name="subject" id="subject" size="40" class="form-control"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="content">Content</label></th>
+                <td>
+                    <!-- 에디터 타겟 textarea -->
+                    <textarea name="content" rows="10" cols="40" class="form-control" id="content"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-end">
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <!-- ★  타임리프 템플릿 경로를 통해 프로젝트 로컬 JS 파일 로드 ★ -->
+ 	<script  th:src="@{/js/summernote-lite.min.js}" ></script> 
+    <!-- 에디터 실행 스크립트 -->
+    <script>
+        (function() {
+            // 레이아웃의 제이쿼리와 위 로컬 써머노트 JS가 모두 메모리에 등록될 때까지 확인 
+            var initTimer = setInterval(function() {
+                if (typeof window.jQuery !== 'undefined' && window.jQuery.fn.summernote) {
+                    clearInterval(initTimer); 
+                    // 써머노트 에디터 구동
+                    window.jQuery( '#content').summernote({
+                        placeholder: '메일 내용을 입력해 주세요.',
+                        tabsize: 2,
+                        height: 350,
+                        toolbar: [
+                            ['style', ['style']],
+                            ['font', ['bold', 'underline', 'clear']],
+                            ['color', ['color']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['table', ['table']],
+                            ['insert', ['link', 'picture', 'video']],
+                            ['view', ['fullscreen', 'codeview', 'help']]
+                        ]
+                    });
+                    console.log("로컬 파일 기반 써머노트 활성화 성공!");
+                }
+            }, 50);  //1000이 1초
+        })();
+    </script>
+ 		 
+ 	</div>
+</body>
+</html>

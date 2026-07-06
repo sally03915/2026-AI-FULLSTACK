@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+/* index.html - #gallery  */
+/* index.html - #gallery  */
+#gallery  img {  transition: all 0.3s  ease; }
+#gallery  img:hover{
+	transform :translateY(-5px)  rotateZ(10deg) ;
+	box-shadow:0 0.5rem 1rem  rgba(0,0,0,0.15);
+}
+
+
+.bg-tabs-gradient { background: linear-gradient( 135deg, rgba(13, 202, 240, 0.2) 0%, /* info 색상에 투명도 20% */ rgba(102, 16, 242, 0.2) 100% /* purple 색상에 투명도 20% */ ); padding: 3rem 0; }
+
+
+/*	member	 */
+/*	member	 */
+
+
+ 

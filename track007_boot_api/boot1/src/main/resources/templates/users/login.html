@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div layout:fragment="content"> 
+	<!-- 알림메시지 -->  
+	<div th:if="${successMessage}" class="alert alert-info alert-dismissible fade show" role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>	 	
+	
+    <div th:if="${errorMessage}" class="alert alert-info alert-dismissible fade show" role="alert">
+        <span th:text="${errorMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>	 
+    <h2 class="mb-4">로그인</h2> 
+    <!-- 로그인 폼은 익명 사용자만 -->  
+    <div  sec:authorize="isAnonymous()">
+	    <form  th:action="@{/users/loginProc}"   method="post"  class="needs-validation"   novalidate>
+	        <div class="mb-3">
+	            <label for="username" class="form-label">이메일</label>
+	            <input type="text" id="username" name="username" class="form-control" required>
+	        </div>
+	
+	        <div class="mb-3">
+	            <label for="password" class="form-label">비밀번호</label>
+	            <input type="password" id="password" name="password" class="form-control" required>
+	        </div> 
+	        <button type="submit" class="btn btn-primary">로그인</button>
+	    </form> 
+	</div>  
+    <!-- 로그인한 유저 -->  
+    <div  sec:authorize="isAuthenticated()">
+	   	<p class="alert alert-info">이미 로그인한 상태입니다.</p>
+	   	<a  th:href="@{/useres/login}" class="btn btn-success">마이페이지로 이동</a>
+	</div>   
+	
+	<!-- 소셜유저 -->
+	<div class="container my-5 text-center">
+      <div class="row">
+         <div class="col-sm-4">
+            <a th:href="@{/oauth2/authorization/kakao}">
+               <img src="/images/kakao.png" alt="kakao login">
+            </a>
+         </div> 
+         <div class="col-sm-4">
+            <a th:href="@{/oauth2/authorization/naver}">
+               <img src="/images/naver.png" alt="naver login">
+            </a>
+         </div> 
+         <div class="col-sm-4">
+            <a th:href="@{/oauth2/authorization/google}">
+               <img src="/images/google.png" alt="google login">
+            </a>
+         </div>          
+      </div>
+   </div>
+	
+		
+</div> 
+</body>
+</html>

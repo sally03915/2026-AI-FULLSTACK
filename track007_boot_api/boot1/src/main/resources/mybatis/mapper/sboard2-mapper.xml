@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.the703.dao.Sboard2Dao">
+  <insert id="insert" parameterType="Sboard2Dto">
+	insert into  sboard2 
+	( ID    ,  APP_USER_ID ,  BTITLE    ,  BCONTENT   ,  BPASS   ,  BFILE  ,  BIP  )
+	values      
+	( sboard2_seq.nextval , #{appUserId},  #{btitle} , #{bcontent} ,  #{bpass} , #{bfile , jdbcType=VARCHAR} ,  #{bip}  ) 
+  </insert>
+  
+  <select id="selectAll"    resultType="Sboard2Dto"> select *  from  sboard2  order by id   desc  </select>
+  
+  <select id="selectPaging" resultType="Sboard2Dto"  parameterType="java.util.HashMap">
+    SELECT * FROM sboard2  ORDER BY id DESC  OFFSET #{start} ROWS FETCH NEXT #{end} ROWS ONLY
+  </select>  
+	<!--   OFFSET 0 ROWS: 건너뛸 행의 개수 (0부터 시작)
+  	   	   FETCH NEXT 10 ROWS ONLY: 가져올 행의 개수 -->
+  <select id="selectCnt" resultType="int"> select  count(*)  from sboard2  </select>  
+  
+  <select id="selectById" resultType="Sboard2Dto" parameterType="Sboard2Dto">select *  from  sboard2    where  id=#{id}  </select>  
+  
+  <update  id="updateHit" parameterType="Sboard2Dto"> update  sboard2   set   bhit = bhit + 1  where  id=#{id} </update>
+  
+  <update  id="update"   parameterType="Sboard2Dto" > 
+  		update  sboard2  
+  		set    btitle=#{btitle} , bcontent=#{bcontent} , bfile=#{bfile , jdbcType=VARCHAR}  
+  		where  id=#{id}  and bpass=#{bpass} 
+  </update>
+  
+  <delete  id="delete"   parameterType="Sboard2Dto"> 
+  		delete  from  sboard2   
+  		where  id=#{id}  and bpass=#{bpass} 
+  </delete>
+  		
+</mapper>
+
+ 

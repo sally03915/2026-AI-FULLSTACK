@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head lang="ko">
+<meta charset="UTF-8">
+<title>RAG 챗봇 테스트 추천 질문 리스트</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content"> 
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">문서 기반 RAG AI 챗봇 (Thymeleaf + RestClient)</h3>
+                </div>
+                
+<pre class="my-5">
+💡 RAG 챗봇 테스트 추천 질문 리스트
+PDF를 생성하여 챗봇에 업로드한 후, 아래 질문들을 입력해 보며 RestClient를 통한 LLM 연동과 Vector DB 검색이 잘 작동하는지 검증해 보세요.
+
+1. 숫자 및 금액 검증: "사내 도서 구입비 지원 한도는 얼마인가요?"	
+2. 조건부 정보 검증: "개발자에게 지급되는 노트북 장비 종류는 무엇인가요?"
+3. 고유 명사 검증: "2026년 상반기 핵심 프로젝트의 코드명은 무엇인가요?"
+4. 문서에 없는 내용 검증 (할루시네이션 체크): "회사 근처 맛집을 추천해줘." 
+(결과: 문서에 없는 내용이므로 "문서에서 관련 내용을 찾을 수 없습니다"라고 답변해야 정상입니다.)
+</pre>
+				 
+                <div class="card-body">
+                    <!-- 파일 업로드 및 질문 전송 폼 -->
+                    <form th:action="@{/api/util/rag/ask}" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="file" class="form-label fw-bold">참조할 PDF 문서 업로드</label>
+                            <input type="file" class="form-control" id="file" name="file" accept=".pdf" >
+                            <!-- <div class="form-text">테스트 시 1~2장 내외의 가벼운 문서 사용을 권장합니다.</div> -->
+                            <small class="text-muted">
+						        ※ 이미 문서를 업로드하셨거나 프로젝트 내 고정 문서(<code class="text-danger">company.pdf</code>)를 사용하려면 선택하지 않아도 됩니다.
+						    </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="question" class="form-label fw-bold">질문 입력</label>
+                            <input type="text" class="form-control" id="question" name="question" 
+                                   th:value="${question}" placeholder="문서 내용에 대해 질문해보세요." required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">AI에게 분석 요청하기</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 에러 메시지 출력 영역 -->
+            <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+
+            <!-- 결과 출력 영역 (답변이 존재할 때만 렌더링) -->
+            <div class="card shadow-sm" th:if="${answer}">
+                <div class="card-header bg-success text-white fw-bold">
+                    💡 AI 분석 결과 <span th:text="${fileName}" class="badge bg-light text-dark ms-2"></span>
+                </div>
+                <div class="card-body bg-white">
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-1">내 질문:</h6>
+                        <p class="fw-bold text-dark" th:text="${question}"></p>
+                    </div>
+                    <hr>
+                    <div>
+                        <h6 class="text-muted mb-1">AI 답변:</h6>
+                        <!-- 텍스트 줄바꿈 유지를 위한 utext 프로퍼티 활용 -->
+                        <p class="text-secondary" th:utext="${#strings.replace(answer, '&#10;', '&lt;br/&gt;')}"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

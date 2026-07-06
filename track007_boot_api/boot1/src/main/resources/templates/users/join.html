@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<div layout:fragment="content">
+
+	<!-- 알림메시지 -->
+	<div th:if="${successMessage}" class="alert alert-info alert-dismissible fade show" role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>	 
+	
+    <div th:if="${errorMessage}" class="alert alert-info alert-dismissible fade show" role="alert">
+        <span th:text="${errorMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>	 
+    
+    <h2 class="mb-4">회원가입</h2> 
+    <form   th:action="@{/users/join}"    method="post"  enctype="multipart/form-data"   class="needs-validation" novalidate>
+        <input type="hidden" name="provider" value="local"  id="provider">
+        <div class="mb-3"> 
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
+			<div class="iddouble_result"></div>	
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="nickname" class="form-label">닉네임</label>
+            <input type="text" id="nickname" name="nickname" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="mobile" class="form-label">휴대폰 번호</label>
+            <input type="text" id="mobile" name="mobile" class="form-control" placeholder="010-1234-5678">
+        </div>
+
+        <div class="mb-3">
+            <label for="file" class="form-label">프로필 이미지</label>
+            <input type="file" id="file" name="file" class="form-control">
+        </div> 
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+
+    <p class="mt-3"> 이미 계정이 있으신가요? <a  th:href="@{/users/login}" >로그인</a> </p>
+    
+    <script>
+    window.addEventListener("load" , function(){  
+    	let email  = document.getElementById("email");
+    	let target = document.querySelector(".iddouble_result");
+    	
+    	email.addEventListener("keyup" , function(e){
+    		let value = e.target.value.trim();   console.log(   value );
+    		if(value != ""){
+    			//fetch().then().then()
+    			fetch(`iddouble?email=${encodeURIComponent(value)}`)  //1. 경로
+    			.then( response=> response.json() )  //2.json
+    			.then( data=>{
+    				if(data.exists){
+            			target.textContent="이미 사용중인 email입니다.";
+            			target.className  ="my-3 alert alert-danger  iddouble_result"
+    				}else{
+            			target.textContent="사용가능한 email입니다.";
+            			target.className  ="my-3 alert alert-success  iddouble_result"
+    				}
+    			}).catch(err =>{
+        			target.textContent="서버오류 입니다.";
+        			target.className  ="my-3 alert alert-info  iddouble_result"
+    			})
+    		}else{
+    			target.textContent="이메일 중복검사는 필수입니다.";
+    			target.className  ="my-3 alert alert-info  iddouble_result"
+    		}
+    	});
+    }); 
+    </script>
+</div>
+</body>
+</html>
