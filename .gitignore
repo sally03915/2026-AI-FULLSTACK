@@ -12,7 +12,7 @@ track007_boot_api/Servers/
 track007_api/Servers/
 
 project/
-track007_api-2/ 
+/track007_api-2/  
 
 
 # 빌드 결과물 무시
