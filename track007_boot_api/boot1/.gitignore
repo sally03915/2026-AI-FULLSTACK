@@ -5,6 +5,9 @@ target/
 !**/src/test/**/target/
 
 
+!**/src/resources/application-oauth.properties
+!**/src/resources/*.zip
+
 
 ### STS ###
 .apt_generated

@@ -1,1 +1,4 @@
 /.metadata/
+
+/boot1/src/resources/application-oauth.properties
+/boot1/src/resources/*.zip
