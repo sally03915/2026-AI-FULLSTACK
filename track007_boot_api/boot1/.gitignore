@@ -4,10 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-
-!**/src/main/resources/application-oauth.properties
-!**/src/main/resources/*.zip
-
+/src/main/resources/application-oauth.properties
+/src/main/resources/*.zip
 
 ### STS ###
 .apt_generated
