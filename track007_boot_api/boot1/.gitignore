@@ -5,8 +5,8 @@ target/
 !**/src/test/**/target/
 
 
-!**/src/resources/application-oauth.properties
-!**/src/resources/*.zip
+!**/src/main/resources/application-oauth.properties
+!**/src/main/resources/*.zip
 
 
 ### STS ###
