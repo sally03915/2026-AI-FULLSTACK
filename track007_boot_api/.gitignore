@@ -1,4 +1,8 @@
 /.metadata/
+<<<<<<< HEAD
 
 /boot1/src/resources/application-oauth.properties
 /boot1/src/resources/*.zip
+=======
+/boot1/src/main/resources/application-oauth.properties
+>>>>>>> 79f22e541ef3d18ec4cb6aa9cadc0659778b2f1b
