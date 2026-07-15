@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+	  <!-- ##1. key 사용 -->
+	  <script type="text/javascript" 
+	  src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=a367l38p7i&callback=initMap"></script>
+	  
+	  <h2 class="mb-3">📍 현재 위치 기반 매장 추천</h2>
+	
+	  <!-- 버튼 영역 -->
+	  <div class="mb-3">
+	    <button id="locateBtn" class="btn btn-primary me-2">내 위치 찾기</button>
+	    <button id="showAllBtn" class="btn btn-secondary">모든 매장 표시</button>
+	  </div>
+	
+	  <!-- 지도 영역 -->
+	  <div id="map" class="border rounded" style="width:100%; height:500px;"></div>
+	
+	  <!-- 결과 패널 -->
+	  <div class="card mt-3">
+	    <div class="card-body">
+	      <h5 class="card-title">추천 결과</h5>
+	      <p id="resultText" class="card-text">아직 위치를 찾지 않았습니다.</p>
+	      <div id="storeList" class="list-group"></div>
+	    </div>
+	  </div>
+	 <!-- ##2. 지도넣기 -->
+	 <script id="code"> 
+	 //$(function(){});
+		 let map;
+		 let userMarker; 
+		 let stores;
+		 
+		 function initMap(){
+			//1. 지도초기화 - 매장좌표 (db연동)
+		     stores = [ { name : "강남점", lat : 37.498095, lng : 127.027610 }
+					, { name : "홍대점", lat : 37.556343, lng : 126.922651 }
+					, { name : "인천점", lat : 37.447275, lng : 126.690894 }
+					, { name : "시청점", lat : 37.566295, lng : 126.977945 } ]; 
+			//2. 지도초기화 - 중심위치
+			map = new naver.maps.Map('map', {
+			    center: new naver.maps.LatLng(37.3595704, 127.105399),
+			    zoom: 15
+			}); 
+			userMarker = new naver.maps.Marker({ 
+				position: new naver.maps.LatLng(37.3595704, 127.105399),
+				zIndex:9999, map: map });
+
+			document.getElementById("locateBtn").onclick = Recomment;   //제일가까운위치의 매장추천
+			document.getElementById("showAllBtn").onclick = showStores; //모든매장			
+		 }  
+		 
+	     //3. 모든매장 - 마커표시
+	     function  showStores(){
+	    	 stores.forEach( store => {
+	    		 const pos = new naver.maps.LatLng( store.lat, store.lng);
+	    		 new  naver.maps.Marker({position:pos, map});
+	    	 }); 
+	    	 map.setZoom(10);
+	    	 document.getElementById("resultText").textContent="모든 매장을 지도에 표시했습니다.";
+	     }
+
+	     // 거리 계산 함수 (Haversine 공식)
+	     // 지도를 구로 보고 두 위도 경도 좌표사이의 최단거리를 계산
+	     // 위도 경도를 라디안으로 변환한뒤 삼각함수를 적용해 거리반환
+	     function haversine(lat1, lng1, lat2, lng2) {
+	        const R = 6371; // 지구 반지름 (km)
+	        const toRad = deg => deg * Math.PI / 180;  // 각도를 라디안으로 변환
+	        const dLat = toRad(lat2 - lat1);  //위도차이
+	        const dLng = toRad(lng2 - lng1);  //경도차이
+	        //Haversine 핵심부분
+	        const a = Math.sin(dLat/2)**2 +
+	                  Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+	                  Math.sin(dLng/2)**2;
+	        // 최종거리계산
+	        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	     }	     
+	     
+         //4. 현재위치 + 가장 가까운 매장추천
+	     function  Recomment(){
+        	 if(!navigator.geolocation){
+        		 alert("브라우저가 위치정보를 지원하지 않습니다.");
+        		 return;
+        	 }
+        	 //	※					watchPosition ( 실시간 사용자가 움직일때마다 위치 추척 )
+        	 navigator.geolocation.getCurrentPosition( pos =>  {
+        		 const  lat = pos.coords.latitude;
+        		 const  lng = pos.coords.longitude;
+        		 const  userPos = new naver.maps.LatLng(lat, lng);
+        		 
+        		 //사용자 위치마커표시
+        		 userMarker.setPosition(userPos);
+        		 userMarker.setMap(map);
+        		 map.setCenter(userPos);
+        		 map.setZoom(15);  // 위치찾기시 확대
+        		 
+        		 //가장가까운 매장찾기
+        		 let nearest = null;
+        		 stores.forEach(store => {
+        			 const dist = haversine(lat, lng, store.lat, store.lng);
+        		 	 if(  !nearest || dist< nearest.dist){ nearest = {...store,dist };  } // 전개문법 
+        		 	 //										    기존매장정보:   ...store store의 기본모든속성가져오기 (복사)
+        		 	 //											거리 :    	  dist 속성추가 덮어씀
+        		 	 // store = { name : "인천점", lat : 37.447275, lng : 126.690894 } , dist=2.5;
+        		 	 // 결과물 :  { name : "인천점", lat : 37.447275, lng : 126.690894  , dist=2.5}
+        		 });
+
+         		/////////////////////////////////////////////////
+        		if(nearest){
+        			document.getElementById("resultText").innerHTML = 
+        				`가장 가까운 매장 : <span  class="text-primary fw-bold">${nearest.name}</span>  (${nearest.dist.toFixed(2)}  km) `;
+        		
+        			//매장 리스트 출력
+        			document.getElementById("storeList").innerHTML = 
+        				stores.map(s=>{
+        					const d = haversine(lat, lng, s.lat, s.lng).toFixed(2);
+        					const activeClass = s.name === nearest.name ? "active" : "";
+        					return  `<div class="list-group-item ${activeClass}">${s.name} - ${d} km</div>`;
+        				}).join("");
+        		}
+        		///////////////////////////////////////////////// 
+        	 });
+        	 
+         }// end    Recomment
+
+		</script>
+	</div> 
+	<!--    http://localhost:8484/api/maps -->
+</body>
+</html>
+<!-- m3jz1a155u -->
+<!-- https://www.ncloud.com/v2/product/applicationService/maps -->
+<!-- 샘플 :  https://navermaps.github.io/maps.js.ncp/docs/tutorial-digest.example.html -->
+<!-- 예시코드 : https://github.com/navermaps/maps.js.ncp/blob/master/examples/map/1-map-simple.html -->

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		  <div class="container my-3">
+		  	<h3> 카카오페이 결제테스트</h3>
+		  	<form  th:action="@{/api/pay/ready}"  method="post">
+		  		<input type="hidden" name="_csrf"  th:value="${_csrf.token}" />
+		  		<button type="submit"  class="btn btn-warning">결제하기</button>
+		  	</form>
+		  </div>
+	</div> 
+	<!--    http://localhost:8484/api/pay/kakao -->
+</body>
+</html>

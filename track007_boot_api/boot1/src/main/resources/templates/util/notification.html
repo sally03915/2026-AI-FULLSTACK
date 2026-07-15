@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head lang="ko">
+<meta charset="UTF-8">
+<title>BOOKS API AJAX</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <h3 class="card-header bg-success text-white">BOOKS API AJAX</h3>
+    
+<!-- 1. Spring Security CSRF 토큰을 위한 메타 태그 추가 -->
+<meta name="_csrf" th:content="${_csrf?.token}"/>
+<meta name="_csrf_header" th:content="${_csrf?.headerName}"/>
+		<!-- Thymeleaf 혹은 일반 HTML 예시 -->
+		<div class="mt-5">
+		    <div class="card">
+		        <div class="card-header bg-dark text-white">
+		            <h4>🔔 실시간 알림 채널 관리</h4>
+		        </div>
+		        <div class="card-body">
+		            <!-- 1. 알림 채널 토글 상태 표시 -->
+		            <div class="form-check form-switch mb-3">
+		                <input class="form-check-input" type="checkbox" id="slackSwitch" checked>
+		                <label class="form-check-label" for="slackSwitch">Slack 실시간 연동 (활성화)</label>
+		            </div>
+		            <div class="form-check form-switch mb-3">
+		                <input class="form-check-input" type="checkbox" id="discordSwitch" checked>
+		                <label class="form-check-label" for="discordSwitch">Discord 실시간 연동 (활성화)</label>
+		            </div>
+		
+		            <hr>
+		
+		            <!-- 2. 수동 강제 알림 테스트 발송 기능 -->
+		            <h5 class="mt-4">🚀 알림 강제 전송 테스트</h5>
+		            <div class="input-group mb-3">
+		                <input type="text" id="testDocUrl" class="form-control" placeholder="테스트할 구글 문서 URL을 입력하세요">
+		                <button class="btn btn-primary" type="button" onclick="triggerTestNotification()">테스트 발송</button>
+		            </div>
+		            <div id="alertResult" class="text-success fw-bold"></div>
+		        </div>
+		    </div>
+		</div>
+		
+		<script>
+		function triggerTestNotification() {
+		    const url = document.getElementById("testDocUrl").value;
+		    if(!url) return alert("URL을 입력해 주세요.");
+		
+		    // 2. 메타 태그에서 CSRF 토큰 및 헤더 이름 추출
+		    const token = document.querySelector('meta[name="_csrf"]')?.content;
+		    const header = document.querySelector('meta[name="_csrf_header"]')?.content;
+		
+		    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+		    
+		    // 토큰이 존재하면 헤더에 주입
+		    if (token && header) {
+		        headers[header] = token;
+		    }
+		
+		    // 백엔드 @PostMapping("/notification") 주소와 일치시킴
+		    fetch('/api/util/notification', {
+		        method: 'POST',
+		        headers: headers,
+		        body: new URLSearchParams({ 'url': url })
+		    })
+		    .then(res => {
+		        if(!res.ok) {
+		            throw new Error("서버 에러 (" + res.status + ")");
+		        }
+		        return res.json();
+		    })
+		    .then(data => {
+		        const resultDiv = document.getElementById("alertResult");
+		        resultDiv.innerText = data.message;
+		        resultDiv.className = "text-success fw-bold"; // 성공 시 초록색
+		    })
+		    .catch(err => {
+		        const resultDiv = document.getElementById("alertResult");
+		        resultDiv.innerText = "발송 실패: " + err.message;
+		        resultDiv.className = "text-danger fw-bold"; // 실패 시 빨간색
+		    });
+		}
+		</script>
+</div>
+</body>
+</html>

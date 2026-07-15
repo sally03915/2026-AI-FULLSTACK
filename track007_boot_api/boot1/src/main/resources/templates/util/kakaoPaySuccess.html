@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		 <div class="container my-3">
+		  	<h3> 카카오페이 결제가 성공적으로 완료되었습니다</h3>
+		  	<table  class="table table-bordered   table-striped   table-hover">
+		  		<caption>KAKAOPAY</caption>
+		  		<tbody>
+		  			<tr><th scope="row">승인번호</th><td  th:text="${result.aid}"></td></tr>
+		  			<tr><th scope="row">결제금액</th><td><span  th:text="${result.total}"></span>원</td></tr>
+		  			<tr><th scope="row">부가세</th><td><span  th:text="${result.vat}"></span>원</td></tr>
+		  		</tbody>
+		  	</table>
+		  	<div class="text-end">
+		  		<a href="/"   class="btn btn-primary">메인으로 돌아가기</a>
+		  	</div>
+		 </div> 
+	</div> 
+	<!--    http://localhost:8484/boot001/board/list -->
+</body>
+</html>

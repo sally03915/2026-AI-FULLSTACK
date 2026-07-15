@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+      <h3>CoolsSMS</h3>
+      <div class="mb-3">
+         <label for="to">받는사람 :</label> 
+         <input type="text" id="to" name="to"    placeholder="0101234567"
+         	class="form-control"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+      </div>  
+      <div class="mb-3">	
+         <input type="button" id="send"  value="전송" title="인증문자전송"   class="btn btn-primary" >  <!-- 문자보내는 전송버튼 -->
+      </div> 
+      
+      <div class="mb-3">
+         <label for="userNum">인증번호 :</label> 
+          <input type="text" id="userNum"   name="userNum"  
+         	class="form-control">   <!-- 인증번호 입력창 -->
+     </div>  
+      <div class="mb-3">	 	
+         <input type="button" id="enterBtn"  value="확인"  title="인증"  
+         	class="btn btn-outline-primary">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->  
+       </div>  
+       <script>
+       		$(function(){
+       			$("#send").on("click" , function(){
+       				let  to = $("#to").val().trim();
+       				if(to.length <= 0){  alert("인증번호를 입력해주세요");  $("#to").focus();  return ;}
+       				else{
+       					$.ajax({
+       						url:"/api/smsapi" , 
+       						type:"get",
+       						data:{to:to} , 
+       						success:function(data){
+       							alert(data);
+       							$("#enterBtn").click(function(){
+       								if( data == $("#userNum").val().trim() ){ alert("인증성공"); }
+       								else{ alert("인증실패"); }
+       							});
+       						} , 
+       						error:function(xhr, status, error) { alert("에러발생 : " + xhr.responseText);}
+       					});
+       				}
+       			});
+       		});
+       </script> 	   
+	</div> 
+	<!--    http://localhost:8484/api/sms -->
+</body>
+</html>
+
+<!-- 		
+		1. CoolSMS란?
+			카카오 알림톡 및 문자메시지 웹 발송을 지원해주는 REST API 제공 서비스이다.
+			단문, 장문, 포토 메시지 등을 보낼 수 있다.
+ 
+
+		2. CoolSMS 회원가입 및 API KEY 생성
+			https://coolsms.co.kr/
+ 
+
+		3. CoolSMS Library 다운받기
+			1) 메인페이지에서 지원센터 창을 클릭한다. - 중간에 개발자 - SDK
+				https://coolsms.zendesk.com/hc/ko
+				
+			2) SDK 부분에서 JAVA를 클릭한다. 
+				https://mvnrepository.com/search?q=coolsms -->

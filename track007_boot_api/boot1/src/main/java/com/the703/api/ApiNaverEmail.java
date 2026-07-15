@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApiEmail { 
+public class ApiNaverEmail { 
 	//1. 보내는쪽
 	@Value("${naver.host}")      private String host;      //  smtp.naver.com
 	@Value("${naver.user}")      private String user;      //  cozizii@naver.com

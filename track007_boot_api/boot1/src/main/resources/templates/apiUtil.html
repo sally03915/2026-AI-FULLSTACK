@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 	<div  layout:fragment="content">
+ 		<h3>🔗 API Util 기능별 바로가기 목록</h3>
+ 		<hr>
+ 		
+ 		<ul>
+ 			<!-- 1. Mail -->
+ 			<li><strong>1. 네이버 메일 발송:</strong> <a href="/api/util/mail">메일 작성 페이지</a></li>
+ 			
+ 			<!-- 3. Book -->
+ 			<li><strong>3. 네이버 도서 검색:</strong> 
+ 				<a href="/api/util/books">도서 검색 메인</a> | 
+ 				<a href="/api/util/books/json?search=spring" target="_blank">JSON 검색 테스트(Spring)</a> | 
+ 				<a href="/api/util/naverbook/xml?search=spring" target="_blank">XML 파싱 테스트(Spring)</a>
+ 			</li>
+ 			
+ 			<!-- 4. OpenAI -->
+ 			<li><strong>4. OpenAI Chat:</strong> <a href="/api/util/openai">AI 채팅 페이지</a></li>
+ 			
+ 			<!-- 5. LLM-RAG -->
+ 			<li><strong>5. LLM-RAG (PDF 질의응답):</strong> <a href="/api/util/rag/chat">RAG 채팅 페이지</a></li>
+ 			
+ 			<!-- 6. KMA Weather -->
+ 			<li><strong>6. 기상청 날씨 조회:</strong> 
+ 				<a href="/api/util/kma">날씨 페이지</a> | 
+ 				<a href="/api/util/kmaWeather" target="_blank">날씨 XML 데이터 확인</a>
+ 			</li>
+ 			
+ 			<!-- 7. OCR API -->
+ 			<li><strong>7. OCR (문자 인식):</strong> <a href="/api/util/ocr">이미지 업로드 페이지</a></li>
+ 			
+ 			<!-- 8. Google Report -->
+ 			<li><strong>8. Google Docs 보고서 생성:</strong> <a href="/api/util/report">보고서 관리 페이지</a></li>
+ 			
+ 			<!-- 9. Discord Notification -->
+ 			<li><strong>9. 디스코드 알림 발송:</strong> <a href="/api/util/notification">알림 테스트 페이지</a></li>
+ 			
+ 			<!-- 10. Map -->
+ 			<li><strong>10. 네이버 지도:</strong> <a href="/api/util/maps">지도 확인 페이지</a></li>
+ 			
+ 			<!-- 11. CoolSms -->
+ 			<li><strong>11. CoolSms 문자 발송:</strong> <a href="/api/util/sms">SMS 발송 페이지</a></li>
+ 			
+ 			<!-- 12. PostCode -->
+ 			<li><strong>12. 우편번호 검색:</strong> <a href="/api/util/postcode">주소 검색 페이지</a></li>
+ 			
+ 			<!-- 13. Chatbot -->
+ 			<li><strong>13. 챗봇:</strong> <a href="/api/util/chatbot">챗봇 화면</a></li>
+ 			
+ 			<!-- 14. Crawling -->
+ 			<li><strong>14. Jsoup 웹 크롤링:</strong> 
+ 				<a href="/api/util/jsoupView">크롤링 결과 뷰</a> | 
+ 				<a href="/api/util/jsoup" target="_blank">실시간 음원 데이터(JSON)</a>
+ 			</li>
+ 			
+ 			<!-- 15. KakaoPay -->
+ 			<li><strong>15. 카카오페이 결제:</strong> <a href="/api/util/pay/kakao">결제 데모 페이지</a></li>
+ 			
+ 			<!-- 16. PasswordCheck -->
+ 			<li><strong>16. 비밀번호 유출 검사:</strong> <a href="/api/util/password">유출 확인 페이지</a></li>
+ 		</ul>
+ 	</div>
+</body>
+</html>

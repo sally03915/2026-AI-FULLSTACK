@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head lang="ko">
+<meta charset="UTF-8">
+<title>BOOKS API AJAX</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+<!-- ⭕ Spring Security CSRF 메타 태그 추가 -->
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <h3 class="card-header bg-success text-white">📝 업무 태스크 기반 주간 보고서 자동 생성</h3>
+    <p>이번 주 진행한 원본 로그/태스크 데이터를 입력창에 넣어주세요.</p>
+    
+    <textarea id="rawTaskData" rows="6" cols="60" placeholder="예: 월요일-로그인 API 개발 완료, 화요일-리팩토링 진행 중"></textarea>
+    <br><br>
+
+    <!-- 실무 적용 시 구글 OAuth로 로그인한 실제 엑세스 토큰(Access Token) 값이 들어와야 합니다 -->
+    <button type="button" class="btn btn-primary" id="btnGenerate">AI 요약 및 구글 문서 발행</button>
+
+    <div id="resultZone" style="margin-top: 20px; padding: 15px; border: 1px dashed #ccc; display: none;">
+        <p style="color: green; font-weight: bold;">🎉 구글 드라이브에 문서 생성이 완료되었습니다!</p>
+        <p>요청 계정의 <strong>[내 드라이브]</strong> 최상단 폴더를 확인하시거나 아래 버튼을 누르세요.</p>
+        <!-- target="_blank"를 제외하여 현재 창에서 이동하도록 세팅 -->
+        <a id="docLink" href="#" style="display:inline-block; padding:8px 15px; background-color:#34A853; color:white; text-decoration:none; border-radius:4px;">생성된 구글 문서 바로가기</a>
+    </div>
+    
+    <script th:inline="javascript">
+    window.addEventListener("DOMContentLoaded", function() {
+        const btnGenerate = document.getElementById("btnGenerate");
+        const rawTaskData = document.getElementById("rawTaskData"); 
+        const docLink = document.getElementById("docLink");
+        const resultZone = document.getElementById("resultZone");
+
+        btnGenerate.addEventListener("click", function() {
+            let rawData = rawTaskData.value; 
+
+            if (!rawData) { 
+                alert("태스크 데이터를 입력하세요!"); 
+                return; 
+            }
+
+            // ⭕ 메타 태그에서 CSRF 토큰 및 헤더 이름 추출
+            const token = document.querySelector("meta[name='_csrf']").getAttribute("content");
+            const header = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+
+            btnGenerate.innerText = "AI 요약 및 문서 작성 중...⏳";
+            btnGenerate.disabled = true;
+
+            let formData = new FormData();
+            formData.append("rawTaskData", rawData); 
+
+            fetch("/api/util/report/generate", {
+                method: "POST",
+                headers: {
+                    // ⭕ 요청 헤더에 CSRF 토큰 주입
+                    [header]: token
+                },
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("서버 응답 에러 (상태 코드: " + response.status + ")");
+                }
+                return response.json();
+            })
+            .then(responseJson => {
+                if (responseJson.status === "success") {
+                    docLink.setAttribute("href", responseJson.url);
+                    
+                    // 순수 JS 방식의 부드러운 노출 구현
+                    resultZone.style.display = "block";
+                    resultZone.style.opacity = 0;
+                    resultZone.style.transition = "opacity 0.5s ease";
+                    setTimeout(() => resultZone.style.opacity = 1, 10);
+                } else {
+                    alert("실패 원인: " + responseJson.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("통신 오류: " + error.message);
+            })
+            .finally(() => {
+                btnGenerate.innerText = "AI 요약 및 구글 문서 발행";
+                btnGenerate.disabled = false;
+            });
+        });
+    });
+    </script>
+</div>
+</body>
+</html>

@@ -22,6 +22,11 @@ public class BasicController {
 		return "basic";
 	}  
 	
+	@GetMapping("/apiUtil")
+	public String api(  ) {  
+		return "apiUtil";
+	}  
+	
 	//1. tmpt 복사해서 basic 만들기
 	//2. http://localhost:8080/basic 했을때 basic.html 열리기   ( th:text )
 	

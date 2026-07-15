@@ -9,7 +9,14 @@ track005_jsp/Servers/
 /track007_boot_api/boot1/src/main/resources/application-oauth.properties
 /track007_boot_api/boot1/src/main/resources/*.zip
 track007_boot_api/Servers/
+track007_api-2표본정리/
 track007_api/Servers/
+track007_boot_api-능력단위/
+track008_1_nodeReact-능력단위/
+track008_1_nodeReact-강의교안/
+track008_node+react/
+track008_1_nodeReact/back/node_modules/
+track008_1_nodeReact/back/.env
 
 project/
 /track007_api-2/  
