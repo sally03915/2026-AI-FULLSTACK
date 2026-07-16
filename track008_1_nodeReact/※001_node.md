@@ -76,7 +76,8 @@ PS C:\Users\tj-bu-703-22>
 ```
 
 
-```
+```cmd
+--  power shell
 Get-ExecutionPolicy
 Set-ExecutionPolicy  RemoteSigned
 
@@ -230,6 +231,22 @@ grant  create table to node;
 
 #### 2.  appuser 테이블
 ```sql
+SQL> desc appuser;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ APP_USER_ID                               NOT NULL NUMBER
+ EMAIL                                     NOT NULL VARCHAR2(255)
+ PASSWORD                                  NOT NULL VARCHAR2(255)
+ NICKNAME                                           VARCHAR2(100)
+ MOBILE                                             VARCHAR2(20)
+ MBTI_TYPE_ID                                       NUMBER
+ UFILE                                              VARCHAR2(255)
+ CREATED_AT                                         DATE
+
+SQL> create sequence  APPUSER_SEQ;
+```
+
+```sql
 DROP  TABLE APPUSER  CASCADE CONSTRAINTS;
 
 CREATE TABLE APPUSER (
@@ -260,22 +277,300 @@ DB_CONNECT=localhost:1521/XE
 
 #### 4.  [config] - db.js 
 ```js
+// config/db.js
+require('dotenv').config();
+module.exports = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  connectString: process.env.DB_CONNECT  //localhost:1521/XE
+};
 ```
 #### 5.  [models] - users.js 
 ```js
+//1.  require
+const  dbConfig = require('../config/db');  //user, password, connectString
+const  oracledb = require('oracledb');
+const  bcrypt    = require('bcrypt');   //## bcrypt
+// oracle 초기화
+oracledb.initOracleClient(); 
+const options = { outFormat: oracledb.OUT_FORMAT_OBJECT , autoCommit:true }; 
+
+//2. 각기능 sql
+// 1. create - insert
+// ### 1. 사용자 등록 (Create - Insert)
+// INSERT INTO appuser (
+//     APP_USER_ID,     EMAIL,     PASSWORD,  NICKNAME,    MOBILE,    MBTI_TYPE_ID,    UFILE,    CREATED_AT
+// ) VALUES (
+//     APPUSER_SEQ.NEXTVAL ,  :email,    :password,   :nickname,     :mobile,   :mbtiTypeId,     :ufile,    SYSDATE
+// )
+async function  createUser( email,     password,    nickname,      mobile,    mbtiTypeId,      ufile){
+    let conn;
+    try{
+        conn = await oracledb.getConnection(dbConfig);
+        const  hashedPassword = await  bcrypt.hash(password , 10);
+        const  result = await conn.execute( 
+            `INSERT INTO appuser (
+                APP_USER_ID,     EMAIL,     PASSWORD,  NICKNAME,    MOBILE,    MBTI_TYPE_ID,    UFILE,    CREATED_AT
+             ) VALUES (
+                APPUSER_SEQ.NEXTVAL ,  :email,    :password,   :nickname,     :mobile,   :mbtiTypeId,     :ufile,    SYSDATE
+             )` 
+            , {email,     password:hashedPassword,    nickname,      mobile,    mbtiTypeId,      ufile} 
+            , options);  // sql, 사용자입력값, 옵션
+    }catch(err){
+        console.log(  'createUser Error' , err);
+        throw err;
+    }finally{
+        if(conn) await  conn.close();
+    } 
+}
+
+
+// 2. 사용자조회 - email
+// ### 2. 사용자 조회 (Email 기준)
+// SELECT APP_USER_ID, EMAIL, PASSWORD, NICKNAME, MOBILE, MBTI_TYPE_ID, UFILE, CREATED_AT 
+// FROM appuser 
+// WHERE EMAIL = :email 
+async function  findUserByEmail(email){
+    let conn;
+    try{
+        conn = await oracledb.getConnection(dbConfig);
+        const result = await  conn.execute(
+            `SELECT APP_USER_ID, EMAIL, PASSWORD, NICKNAME, MOBILE, MBTI_TYPE_ID, UFILE, CREATED_AT 
+             FROM appuser 
+             WHERE EMAIL = :email` 
+             , {email} 
+             , options); //실행
+        return result.rows[0];  //결과처리    
+    }catch(err){
+        console.log(  'findUserByEmail Error' , err);
+        throw err;
+    }finally{
+        if(conn) await  conn.close();
+    } 
+}
+
+
+// 3. 사용자조회 - id
+// ### 3. 사용자 조회 (ID 기준)
+// SELECT APP_USER_ID, EMAIL, NICKNAME, MOBILE, MBTI_TYPE_ID, UFILE, CREATED_AT 
+// FROM appuser 
+// WHERE APP_USER_ID = :id
+async function  findUserById(id){
+    let conn;
+    try{
+        conn = await oracledb.getConnection(dbConfig);
+        const result = await  conn.execute(
+            `SELECT APP_USER_ID, EMAIL, PASSWORD, NICKNAME, MOBILE, MBTI_TYPE_ID, UFILE, CREATED_AT 
+             FROM appuser 
+             WHERE APP_USER_ID = :id` 
+             , {id} 
+             , options); //실행
+        return result.rows[0];  //결과처리    
+    }catch(err){
+        console.log(  'findUserById Error' , err);
+        throw err;
+    }finally{
+        if(conn) await  conn.close();
+    } 
+}
+
+// 4. 로그인 - sql 빼기 pass /  로그아웃
+// ### 4. 로그인 & 로그아웃
+async function  verifyUser(   email, password ){
+    const user = await  findUserByEmail(email);
+    if(!user)  return null;
+
+    const  match = await bcrypt.compare(  password , user.PASSWORD);
+    if(!user)  return null;
+
+    return {
+        id:   user.APP_USER_ID, 
+        email : user.EMAIL , 
+        nickname: user.NICKNAME,
+    }
+} 
+
+
+// 5. 전체조회 
+// ### 5. 전체 사용자 조회 (Read All)
+// SELECT APP_USER_ID, EMAIL, NICKNAME, MOBILE, MBTI_TYPE_ID, UFILE, CREATED_AT 
+// FROM appuser 
+// ORDER BY CREATED_AT DESC
+async function  getAllUsers(){
+    let conn;
+    try{
+        conn = await oracledb.getConnection(dbConfig);
+        const result = await  conn.execute(
+            `SELECT APP_USER_ID, EMAIL, NICKNAME, MOBILE, MBTI_TYPE_ID, UFILE, CREATED_AT 
+             FROM appuser 
+             ORDER BY CREATED_AT DESC` 
+             , {} 
+             , options); //실행
+        return result.rows;  //결과처리   
+    }catch(err){
+        console.log(  'getAllUsers Error' , err);
+        throw err;
+    }finally{
+        if(conn) await  conn.close();
+    } 
+} 
+
+// 6. 닉네임수정
+// ### 6. 닉네임 수정 (Update Nickname)
+// UPDATE appuser 
+// SET NICKNAME = :nickname 
+// WHERE APP_USER_ID = :id
+async function  updateUserNickname(  nickname , id  ){
+    let conn;
+    try{
+        conn = await oracledb.getConnection(dbConfig);
+        const result = await  conn.execute(
+            `UPDATE appuser 
+             SET NICKNAME = :nickname 
+             WHERE APP_USER_ID = :id` 
+             , {nickname , id } 
+             , options); //실행
+    }catch(err){
+        console.log(  'updateUserNickname Error' , err);
+        throw err;
+    }finally{
+        if(conn) await  conn.close();
+    } 
+} 
+
+// 7. 사용자 삭제
+// ### 7. 사용자 삭제 (Delete)
+// DELETE FROM appuser 
+// WHERE APP_USER_ID = :id
+async function  deleteUser( id ){
+    let conn;
+    try{
+        conn = await oracledb.getConnection(dbConfig);
+        const result = await  conn.execute(
+            `DELETE FROM appuser  
+             WHERE APP_USER_ID = :id` 
+             , { id } 
+             , options); //실행
+    }catch(err){
+        console.log(  'deleteUser Error' , err);
+        throw err;
+    }finally{
+        if(conn) await  conn.close();
+    } 
+} 
+
+// 8. 닉네임조회
+// ### 8. 닉네임 조회 
+// SELECT APP_USER_ID, EMAIL, NICKNAME 
+// FROM appuser 
+// WHERE NICKNAME = :nickname  
+async function  findUserByNickname(nickname){
+    let conn;
+    try{
+        conn = await oracledb.getConnection(dbConfig);
+        const result = await  conn.execute(
+        `SELECT APP_USER_ID, EMAIL, NICKNAME 
+        FROM appuser 
+        WHERE NICKNAME = :nickname` 
+        , {nickname} 
+        , options); //실행
+        return result.rows[0];  //결과처리  
+    }catch(err){
+        console.log(  'findUserByNickname Error' , err);
+        throw err;
+    }finally{
+        if(conn) await  conn.close();
+    } 
+} 
+
+//3. export
+module.exports = {  createUser ,  findUserByEmail ,  findUserById, 
+                    verifyUser , getAllUsers , updateUserNickname , deleteUser , findUserByNickname};
+
 ```
 #### 6.  모델함수 테스트
 ```js
+const { 
+    createUser, 
+    findUserByEmail, 
+    verifyUser, 
+    getAllUsers, 
+    updateUserNickname, 
+    deleteUser, 
+    findUserById, 
+    findUserByNickname 
+} = require('./models/users');
+
+async function runTests() {
+    try {
+        console.log('--- 🧪 [테스트 시작] ---');
+
+        // 1. 회원가입
+        await createUser('t@t', 't', 'tt', '0101111111', 1, '1.png');  
+        console.log('✅ 1. createUser 성공');
+
+        // 2. 이메일로 조회
+        const userByEmail = await findUserByEmail('t@t');  
+        console.log('✅ 2. findUserByEmail 결과: ', userByEmail);
+
+        // 3. 로그인 검증 (비밀번호 맞는 경우)
+        const loginUser = await verifyUser('t@t', 't');  
+        console.log('✅ 3. verifyUser 결과 (비밀번호 일치): ', loginUser);
+
+        // 4. 로그인 검증 (비밀번호 틀린 경우)
+        const failLogin = await verifyUser('t@t', 'wrong');  
+        console.log('✅ 4. verifyUser 결과 (비밀번호 불일치): ', failLogin);
+        
+        // 5. 전체조회
+        const allUsers = await getAllUsers();  
+        console.log('✅ 5. getAllUsers 결과:', allUsers);
+        
+        // 6. 닉네임 수정 (순서 수정됨: nickname, id)
+        await updateUserNickname('AA', userByEmail.APP_USER_ID);  
+        const updateUser = await findUserById(userByEmail.APP_USER_ID);
+        console.log('✅ 6. updateUserNickname 결과:', updateUser);
+
+        // 7. 사용자 삭제
+        // await deleteUser(userByEmail.APP_USER_ID);  
+        // console.log('✅ 7-1. deleteUser 성공');
+        // const deletedUser = await findUserById(userByEmail.APP_USER_ID);
+        // console.log('✅ 7-2. findUserById (삭제 후 조회결과 - null 기대):', deletedUser);
+
+ 
+ 
+        // 8-1. 이미 존재하는 닉네임 'tt'로 테스트용 사용자 회원가입
+        await createUser('test2@test.com', 'pw', 'tt', '0101111111', 1, '1.png');
+        console.log('✅ 8-1. createUser(tt) 성공');
+
+        // 8-2. 닉네임 중복 검사 실행 (중복 발생 시나리오)
+        const duplicateNickname = await findUserByNickname('tt');
+        if (duplicateNickname) {
+            console.log('✅ 8-2. findUserByNickname 결과: 닉네임 중복 확인됨 (값 있음)');
+        } else {
+            console.log('❌ 8-2. findUserByNickname 결과: 닉네임이 없다고 나옴 (검증 실패)');
+        }
+
+        // 8-3. 존재하지 않는 닉네임 검사 (사용 가능 시나리오)
+        const newNickname = await findUserByNickname('uniqueName123');
+        if (!newNickname) {
+            console.log('✅ 8-3. findUserByNickname 결과: 닉네임 사용 가능 (값 없음)');
+        }
+
+    } catch (err) {
+        console.error('❌ 닉네임 테스트 중 오류 발생:', err);
+    }
+}
+
+runTests();
+
+//  node   test1.js
+
+
 ``` 
 
 
 ### 2) controller
 back/
-├── middlewares/
-│   └── isAuthenticated.js     # 로그인 인증 미들웨어
-├── passport/
-│   ├── index.js               # Passport 초기화
-│   └── local.js               # Local 전략 설정
 ├── routes/
 │   └── user.js                # 사용자 관련 API 라우터 
 ├── app.js
@@ -295,10 +590,22 @@ delete: /user/{id}
 patch: /user/{id}/nickname   ← rest 방식     데이터접근방식 : url 자원소스가 포함
 ※비교  /user/nickname?id=1   ← 쿼리스트링     데이터접근방식 : url ?key=value
 
-http 표준프로토콜 사용 
-- GET(조회) , POST(생성) , PUT/PATCH(수정) , DELETE(삭제)
-
-
 2. app.js
+
+
+### 3) security
+back/
+├── middlewares/
+│   └── isAuthenticated.js     # 로그인 인증 미들웨어
+├── passport/
+│   ├── index.js               # Passport 초기화
+│   └── local.js               # Local 전략 설정
+├── routes/
+│   └── user.js                # 사용자 관련 API 라우터 
+├── app.js
+
+
 3. [passport] -  index.js /  local.js
 4. [middlewares] -  isAuthenticated.js 
+5. [routers] - user.js
+6. app.js
