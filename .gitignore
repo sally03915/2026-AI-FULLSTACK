@@ -15,8 +15,12 @@ track007_boot_api-능력단위/
 track008_1_nodeReact-능력단위/
 track008_1_nodeReact-강의교안/
 track008_node+react/
-track008_1_nodeReact/back/node_modules/
-track008_1_nodeReact/back/.env
+
+track008_1_nodeReact2026/back/node_modules/
+track008_1_nodeReact2026/back/.env
+track008_1_nodeReact2026/*.zip
+track008_1_nodeReact2026/front/node_modules/
+track008_1_nodeReact2026/front/.next/ 
 
 project/
 /track007_api-2/  

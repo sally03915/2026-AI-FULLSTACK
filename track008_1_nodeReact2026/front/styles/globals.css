@@ -1,0 +1,6 @@
+/* styles/globals.css */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+  background-color: #f8f9fa; /* Bootstrap 기본 배경색 */
+} 
