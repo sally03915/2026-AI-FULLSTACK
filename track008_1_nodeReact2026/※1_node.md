@@ -158,9 +158,7 @@ back/
 ├── app.js                     # 서버 진입점 
 ```
 1. app.js
-```
 
-```
 2. 실행
 ```
 npx  nodemon  app.js
@@ -570,10 +568,12 @@ runTests();
 
 
 ### 2) controller
+```
 back/
 ├── routes/
 │   └── user.js                # 사용자 관련 API 라우터 
 ├── app.js
+```
 
 1. [routers] - user.js
 ```
@@ -594,6 +594,7 @@ patch: /user/{id}/nickname   ← rest 방식     데이터접근방식 : url 자
 
 
 ### 3) security
+```
 back/
 ├── middlewares/
 │   └── isAuthenticated.js     # 로그인 인증 미들웨어
@@ -603,6 +604,7 @@ back/
 ├── routes/
 │   └── user.js                # 사용자 관련 API 라우터 
 ├── app.js
+```
 
 
 3. [passport] -  index.js /  local.js
