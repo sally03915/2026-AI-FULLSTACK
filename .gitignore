@@ -37,5 +37,4 @@ node_modules/
 *.DS_Store
 Thumbs.db
 
-
-track000-OT.txt
+./track000-OT.txt
