@@ -310,7 +310,7 @@ front/
 │   ├── __tests__/       
 │   │	├── post.test.js        # 게시판 테스트 코드 
 │   │	└── user.test.js        # 리듀서 테스트 코드
-│   ├── index.js            # 루트 리듀서 (combineReducers)
+│   ├── index.js              # 루트 리듀서 (combineReducers)
 │   ├── authReducer.js             # 사용자 관련 리듀서
 │   └── postReducer.js             # 게시판 관련 리듀서 
 ├── sagas/                  # Redux-Saga 폴더
