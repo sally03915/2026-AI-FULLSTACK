@@ -194,5 +194,34 @@ router.delete('/:id'   ,   isAuthenticated   , async(req, res)=>{
     }
 }); 
 
+// 이메일중복검사   
+// get /user/check-email
+/**
+ * @swagger
+ * /user/check-email:
+ *   get:
+ *     summary: 이메일 중복 확인
+ *     description: 입력한 이메일이 이미 존재하는지 확인합니다.
+ *     parameters:
+ *       - in: query
+ *         name: email
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: 사용가능한 이메일
+ *       409:
+ *         description: 이미 사용 중인 이메일 
+ */
+router.get('/check-email'   ,   async(req, res)=>{
+    try{  
+        const {email} = req.query;
+        const user =  await  findUserByEmail( email );   // 쿼리스트링으로 이메일받음
+        if( user ){    return  res.status(409).json({ isAvailable:false , message : '이미 사용 중인 이메일입니다.'}); }
+        return  res.status(200).json({ isAvailable:true , message : '사용 가능한 이메일입니다.'});
+    }catch(err){   res.status(500).json({message:'서버 오류'});  }
+}); 
+
+
 //3. export
 module.exports = router;

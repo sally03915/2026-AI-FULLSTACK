@@ -15,6 +15,7 @@ export  const   LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';  // 로그아웃 요청
 export  const   LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';  // 로그아웃 성공
 export  const   LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';  // 로그아웃 실패
 
+export  const   SIGN_UP_RESET = 'SIGN_UP_RESET';  // 회원가입 요청
 export  const   SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';  // 회원가입 요청
 export  const   SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';  // 회원가입 성공
 export  const   SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';  // 회원가입 실패
@@ -31,6 +32,10 @@ export  const   DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';  // 사용자삭제
 export  const   DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';  // 사용자삭제  성공
 export  const   DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';  // 사용자삭제  실패
 
+export  const   CHECK_EMAIL_REQUEST = 'CHECK_EMAIL_REQUEST';  // 이메일중복검사  요청
+export  const   CHECK_EMAIL_SUCCESS = 'CHECK_EMAIL_SUCCESS';  // 이메일중복검사  성공
+export  const   CHECK_EMAIL_FAILURE = 'CHECK_EMAIL_FAILURE';  // 이메일중복검사  실패
+
 // 2. 초기상태  
 export  const initialState={
     me: null  ,    // 로그인사용자정보 {  id,  email, nickname  }
@@ -38,12 +43,18 @@ export  const initialState={
     isLoading: false,  // api 요청 중 여부
     error:  null    ,  // 에러메시지
     signUpDone: false, // 회원가입 완료여부
+    
+    checkEmailLoading: false, //  email - api 요청중
+    checkEmailDone: false,
+    checkEmailError: null, 
+    isEmailAvailable: null,   //  true : 사용가능 , false : 중복 
 };
 
  
 // 3. reducer 함수
 const reducer = (   state=initialState   ,   action    )=>{   // 현재상태,  요청액션
     switch(  action.type ){
+        case SIGN_UP_RESET :   return {  ...state , signUpDone: false } 
         // 요청 액션 → 로딩시작
         case LOG_IN_REQUEST:
         case LOG_OUT_REQUEST:
@@ -51,8 +62,17 @@ const reducer = (   state=initialState   ,   action    )=>{   // 현재상태,  
         case LOAD_USERS_REQUEST:
         case UPDATE_NICKNAME_REQUEST:
         case DELETE_USER_REQUEST:
-            return {  ...state , isLoading: true ,  error:  null }
-        
+            return {  ...state , isLoading: true ,  error:  null };
+        //  -- 이메일 중복확인요청
+        case CHECK_EMAIL_REQUEST:
+            return {
+                checkEmailLoading: true,  
+                checkEmailDone: false,
+                checkEmailError: null, 
+                isEmailAvailable: null,   
+            };
+
+
         // 성공 액션 → 상태 업데이트
         case  LOG_IN_SUCCESS:
                 return  {  ...state, isLoading: false ,  me: action.data  };
@@ -74,6 +94,23 @@ const reducer = (   state=initialState   ,   action    )=>{   // 현재상태,  
                     me : state.me?.id === action.data.id? null : state.me , 
                     users: state.users.filter(  (u) => u.id !== action.data.id )
                 };
+        case CHECK_EMAIL_SUCCESS:
+            return {
+                ...state,
+                checkEmailLoading: false,  
+                checkEmailDone: true,
+                isEmailAvailable: action.data.isAvailable,   
+            } 
+
+        case CHECK_EMAIL_FAILURE:
+            return {
+                ...state,
+                checkEmailLoading: false,  
+                checkEmaileError: action.error,
+                isEmailAvailable: false,   
+            } 
+
+
 
         // 실패 액션 → 에러메시지 저장
         case LOG_IN_FAILURE:
