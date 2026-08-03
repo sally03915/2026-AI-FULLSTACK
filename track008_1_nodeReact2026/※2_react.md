@@ -420,3 +420,10 @@ app.use( cors({
 ```  
 
 실습1) front - pages- [ _app.js ]
+
+
+// useSelector  - 전역상태
+// useDispatch  - 스토어알림
+// useState     - 변수
+// useEffect    - 이벤트변경감지
+// useRouter    - 경로

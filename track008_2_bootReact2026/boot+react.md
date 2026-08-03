@@ -118,7 +118,7 @@ grant  create table to boot;
 ```
 위에는 참고요.  완성하신분들은   카카오톡에 `````    oracle  유저셋팅   `````   부분에 체크표시해주세요
 
-
+---
 
 ##### [■실습]  4.   Boot + React  - ver1  (기본게시판 + 회원가입)
 
@@ -346,5 +346,138 @@ npm install
 ```
 Step3) reducer
 Step4) saga
-Step5) view
+Step5) view 
+1. AppLayout({  children, initialUser })   
+2. Row - Col - Col
+3. 반응형 <Col flex="none"> 고정
+4. 반응형 <Col flex="auto" xs={0}  sm={0}  md={16}  lg={18}>
+                xs, sm (모바일): 0 숨김처리  ,  md (테블릿) : 16  24칸중에 16 , lg(pc) : 18   24칸중에 18
+5. button 종류 : primary , default(하얀색), text(없음) , link(a링크형식모양) 
+                <Button   type="text" >
+
+
+2. 경로
+```
+├── pages/                # Next.js 라우팅 기반 페이지 폴더
+│   ├── posts/             
+│   │ └──new.js           #  글쓰기 파일
+│   ├── _app.js           # 전체 앱의 공통 설정 (Redux Provider, 글로벌 스타일 등)
+│   ├── singup.js         # 회원가입
+│   ├── mypage.js         # 마이페이지
+│   └── index.js          # 메인 페이지  
+```
+<Link href="/">          index.js     # 메인 페이지  
+<Link href="/mypage">    mypage.js    # 마이 페이지  
+<Link href="/singup">    singup.js    # 회원가입  
+<Link href="/posts/new"> posts/new.js # 글쓰기 파일  
+
  
+
+
+##  (1) : 회원가입 +  board (crud)
+##  (2) : 멤버기능 +  board (이미지업로드, 해쉬태그 , 좋아요)
+boot2 -  프로젝트만들기
+- table     →   mapper      (dto)   →  service    →   controller
+- @Entity   →   repository  (dto)   →  service    →   controller
+
+1) 유저는 많은 글을 쓸 수 있다.
+<AppUser>  → <Post>
+```
+<AppUser>
+@OneToMany( mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true )
+private List<Post> posts = new ArrayList<>(); 
+
+<Post>
+@ManyToOne   //1. 다대일  (테이블필드)
+@JoinColumn(name="APP_USER_ID" , nullable = false)
+private AppUser user; 
+```
+
+2) 글은 많은 이미지를 갖는다.
+<Post> → <Image>
+
+```
+  <Post>	// 한 글은 여러 이미지를 갖는다
+	@OneToMany( mappedBy= "post",   cascade = CascadeType.ALL , orphanRemoval = true)
+	private List<Image>  images = new ArrayList<>();
+
+  <Image>	
+  @ManyToOne // 한 글은 여러 이미지를 갖는다
+	@JoinColumn(name="POST_ID" , nullable = false)   // POST_ID 외래키 (FK)   POST엔티티의 PK(ID) 참조
+	private Post post;
+```
+
+
+3) 글은 많은 해쉬태그를 갖는다.    / 해쉬태그는 많은 글을 갖는다.
+1)   다:다
+2)   중간테이블 
+<Post> → <Hashtag>       글(여러)은 많은 해쉬태그를 갖는다.
+<Hashtag> → <Post>       해쉬태그은 많은 글를 갖는다.
+
+<Post>                                     <Hashtag>
+content                                    1  test123 
+deleted                                    2  like 
+                    
+         ↔     <Post_Hashtag>  ↔
+                    1   1
+                    1   2 
+                    2   1
+                    2   2 
+                 1번글  test123
+                 1번글  like
+
+```
+<Post>
+	@ManyToMany
+	@JoinTable(name="POST_HASHTAG" ,
+		joinColumns = @JoinColumn(name="POST_ID") ,
+		inverseJoinColumns =  @JoinColumn(name="HASHTAG_ID") 
+	)
+	private List<Hashtag>  hashtags = new ArrayList<>();
+
+<Hashtag>
+	@ManyToMany(mappedBy = "hashtags")
+	private List<Post>  posts = new ArrayList<>();
+```
+
+4) 글은 많은 좋아요를 갖는다   
+한글에 여러유저가 좋아요를 눌러요
+<Post>                                     <POST_LIKE>     
+@OneToMany List<POST_LIKE> likes;          @ManyToOne    AppUser user;  
+@OneToMany List<POST_LIKE> likes;          @ManyToOne    Post    post;    
+<AppUser>
+                                          좋아요번호   글번호   유저번호
+                                          1           1      1
+                                          2           1      2
+                                          3           1      3
+                                          4           2      2
+                                          5           2      3
+
+
+5) 리트윗
+6) 팔로우
+팔로워 :  나를 구독하는 사람들  ,내팬 
+팔로잉 :  내가 한 구독             ,김우빈/신민아/카리나
+
+		follower	     followee
+		1	     2
+		1	     3
+		2                3	
+
+		1 나	2 김우빈	3신민아	4카리나	 	 
+
+
+> 포트폴리오
+1. boot - 두번째
+1) 포폴1 - 옮기기 ( 리뉴얼 )
+	1. 프로젝트
+	2. 테이블구성 @Entity  숙제)
+	3. mybatis 셋팅  (mapper)  / repository  
+	4. service  
+	5. RestController   	
+
+2) 포폴2 - 새롭게 구성되는파트
+
+
+
+front2 - 프로젝트복사하기

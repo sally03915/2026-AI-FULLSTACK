@@ -20,3 +20,4 @@ describe('Redux Store and Saga Middleware', () => {
         expect(updatedState.post.loading).toBe(true);
     });
 });
+// npm test

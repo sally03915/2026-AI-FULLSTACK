@@ -92,7 +92,7 @@ const postReducer=  createSlice({
         deletePostSuccess: (state , action)=>{ 
             state.loading = false;
             // 삭제된 게시글의 id받아서 목록에서 제외
-            state.posts   = state.posts.filter(post=>  post.id !== action.palyload);   
+            state.posts   = state.posts.filter(post=>  post.id !== action.payload);   
             state.success = true;
         },
         deletePostFailure: (state , action)=>{ 
@@ -108,5 +108,11 @@ const postReducer=  createSlice({
         } , 
     }
 }); 
-export const {} = postReducer.actions; 
+export const {  fetchPostsRequest , fetchPostsSuccess, fetchPostsFailure ,   //  전체글
+                fetchPostDetailRequest  , fetchPostDetailSuccess  , fetchPostDetailFailure,  //상세글 
+                createPostRequest , createPostSuccess , createPostFailure ,  // 글쓰기
+                updatePostRequest ,  updatePostSuccess ,  updatePostFailure ,  // 글수정
+                deletePostRequest ,  deletePostSuccess ,  deletePostFailure ,  // 글삭제
+                resetUserState // 초기화
+} = postReducer.actions; 
 export default postReducer.reducer;
