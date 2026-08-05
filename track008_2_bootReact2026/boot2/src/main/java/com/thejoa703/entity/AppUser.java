@@ -45,7 +45,8 @@ public class AppUser {
 	private String provider="local";
 
 	@Column(name="PROVIDER_ID" ,  length = 150 )
-	private String providerId="local";   //  kakao_id, naver_id
+	private String providerId="local";   
+	//  kakao_id, naver_id
 	
 	@Column(length = 255)
 	private String ufile;
