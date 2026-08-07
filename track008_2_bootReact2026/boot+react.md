@@ -486,7 +486,7 @@ Step5) view
 
 1) UserDto :  UserRequestDto   /  UserResponseDto  
 UserRequestDto  < email , password, nickname,  ☆image (ufile: Multipart 빠짐)   /  provider , mobile, mbtitype  >
-UserResponseDto < email , role    , nickname,   ufile  , password(비밀번호암호화 빠진)    / id, provider , mobile , mbtitype >
+UserResponseDto < email , role    , nickname,   ufile  , password(비밀번호암호화 빠짐)    / id, provider , mobile , mbtitype >
 
 2) LoginRequest  < email, password , provider >
 
@@ -500,7 +500,35 @@ UserResponseDto < email , role    , nickname,   ufile  , password(비밀번호�
 
 
 [5]  RestController   	
- 
+
+> Ver2  . frontend
+
+1. 프로젝트만들기  (npm init)
+```
+mkdir front2
+cd    fonrt2
+npm init
+```
+
+2. 프로그램 설치  (npm install)
+```
+npm install
+```
+
+3. 개발
+1) reducer   → 2) saga    →  3) page
+
+<20260807> 
+- [x] login.js 로그인  
+- [x] 닉네임 수정  
+- [x] 이미지프로필 수정  
+- [x] 게시판 작성 
+- [ ] 게시판 수정
+
+4. 보안 + 시큐리티
+
+
+
 
 
 

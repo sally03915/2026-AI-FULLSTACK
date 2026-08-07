@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update  #  test환경  create-drop 매번초기화 / update 부분수정  
+      ddl-auto: create-drop  #  test환경  create-drop 매번초기화 / update 부분수정  
     properties:
       hibernate:
         format_sql: true

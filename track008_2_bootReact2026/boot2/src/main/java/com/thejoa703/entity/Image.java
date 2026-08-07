@@ -32,3 +32,6 @@ public class Image {
 	@JoinColumn(name="POST_ID" , nullable = false)   // POST_ID 외래키 (FK)   POST엔티티의 PK(ID) 참조
 	private Post post;
 }
+
+
+
