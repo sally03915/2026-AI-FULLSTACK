@@ -41,7 +41,7 @@ public class PostDto {
 			if(post.getUser()  != null) {  dto.setUserNickname(  post.getUser().getNickname() ); }
 			dto.setImageUrls(   post.getImages().stream().map(Image::getSrc).collect(Collectors.toList()) );
 			dto.setHashtags(    post.getHashtags().stream().map(Hashtag::getName).collect(Collectors.toList()) );
-			dto.setCreatedAt(post.getCreatedAt());
+			dto.setCreatedAt(   post.getCreatedAt());
 			return dto;
 		} 
 		public PostResponseDto(Post post) {

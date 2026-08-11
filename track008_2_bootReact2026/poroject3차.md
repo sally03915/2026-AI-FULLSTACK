@@ -43,23 +43,23 @@ DAY1~5. 260727~31
       ★ 셋팅점검
 
 DAY6~10. 260803~
-■1)  @Entity                              > 260803
-- [ ] moit   ( 보라, 예진, 채연, 욱진 )
-- [x] spring breeze  ( 윤정 , 주엽 , 다영 )
-- [ ] the library
+■1)  @Entity > 260803
+- [x] moit    (보라 , 욱진, 혜원 , 예진 , 채연)
+- [x] spring breeze   ( 윤정 , 수정 , 다영 , 주엽 )
+- [ ] the library (현미)
 - [ ] marin boy
 
-■2)  @Repository  / @Mapper               > 260804
-- [ ] moit  ( 보라, 예진, 채연/  욱진 도전 중....)
-- [ ] spring breeze  ( 윤정, 주엽 , 다영 )
-- [ ] the library
-- [ ] marin boy
+■2)  @Repository  / @Mapper > 260804
 ................. 기존의 dto / @Mapper 동작하는지확인
 ................. @Entity 연결되는지  
+- [x] moit  (보라 , 욱진 , 혜원  , 예진 , 채연)
+- [ ] spring breeze   ( 윤정, 수정 , 다영 , 주엽)
+- [ ] the library
+- [ ] marin boy
 
 ■3)  Dto( RequestDto + ResponseDto )  흐름도 / @Serivce + @RestController  > 260805
-- [ ] moit  (보라, 예진 , 채연 도전 중 !)
-- [ ] spring breeze   (윤정, 주엽, 다영 도전 중 !)
+- [ ] moit  (보라, 욱진 , 혜원  , 예진 , 채연)
+- [ ] spring breeze     ( 윤정, 수정  , 다영 , 주엽)
 - [ ] the library
 - [ ] marin boy
 

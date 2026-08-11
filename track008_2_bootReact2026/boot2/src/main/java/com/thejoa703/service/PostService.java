@@ -32,14 +32,13 @@ public class PostService {
 	private final FileStorageService fileStorageService;  // 이미지 업로드처리
 	
 	//1. 전체게시글조회
-	//	public List<Post>  getAllPosts(){return    postRepository.findByDeletedFalse();	}
-	public List<PostResponseDto> getAllPosts() {
-		return postRepository.findByDeletedFalse().stream()
-				.map(PostResponseDto::from)
-				.collect(Collectors.toList());
+	//public List<Post>  getAllPosts(){return    postRepository.findByDeletedFalse();	}
+	public List<PostResponseDto>  getAllPosts(){
+		return    postRepository.findByDeletedFalse().stream()
+					.map( PostResponseDto::from  )
+					.collect(Collectors.toList());	
 	}
-	
-	
+	 
 	//2. 단건조회
 	public Post   getPostById(Long id) {
 		Post post = postRepository.findById(id)

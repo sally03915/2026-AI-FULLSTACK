@@ -48,23 +48,23 @@ public class PostController {
 		return  ResponseEntity.ok(   postService.createPost(userId, dto , files)  );  // 201
 	}
  
-//	@Operation(summary = "전체게시" , description = "전체게시글")
-//	@GetMapping   //ctrl + shift + o
-//	public ResponseEntity<List<PostResponseDto>>  getPosts(){
-//		List<Post> posts =postService.getAllPosts();
-//		List<PostResponseDto>  lists =   posts.stream()
-//											  .map(PostResponseDto::new)  //PostResponseDto
-//											  .collect(Collectors.toList());   // list로 변경
-//		return  ResponseEntity.ok( lists );  // 200
-//	} 
-//	
-	@Operation(summary = "전체게시", description = "전체게시글")
-	@GetMapping
-	public ResponseEntity<List<PostResponseDto>> getPosts() {
-		List<PostResponseDto> lists = postService.getAllPosts();
-		return ResponseEntity.ok(lists);  // 200 OK
+	//	@Operation(summary = "전체게시" , description = "전체게시글")
+	//	@GetMapping   //ctrl + shift + o
+	//	public ResponseEntity<List<PostResponseDto>>  getPosts(){
+	//		List<Post> posts =postService.getAllPosts();
+	//		List<PostResponseDto>  lists =   posts.stream()
+	//											  .map(PostResponseDto::new)  //PostResponseDto
+	//											  .collect(Collectors.toList());   // list로 변경
+	//		return  ResponseEntity.ok( lists );  // 200
+	//	} 
+ 	
+	@Operation(summary = "전체게시" , description = "전체게시글")
+	@GetMapping  
+	public ResponseEntity<List<PostResponseDto>>  getPosts(){
+		return  ResponseEntity.ok(  postService.getAllPosts()  );
 	}
 	
+
 	@Operation(summary = "단건게시" , description = "단건게시")
 	@GetMapping("/{id}")   //ctrl + shift + o
 	public ResponseEntity<PostResponseDto>  getPost(@PathVariable("id")  Long id){
