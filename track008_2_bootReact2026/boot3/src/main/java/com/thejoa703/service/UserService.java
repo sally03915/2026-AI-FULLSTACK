@@ -74,8 +74,8 @@ public class UserService {
 	public  Optional<AppUser>   findByEmailAndProvider(String email, String provider){
 		return   appUserRepository.findByEmailAndProvider(email, provider);
 	}
-	//#### saveSocialUser
-	@Transactional   //###확인
+	//#### saveSocialUser 
+	@Transactional	  //######  social - insert
 	public AppUser saveSocialUser( String email, String provider, String providerId, String nickname, String image) {
 		AppUser user  = AppUser.builder()
 						   .email(email)
@@ -83,8 +83,8 @@ public class UserService {
 						   .providerId(providerId)
 						   .nickname(nickname)
 						   .ufile(image)
-						   .role("ROLE_USER")
-						   .password(passwordEncoder.encode(  "thejoa703"  ))  //###확인
+						   .password( passwordEncoder.encode("thejoa703")  )   //## social + security
+						   .role("ROLE_USER") 
 						   .build();
 		return appUserRepository.save(user);  
 	}

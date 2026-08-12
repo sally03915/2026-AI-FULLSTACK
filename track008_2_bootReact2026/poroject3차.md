@@ -44,10 +44,10 @@ DAY1~5. 260727~31
 
 DAY6~10. 260803~
 ■1)  @Entity > 260803
-- [x] moit    (보라 , 욱진, 혜원 , 예진 , 채연)
-- [x] spring breeze   ( 윤정 , 수정 , 다영 , 주엽 )
-- [ ] the library (현미)
-- [ ] marin boy
+      - [x] moit    (보라 , 욱진, 혜원 , 예진 , 채연)
+      - [x] spring breeze   ( 윤정 , 수정 , 다영 , 주엽 )
+      - [ ] the library (현미)
+      - [ ] marin boy
 
 ■2)  @Repository  / @Mapper > 260804
 ................. 기존의 dto / @Mapper 동작하는지확인
@@ -65,12 +65,21 @@ DAY6~10. 260803~
 
 ■4)  backend 리팩토링                      
 
- 
+
+■ 과정명   : [취업기업확대]AI활용 풀스택(프론트엔드,백엔드)부트캠프(자바,파이썬,플러터)
+■ 훈련과목 : 	(비NCS)프로젝트ⅡBtoC 웹서비스 구축(Spring Framework 활용)
+> boot + security + jwt + redis / jpa( mybatis ) +oracle / react + next     → aws
 
 주제 → CRUD → ERD  → 피그마 → 코드구현
 
+1. 2차 포트폴리오 3차로 리팩토링
+□1)  @Entity
+□2)  @Repository  / @Mapper  
+□3)  Dto( RequestDto + ResponseDto )  흐름도 / @Serivce + @RestController
+□4)  backend 리팩토링    
+□5)  react
 
-
+2. 3차 새로운 기능추가 및 점검
 
 
 

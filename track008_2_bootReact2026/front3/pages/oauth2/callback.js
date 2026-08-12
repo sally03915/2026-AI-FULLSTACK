@@ -1,54 +1,47 @@
+//1. imoprt, require  
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../reducers/authReducer";
+import axios from "axios";
+// String targetUrl = redirectUrl + "?accessToken=" + access;   // 쿼리스트링
+//2. 부품 + export
+export default function OAuth2CallbackPapge(){
+    const router   = useRouter();  // 경로이동
+    const dispatch = useDispatch();// 스토어알림
 
-export default function OAuth2CallbackPage() {
-    const router = useRouter();
-    const dispatch = useDispatch();
-    
-    // 중복 요청 방지용 Ref
-    const hasFetched = useRef(false);
-
-    useEffect(() => {
-        if (!router.isReady) return;
-
-        const { accessToken } = router.query;
-
-        // accessToken이 있고, 아직 fetch를 수행하지 않았을 때만 실행
-        if (accessToken && !hasFetched.current) {
-            hasFetched.current = true; // 플래그를 true로 변경하여 중복 방지
-            
-            try {
-                localStorage.setItem("accessToken", accessToken);
-                fetchUser(accessToken);
-            } catch (err) {
-                console.error("OAuth2 callback error:", err);
+    useEffect(()=>{
+        if(! router.isReady) return;
+        const {accessToken} = router.query;
+        if(accessToken){
+            try{
+                localStorage.setItem("accessToken" , accessToken);   // 토큰 저장
+                fetchUser(accessToken);  // 사용자 정보를 요청
+            }catch(err){
+                console.error( "OAuth2 callback error:", err);
                 router.push("/login");
-            }
+            }    
         }
-    }, [router.isReady, router.query.accessToken]); // 의존성을 query 전체가 아닌 필요한 accessToken으로 한정
+    } , [ router.isReady , router.query ]);
 
-    const fetchUser = async (accessToken) => {
-        try {
-            const res = await fetch("http://localhost:8080/auth/me", {
+    const fetchUser = async( accessToken)=>{ 
+        try{
+            const res = await axios.get("http://localhost:8080/auth/me", {
                 headers: { Authorization: `Bearer ${accessToken}` },
-                credentials: "include",
+                withCredentials: true,  //쿠키전송용
             });
-
-            if (res.ok) {
-                const user = await res.json();
-                dispatch(loginSuccess({ user, accessToken }));
-                router.push("/mypage");
-            } else {
-                console.error("Auth failed with status:", res.status);
-                router.push("/login");
-            }
-        } catch (err) {
+            const user = res.data;
+            dispatch(loginSuccess({ user, accessToken}));
+            router.push("/mypage");
+        }catch(err){
             console.error("User fetch error:", err);
             router.push("/login");
         }
-    };
 
-    return <p>소셜 로그인 처리 중입니다....</p>;
+    }; 
+    return (<p>소셜 로그인 처리 중입니다.</p>);
 }
+
+// useSelector  - 전역상태 / useDispatch  - 스토어알림
+// useState     - 변수    / useEffect    - 이벤트변경감지
+// useRouter    - 경로

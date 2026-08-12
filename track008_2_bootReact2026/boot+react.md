@@ -658,15 +658,15 @@ STEP3)
 > boot + security + jwt + redis / jpa( mybatis ) +oracle / react + next     → aws
 
 1. boot
-1) docker  → redis
-2) boot 구동
+■1) docker  → redis
+■2) boot 구동
 
 2. react
 1) 폴더만들기
 2) 프로젝트 설치
 3) reducer → saga → page
 4) jwt 사용
-front3
+■front3
   ㄴ api/axios.js
   ㄴ pages
       ㄴ signup.js
@@ -676,6 +676,21 @@ front3
 3. social 개발자사이트 - 키찾기
 > kakao 개발자 , naver 개발자 ,  google 개발자     
 > boot의 .env 파일 바꾸기
+■boot3
+  ㄴ service : public AppUser saveSocialUser()- @더디체크/Security 처리
+
+■front3 
+  ㄴ public
+      ㄴ images
+        이미지 파일들
+    
+  ㄴ pages
+      ㄴ oauth2
+          ㄴ callback.js
+
+          String targetUrl = redirectUrl + "?accessToken=" + access;
+
+
 
 
 ```

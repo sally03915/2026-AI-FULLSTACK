@@ -92,6 +92,7 @@ export default function LoginPage() {
                         onClick={()=> handleSocialLogin("naver")}
                     />
                 </div>
+ 
 
             </Col>
         </Row>
