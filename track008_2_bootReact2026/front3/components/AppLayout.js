@@ -20,14 +20,9 @@ function AppLayout({  children , initialUser  }){   //★ 대체부품, 초기�
     const [ drawerOpen , setDrawerOpen ] = useState(false);  
     const router       = useRouter();
     const dispatch     = useDispatch();
-    const {user}       = useSelector((state)=> state.auth);
-    
- 
+    const {user}       = useSelector((state)=> state.auth); 
     
     const handleLogout = ()=>{   dispatch(logoutRequest());   router.replace('/login');  };  // 디스패치(logoutRequest()) / 경로 login 넘기기   //##
-
-
-
 
     const menuItems = [
        ...( user  &&  user.nickname
