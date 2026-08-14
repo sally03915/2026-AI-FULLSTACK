@@ -1,0 +1,140 @@
+package com.thejoa703.analysis;
+ 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thejoa703.repository.AppUserRepository;
+import com.thejoa703.repository.PostRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class StatisticsSyncService {
+
+    private final AppUserRepository userRepository;
+    private final PostRepository postRepository;
+
+    // Django 대시보드로 상세 분석 및 구분 데이터를 전송하는 메서드 (RestClient 활용)
+    public void sendRealStatsToDjango() {
+        String djangoUrl = "http://localhost:8000/dashboard/api/statistics/";
+        
+        // 1. 전체 회원 수 집계
+        long totalUsers = userRepository.count();
+        sendDataToDjango(djangoUrl, "전체 회원 수", (int) totalUsers);
+
+        // 💡 2. 상세 구분 분석: 소셜 로그인 가입 유형별 회원 수 분할 전송 (예시)
+        // (AppUserRepository에 provider별 카운트 메서드가 없어도 전체 데이터에서 다각도 분할 가능)
+        long localUsers = userRepository.findAll().stream()
+                .filter(u -> "local".equals(u.getProvider()) && !Boolean.TRUE.equals(u.getDeleted()))
+                .count();
+        sendDataToDjango(djangoUrl, "회원유형_일반(Local)", (int) localUsers);
+
+        long socialUsers = totalUsers - localUsers;
+        sendDataToDjango(djangoUrl, "회원유형_소셜(OAuth)", (int) socialUsers);
+
+        // 3. 전체 커뮤니티 게시글 수 집계
+        long totalPosts = postRepository.count();
+        sendDataToDjango(djangoUrl, "커뮤니티 게시글", (int) totalPosts);
+
+        // 💡 4. 상세 구분 분석: 삭제되지 않은 유효 게시글 vs 삭제된 게시글 비교
+        long activePosts = postRepository.findByDeletedFalse().size();
+        sendDataToDjango(djangoUrl, "활성 게시글(정상)", (int) activePosts);
+        
+        long deletedPosts = totalPosts - activePosts;
+        sendDataToDjango(djangoUrl, "삭제된 게시글(휴지통)", (int) deletedPosts);
+    }
+
+    // 공통 전송 헬퍼 메서드 (상세 카테고리 정보 동적 전송)
+    private void sendDataToDjango(String djangoUrl, String category, int count) {
+        RestClient restClient = RestClient.create();
+        
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("date", LocalDate.now().toString());
+        payload.put("category", category);
+        payload.put("count", count);
+
+        try {
+            // ObjectMapper를 사용하여 Map을 확실한 JSON 문자열로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonPayload = objectMapper.writeValueAsString(payload);
+
+            // RestClient를 이용한 POST 요청 전송
+            restClient.post()
+                    .uri(djangoUrl)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(jsonPayload)
+                    .retrieve()
+                    .toBodilessEntity();
+
+            System.out.println("✅ [세부분석: " + category + "] 통계 전송 성공!");
+        } catch (Exception e) {
+            System.out.println("❌ [" + category + "] 통계 전송 실패: " + e.getMessage());
+        }
+    }
+}
+
+
+//package com.thejoa703.analysis;
+// 
+//import java.time.LocalDate;
+//import java.util.HashMap;
+//import java.util.Map;
+//
+//import org.springframework.http.MediaType;
+//import org.springframework.stereotype.Service;
+//import org.springframework.web.client.RestClient;
+//
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.thejoa703.repository.AppUserRepository;
+//import com.thejoa703.repository.PostRepository;
+//
+//import lombok.RequiredArgsConstructor;
+//
+//@Service
+//@RequiredArgsConstructor
+//public class StatisticsSyncService {
+//
+//    private final AppUserRepository userRepository;
+//    private final PostRepository postRepository;
+//
+//    // Django 대시보드로 실제 통계 데이터를 전송하는 메서드 (RestClient 활용)
+//    public void sendRealStatsToDjango() {
+//        String djangoUrl = "http://localhost:8000/dashboard/api/statistics/";
+//        
+//        // RestClient 생성
+//        RestClient restClient = RestClient.create();
+//
+//        // 1. 전체 게시글 수 집계
+//        long totalPosts = postRepository.count();
+//        
+//        Map<String, Object> payload = new HashMap<>();
+//        payload.put("date", LocalDate.now().toString());
+//        payload.put("category", "커뮤니티 게시글");
+//        payload.put("count", (int) totalPosts);
+//
+//        try {
+//            // ObjectMapper를 사용하여 Map을 확실한 JSON 문자열로 변환
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            String jsonPayload = objectMapper.writeValueAsString(payload);
+//
+//            // RestClient를 이용한 POST 요청 전송
+//            restClient.post()
+//                    .uri(djangoUrl)
+//                    .contentType(MediaType.APPLICATION_JSON)
+//                    .body(jsonPayload) // 👈 JSON 문자열을 바디에 담아 전송
+//                    .retrieve()
+//                    .toBodilessEntity(); // 응답 본문이 따로 필요 없을 때 사용
+//
+//            System.out.println("✅ Django 통계 전송 성공!");
+//        } catch (Exception e) {
+//            System.out.println("❌ Django 통계 전송 실패: " + e.getMessage());
+//        }
+//    }
+//}

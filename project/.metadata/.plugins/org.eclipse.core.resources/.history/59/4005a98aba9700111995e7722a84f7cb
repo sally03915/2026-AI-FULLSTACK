@@ -1,0 +1,52 @@
+package com.thejoa703.analysis;
+ 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
+import com.thejoa703.repository.AppUserRepository;
+import com.thejoa703.repository.PostRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class StatisticsSyncService {
+
+    private final AppUserRepository userRepository;
+    private final PostRepository postRepository;
+
+    // Django 대시보드로 실제 통계 데이터를 전송하는 메서드 (RestClient 활용)
+    public void sendRealStatsToDjango() {
+        String djangoUrl = "http://localhost:8000/dashboard/api/statistics/";
+        
+        // RestClient 생성
+        RestClient restClient = RestClient.create();
+
+        // 1. 전체 게시글 수 집계
+        long totalPosts = postRepository.count();
+        
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("date", LocalDate.now().toString());
+        payload.put("category", "커뮤니티 게시글");
+        payload.put("count", (int) totalPosts);
+
+        try {
+            // RestClient를 이용한 POST 요청 전송
+            restClient.post()
+                    .uri(djangoUrl)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(payload)
+                    .retrieve()
+                    .toBodilessEntity(); // 응답 본문이 따로 필요 없을 때 사용
+
+            System.out.println("✅ Django 통계 전송 성공!");
+        } catch (Exception e) {
+            System.out.println("❌ Django 통계 전송 실패: " + e.getMessage());
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.thejoa703.mapper.DeptUserMapper"> 
+    <resultMap id="DeptUserResultMap" type="DeptUser">
+        <id property="deptno" column="DEPTNO"/>
+        <result property="dname" column="DNAME"/>
+        <result property="loc" column="LOC"/>
+    </resultMap>
+    <select id="findByNameKeyword" parameterType="string" resultMap="DeptUserResultMap">
+        SELECT * FROM DEPTUSER WHERE DNAME LIKE '%' || #{keyword} || '%'
+    </select> 
+</mapper>
