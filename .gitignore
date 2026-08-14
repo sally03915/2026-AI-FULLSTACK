@@ -14,10 +14,12 @@ track008_1_nodeReact2026/front/.next/
 track008_2_bootReact2026/*.zip
 application-oauth.properties
 
+days/
 track008_2_bootReact-강의교안/
 track009_flutter-t/
 ★강의교안/
 ※참고파일/
+d2big/
 
 project/
 /track007_api-2/  
@@ -38,3 +40,6 @@ node_modules/
 *.DS_Store
 Thumbs.db
  
+*.md
+
+/now 

@@ -1,5 +1,5 @@
 ■ 과정명   : [취업기업확대]AI활용 풀스택(프론트엔드,백엔드)부트캠프(자바,파이썬,플러터)
-■ 훈련과목 : (비NCS)프로젝트(완성된 웹서비스 플랫폼 프로젝트 리뉴얼)
+■ 훈련과목 : (비NCS)프로젝트ⅡBtoC 웹서비스 구축(Spring Framework 활용)
 > boot + security + jwt + redis / jpa( mybatis ) +oracle / react + next     → aws (9월초)
 
 ※ 참고)  PostController  
@@ -42,48 +42,33 @@ DAY1~5. 260727~31
       ★ 회의내용 : 구글시트점검  
       ★ 셋팅점검
 
-DAY6~10. 260803~
-■1)  @Entity > 260803
-      - [x] moit    (보라 , 욱진, 혜원 , 예진 , 채연)
-      - [x] spring breeze   ( 윤정 , 수정 , 다영 , 주엽 )
-      - [ ] the library (현미)
-      - [ ] marin boy
-
-■2)  @Repository  / @Mapper > 260804
-................. 기존의 dto / @Mapper 동작하는지확인
-................. @Entity 연결되는지  
-- [x] moit  (보라 , 욱진 , 혜원  , 예진 , 채연)
-- [ ] spring breeze   ( 윤정, 수정 , 다영 , 주엽)
-- [ ] the library
-- [ ] marin boy
-
-■3)  Dto( RequestDto + ResponseDto )  흐름도 / @Serivce + @RestController  > 260805
-- [ ] moit  (보라, 욱진 , 혜원  , 예진 , 채연)
-- [ ] spring breeze     ( 윤정, 수정  , 다영 , 주엽)
-- [ ] the library
-- [ ] marin boy
-
-■4)  backend 리팩토링                      
-
+DAY6~10.  260803~  
+DAY11~15. 260810~14
 
 ■ 과정명   : [취업기업확대]AI활용 풀스택(프론트엔드,백엔드)부트캠프(자바,파이썬,플러터)
-■ 훈련과목 : 	(비NCS)프로젝트ⅡBtoC 웹서비스 구축(Spring Framework 활용)
-> boot + security + jwt + redis / jpa( mybatis ) +oracle / react + next     → aws
+■ 훈련과목 :  (비NCS)프로젝트ⅡBtoC 웹서비스 구축(Spring Framework 활용) 
+> 포트폴리오 가이드  참고 해서 작업 시작 
+      ■1)  @Entity  
+      ■2)  @Repository  / @Mapper  
+      ................. 기존의 dto / @Mapper 동작하는지확인
+      ................. @Entity 연결되는지    
+      ■3)  Dto( RequestDto + ResponseDto ★ )  흐름도 / @Serivce 
+      ■4)  @RestController   -   backend 리팩토링                
+      ■5)  React   
+
+      - [ ] moit   
+      - [ ] spring breeze     
+      - [ ] the library
+      - [ ] marin boy
+
+> boot + security + jwt + redis / jpa( mybatis ) +oracle / react
+
+
 
 주제 → CRUD → ERD  → 피그마 → 코드구현
 
-1. 2차 포트폴리오 3차로 리팩토링
-□1)  @Entity
-□2)  @Repository  / @Mapper  
-□3)  Dto( RequestDto + ResponseDto )  흐름도 / @Serivce + @RestController
-□4)  backend 리팩토링    
-□5)  react
-
-2. 3차 새로운 기능추가 및 점검
 
 
 
-■ 포트폴리오
-1. 서로존중하기 - 금기어 : 고소, 경찰서  >  아이스크림....쏴요 ㅎㅎ
-2. 각자 당 : 10~15분씩
 
+ 
